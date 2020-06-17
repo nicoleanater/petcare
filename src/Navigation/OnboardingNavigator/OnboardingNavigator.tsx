@@ -8,8 +8,8 @@ const Stack = createNativeStackNavigator();
 
 function OnboardingNavigator() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Login" component={LoginScreen} />
+    <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
       <Stack.Screen name="Cadastro" component={Cadastro} />
     </Stack.Navigator>
   );

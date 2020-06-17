@@ -3,31 +3,11 @@ import { Colors, Metrics } from "../Themes";
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 export default {
-    // global styles
-    inputStyle: {
-        height: Metrics.inputHeight,
-        borderWidth: 1,
-        borderRadius: 50,
-        backgroundColor: Colors.white,
-        marginBottom: Metrics.doubleMargin,
-    } as ViewStyle,
-    leftIconStyle: {
-        marginRight: Metrics.margin
-    } as ViewStyle,
-    buttonContainer: {
-        flexDirection: 'row'
-    } as ViewStyle,
-    buttonStyle: {
-        backgroundColor: Colors.oriolesOrange,
-        height: Metrics.inputHeight,
-        borderRadius: 60,
-        paddingHorizontal: Metrics.buttonPadding
-    } as ViewStyle,
-    textLink: {
-        color: Colors.oriolesOrange,
-        fontWeight: 'bold',
-        textDecorationLine: 'underline'
-    } as TextStyle,
+		// global styles
+		fullContainer: {
+			width: '100%',
+			height: '100%'
+	} as ViewStyle,
 
     // regular padding
     padding: {

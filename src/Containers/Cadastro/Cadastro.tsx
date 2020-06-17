@@ -23,12 +23,12 @@ export const Cadastro: FunctionComponent < IProps > = (props) => {
     }, [])
 
 		//@ts-ignore
-		const teste: string = props.route.params.teste;
+		// const teste: string = props.route.params.teste;
 
     return (
-        <View >
+        <View>
 					<Text>Billie Eilish</Text>
-					<Text>Props: {teste}</Text>
+					{/* <Text>Props: {teste}</Text> */}
         </View>
     );
 };

@@ -1,19 +1,36 @@
-import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React, { FunctionComponent } from 'react';
+import {View, Text, Image, TouchableOpacity, KeyboardAvoidingView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
+import { Colors, Images } from '../../Themes';
+import styles from './LoginScreenStyles';
+import _ from 'lodash';
+import { FloatingLabelInput } from '../../Components/FloatingLabelInput/FloatingLabelInput';
 
-const LoginScreen = () => {
+const LoginScreen: FunctionComponent<any> = () => {
 	const navigation = useNavigation();
   return (
-    <View>
-      <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']}>
-        <Text>TESTEEEEE LOGIN a</Text>
-				<TouchableOpacity onPress={() => {navigation.navigate('Cadastro', {teste: 'teste'})}}>
-					<Text>Cadastrar</Text>
-				</TouchableOpacity>
+    <KeyboardAvoidingView contentContainerStyle={styles.fullContainer}>
+      <LinearGradient colors={[Colors.gradientPink, Colors.gradientPeach]}>
+				<View style={styles.mainContainer}>
+					<Image source={Images.petCareLogo}/>
+					<FloatingLabelInput
+						// ref={(ref: FloatingLabelInput) => {
+						// 		this.inputRefs['username'] = ref;
+						// }}
+						label={'Teste'}
+						value={'teste'}
+						error={''}
+						isFieldCorrect={true}
+						maxLength={60}
+						onChangeText={(value) => this.onChangeFormValue('username', value)}
+						keyboardType={'email-address'}
+						returnKeyType={'next'}
+						onSubmitEditing={() => this.onEndEditingField('username')}
+				/>
+				</View>
       </LinearGradient>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
