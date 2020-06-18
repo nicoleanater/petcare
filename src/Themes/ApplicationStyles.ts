@@ -1,5 +1,5 @@
 import { ViewStyle, TextStyle } from "react-native";
-import { Colors, Metrics } from "../Themes";
+import { Colors, Metrics } from "../themes";
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
 
 export default {

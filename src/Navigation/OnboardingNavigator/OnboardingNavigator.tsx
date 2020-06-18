@@ -1,8 +1,8 @@
 import React from 'react';
-import LoginScreen from "../../Containers/LoginScreen/LoginScreen";
+import LoginScreen from "../../containers/LoginScreen/LoginScreen";
 
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
-import { Cadastro } from '../../Containers/Cadastro/Cadastro';
+import { Cadastro } from '../../containers/Cadastro/Cadastro';
 
 const Stack = createNativeStackNavigator();
 

@@ -1,9 +1,11 @@
 import React, { useEffect, useState, FunctionComponent } from 'react';
 import { View, ImageRequireSource, ViewStyle, StyleProp, ImageStyle, ReturnKeyTypeOptions, Text, Image } from 'react-native';
-import { TextInputMask } from 'react-native-masked-text';
+import { TextInputMask, TextInputMaskTypeProp } from 'react-native-masked-text';
 import _ from 'lodash';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './FloatingLabelInputStyles';
 import { TextInput } from 'react-native-gesture-handler';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 interface IProps {
 	label: string;
@@ -15,11 +17,11 @@ interface IProps {
 	maxLength?: number;
 	autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
 	isFieldCorrect?: boolean;
-	icon?: ImageRequireSource;
+	icon?: {name: string, size?: number, color?: string};
 	iconStyle?: StyleProp<ImageStyle>;
 	viewStyle?: ViewStyle[] | ViewStyle;
 	secureTextEntry?: boolean;
-	mask?: string;
+	mask?: TextInputMaskTypeProp;
 	maskOptions?: any;
 	isFieldEditable?: boolean;
 	returnKeyType?: ReturnKeyTypeOptions;
@@ -54,8 +56,7 @@ export const FloatingLabelInput: FunctionComponent<IProps> = (props) => {
 			<View
 					pointerEvents={props.isFieldEditable === false ? 'none' : 'auto'}
 					style={[styles.floatingLabelStyle, props.viewStyle, /* this.borderStyle() */]}>
-					{icon ? <Image style={!props.iconStyle ? styles.iconStyle : [styles.iconStyle, props.iconStyle]} source={icon} /> : <View />}
-
+					{icon ? <Icon name={icon.name} style={!props.iconStyle ? styles.iconStyle : [styles.iconStyle, props.iconStyle]}/> : <View />}
 					{/* <Animated.Text style={this.labelStyle()}>{props.error ? props.error : label}</Animated.Text> */}
 					<Text>{props.error ? props.error : label}</Text>
 
@@ -63,7 +64,7 @@ export const FloatingLabelInput: FunctionComponent<IProps> = (props) => {
 					{mask ? (
 							<TextInputMask
 									{...restProps}
-									style={[styles.inputStyle, styles.inputTextDark]}
+									style={styles.inputStyle}
 									onFocus={this.handleFocus}
 									onSubmitEditing={props.onSubmitEditing}
 									ref={(ref: any) => (this.maskedTextInput = ref)}
@@ -82,7 +83,7 @@ export const FloatingLabelInput: FunctionComponent<IProps> = (props) => {
 					) : (
 							<TextInput
 									{...restProps}
-									style={[styles.inputStyle, styles.inputTextDark]}
+									style={styles.inputStyle}
 									onSubmitEditing={props.onSubmitEditing}
 									ref={(ref: TextInput) => (this.textInput = ref)}
 									onFocus={this.handleFocus}
@@ -100,13 +101,13 @@ export const FloatingLabelInput: FunctionComponent<IProps> = (props) => {
 							/>
 					)}
 
-					{!props.isFieldCorrect ? (
+					{/* {!props.isFieldCorrect ? (
 							<View style={styles.warningIconStyle}>
 								
 							</View>
 					) : (
 							<View />
-					)}
+					)} */}
 					</View>
 			</View>
     );

@@ -1,4 +1,4 @@
-import { Colors, Fonts, ApplicationStyles } from '../../Themes';
+import { Colors, Fonts, ApplicationStyles } from '../../themes';
 import { responsiveWidth, responsiveHeight } from 'react-native-responsive-dimensions';
 import { ViewStyle } from 'react-native';
 
@@ -9,6 +9,7 @@ export default {
 			height: '100%',
 			flexDirection: 'column',
 			alignItems: 'center',
-			paddingTop: responsiveHeight(10)
+			paddingTop: responsiveHeight(10),
+			paddingHorizontal: responsiveWidth(12)
 		} as ViewStyle
 };

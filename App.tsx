@@ -1,7 +1,7 @@
 import React from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import AppNavigator from './src/Navigation/AppNavigator';
+import AppNavigator from './src/navigation/AppNavigator';
 
 declare const global: {HermesInternal: null | {}};
 

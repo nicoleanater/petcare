@@ -1,5 +1,5 @@
 import { ViewStyle, TextStyle, StyleProp, ImageStyle } from 'react-native';
-import { Colors, ApplicationStyles, Fonts } from '../../Themes';
+import { Colors, ApplicationStyles, Fonts } from '../../themes';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 export default {
@@ -8,15 +8,18 @@ export default {
     // input general styles
     floatingLabelStyle: {
         justifyContent: 'flex-end',
-        height: 55,
-        paddingBottom: 5,
-        borderBottomWidth: 1,
-        marginBottom: responsiveHeight(3)
+				height: 52,
+				backgroundColor: Colors.white,
+				borderRadius: 71,
+				paddingBottom: 5,
+				paddingHorizontal: 20,
+				marginBottom: responsiveHeight(3),
+				elevation: 2
     } as ViewStyle,
     inputStyle: {
-				// fontFamily: Fonts.defaultFont,
+				fontFamily: Fonts.fontFamilies.latoLight,
+				color: Colors.blackTwo,
 				fontSize: Fonts.sizes.big,
-				color: Colors.black,
 				textAlignVertical: 'center',
         backgroundColor: 'transparent',
         height: '100%',
@@ -33,23 +36,12 @@ export default {
         paddingRight: 5
     } as ViewStyle,
     iconStyle: {
-        position: 'absolute',
-        height: 24,
-        width: 24,
-        resizeMode: 'contain'
-    } as StyleProp<ImageStyle>,
-    warningIconStyle: {
-        position: 'absolute',
-        right: 5
+				position: 'absolute',
+				top: 16,
+				left: 20,
+				color: Colors.grayFour,
+				fontSize: Fonts.sizes.icon
     } as ViewStyle,
-
-    // input text theme styles
-    inputTextLight: {
-        // color: Colors.dark_grey
-    },
-    inputTextDark: {
-        color: Colors.white
-    },
 
     // label general styles
     labelStyle: {

@@ -1,12 +1,23 @@
-import { responsiveFont } from '../Utils/FontUtils'
+import { responsiveFont } from '../utils/FontUtils'
 
 const sizes = {
-    xSmall:10,
-    small: responsiveFont(12),
-    regular: 14,
-    big: 16,
-    giant: 24,
-    logo: 28
+	xSmall: responsiveFont(10),
+	small: responsiveFont(12),
+	regular: responsiveFont(14),
+	big: responsiveFont(16),
+	icon: 20,
+	giant: responsiveFont(24),
+	logo: responsiveFont(28)
 };
 
-export default { sizes };
+const fontFamilies = {
+	latoLight: 'Lato Light',
+	latoRegular: 'Lato Regular',
+	latoBold: 'Lato Bold',
+	latoBlack: 'Lato Black'
+}
+
+export default {
+    fontFamilies,
+    sizes,
+};
