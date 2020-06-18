@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './FloatingLabelInputStyles';
 import { TextInput } from 'react-native-gesture-handler';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import Animated from 'react-native-reanimated';
 
 interface IProps {
 	label: string;
@@ -36,6 +37,9 @@ interface IState {
 }
 
 export const FloatingLabelInput: FunctionComponent<IProps> = (props) => {
+	let animatedIsFocused: Animated.Value | any = new Animated.Value(1);
+	// textInput: TextInput | any;
+	// maskedTextInput: TextInputMask;
 		
 	const initialState: IState = {
 			isFocused: false,
@@ -46,10 +50,31 @@ export const FloatingLabelInput: FunctionComponent<IProps> = (props) => {
 		const [value, setValue] = useState(initialState.value)
 
     useEffect(() => {
+				animatedIsFocused = new Animated.Value(_.isEmpty(props.value) ? 0 : 1);
         return () => {
 
         }
-    }, [])
+		}, [])
+		
+		const labelStyle: any = () => {
+				// if (props.icon) {
+				// 		//    
+				// } else {
+						let style = {
+								...styles.labelStyle,
+								color: props.isFieldCorrect ? styles.labelColorDark : styles.labelColorErrorDark,
+								bottom: animatedIsFocused.interpolate({
+										inputRange: [0, 1],
+										outputRange: [styles.labelStyleBlur.bottom, styles.labelStyleFocused.bottom],
+								}),
+								fontSize: animatedIsFocused.interpolate({
+										inputRange: [0, 1],
+										outputRange: [styles.labelStyleBlur.fontSize, styles.labelStyleFocused.fontSize],
+								})
+						}
+				// }
+				return style;
+		};
 
 		const { label, icon, mask, maskOptions, isFieldEditable, autoCapitalize, ...restProps } = props;
     return (
@@ -57,8 +82,7 @@ export const FloatingLabelInput: FunctionComponent<IProps> = (props) => {
 					pointerEvents={props.isFieldEditable === false ? 'none' : 'auto'}
 					style={[styles.floatingLabelStyle, props.viewStyle, /* this.borderStyle() */]}>
 					{icon ? <Icon name={icon.name} style={!props.iconStyle ? styles.iconStyle : [styles.iconStyle, props.iconStyle]}/> : <View />}
-					{/* <Animated.Text style={this.labelStyle()}>{props.error ? props.error : label}</Animated.Text> */}
-					<Text>{props.error ? props.error : label}</Text>
+					<Animated.Text style={labelStyle()}>{label}</Animated.Text>
 
 					<View style={styles.inputContent}>
 					{mask ? (
@@ -100,14 +124,6 @@ export const FloatingLabelInput: FunctionComponent<IProps> = (props) => {
 									secureTextEntry={props.secureTextEntry ? props.secureTextEntry : false}
 							/>
 					)}
-
-					{/* {!props.isFieldCorrect ? (
-							<View style={styles.warningIconStyle}>
-								
-							</View>
-					) : (
-							<View />
-					)} */}
 					</View>
 			</View>
     );
@@ -117,9 +133,7 @@ export const FloatingLabelInput: FunctionComponent<IProps> = (props) => {
 
 
 // export default class FloatingLabelInput extends React.Component<Props, State> {
-//     animatedIsFocused: Animated.Value | any;
-//     textInput: TextInput | any;
-//     maskedTextInput: any;
+
    
 
 //     focus() {
@@ -132,9 +146,6 @@ export const FloatingLabelInput: FunctionComponent<IProps> = (props) => {
 //         }
 //     }
 
-//     componentWillMount() {
-//         this.animatedIsFocused = new Animated.Value(_.isEmpty(this.props.value) ? 0 : 1);
-//     }
 
 //     componentDidUpdate() {
 //         Animated.timing(this.animatedIsFocused, {
@@ -151,30 +162,7 @@ export const FloatingLabelInput: FunctionComponent<IProps> = (props) => {
 //         this.setState({ isFocused: false });
 //         this.props.onBlur ? this.props.onBlur() : noop();
 //     };
-
-//     labelStyle: any = () => {
-//         let labelStyle = {};
-//         const labelColor = this.props.inputTheme === 'dark' ? styles.labelColorDark : styles.labelColorLight;
-//         const labelColorError = this.props.inputTheme === 'dark' ? styles.labelColorErrorDark : styles.labelColorErrorLight;
-//         if (this.props.icon) {
-//             //    
-//         } else {
-//             labelStyle = {
-//                 ...styles.labelStyle,
-//                 color: this.props.isFieldCorrect ? labelColor : labelColorError,
-//                 bottom: this.animatedIsFocused.interpolate({
-//                     inputRange: [0, 1],
-//                     outputRange: [styles.labelStyleBlur.bottom, styles.labelStyleFocused.bottom],
-//                 }),
-//                 fontSize: this.animatedIsFocused.interpolate({
-//                     inputRange: [0, 1],
-//                     outputRange: [styles.labelStyleBlur.fontSize, styles.labelStyleFocused.fontSize],
-//                 })
-//             }
-//         }
-//         return labelStyle;
-//     };
-
+//     
 //     borderStyle = () => {
 //         if (this.props.error) {
 //             if (this.state.isFocused) {
@@ -190,8 +178,4 @@ export const FloatingLabelInput: FunctionComponent<IProps> = (props) => {
 //             }
 //         }
 //     };
-
-//     public render() {
-        
-//     }
 // }
