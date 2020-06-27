@@ -9,7 +9,7 @@ interface IState {
     // State type definition
 }
 
-export const {{ pascalCase name }}: FunctionComponent < IProps > = (props) => {
+export const {{ pascalCase name }}: FunctionComponent<IProps> = (props) => {
     const initialState: IState = {
     };
 
@@ -22,7 +22,7 @@ export const {{ pascalCase name }}: FunctionComponent < IProps > = (props) => {
     }, [])
 
     return (
-        <View style={[styles.centeredColumn, styles.fullContainer]} >
+        <View>
 
         </View>
     );

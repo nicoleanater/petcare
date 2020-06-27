@@ -7,6 +7,7 @@ import FloatingLabelInput, { IRefFloatingLabel } from '../../components/Floating
 import { useForm } from '../../hooks';
 import { Colors, Images } from '../../themes';
 import styles from './LoginScreenStyles';
+import RoundedButton from '../../components/RoundedButton/RoundedButton';
 
 interface IState {
 	formValues: {
@@ -84,6 +85,10 @@ const LoginScreen: FunctionComponent<any> = () => {
 							returnKeyType={'done'}
 							secureTextEntry={true}
 							onSubmitEditing={() => onEndEditingField('email')}
+						/>
+						<RoundedButton
+							onPress={() => console.log('oi')}
+							label={'Entrar'}
 						/>
 					</View>
 				</LinearGradient>
