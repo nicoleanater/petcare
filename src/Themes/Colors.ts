@@ -5,5 +5,6 @@ export default {
 		grayFour: '#CBCACA',
 		white: '#FFFFFF',
 		gradientPink: '#FF738C',
-		gradientPeach: '#FFD397'
+		gradientPeach: '#FFD397',
+		errorRed: '#E03434',
 }

@@ -64,7 +64,7 @@ const LoginScreen: FunctionComponent<any> = () => {
 							label={'Email'}
 							value={formState['email']}
 							error={formErrors['email']}
-							isFieldCorrect={true}
+							isFieldCorrect={_.isEmpty(formErrors['email'])}
 							maxLength={60}
 							icon={{ name: 'email' }}
 							onChangeText={(value: string) => onChangeFormValue('email', value)}
@@ -77,7 +77,7 @@ const LoginScreen: FunctionComponent<any> = () => {
 							label={'Senha'}
 							value={formState['password']}
 							error={formErrors['password']}
-							isFieldCorrect={true}
+							isFieldCorrect={_.isEmpty(formErrors['password'])}
 							maxLength={60}
 							icon={{ name: 'lock' }}
 							onChangeText={(value: string) => onChangeFormValue('password', value)}

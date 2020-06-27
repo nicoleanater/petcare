@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { forwardRef, MutableRefObject, RefForwardingComponent, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { ImageStyle, ReturnKeyTypeOptions, StyleProp, TextInput, View, ViewStyle } from 'react-native';
+import { ImageStyle, ReturnKeyTypeOptions, StyleProp, TextInput, View, ViewStyle, Text } from 'react-native';
 import { TextInputMask, TextInputMaskTypeProp } from 'react-native-masked-text';
 import Animated, { Easing } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -78,7 +78,6 @@ export const FloatingLabelInput: RefForwardingComponent<IRefFloatingLabel, IProp
 	const labelStyle: any = () => {
 		let style = {
 			...styles.labelStyle,
-			color: props.isFieldCorrect ? styles.labelColor : styles.labelColorError,
 			bottom: animatedIsFocused.interpolate({
 				inputRange: [0, 1],
 				outputRange: [styles.labelStyleBlur.bottom, styles.labelStyleFocused.bottom],
@@ -91,55 +90,58 @@ export const FloatingLabelInput: RefForwardingComponent<IRefFloatingLabel, IProp
 		return style;
 	};
 
-	const { label, icon, mask, maskOptions, isFieldEditable, autoCapitalize, ...restProps } = props;
+	const { label, icon, mask, maskOptions, isFieldEditable, autoCapitalize, isFieldCorrect, error, ...restProps } = props;
 	return (
-		<View
-			pointerEvents={props.isFieldEditable === false ? 'none' : 'auto'}
-			style={[styles.floatingLabelStyle, props.viewStyle]}>
-			{icon ? <Icon name={icon.name} style={!props.iconStyle ? styles.iconStyle : [styles.iconStyle, props.iconStyle]} /> : <View />}
-			<Animated.Text style={[labelStyle(), icon && styles.labelWithIcon]}>{label}</Animated.Text>
+		<View style={styles.inputContainer}>
+			<View
+				pointerEvents={props.isFieldEditable === false ? 'none' : 'auto'}
+				style={[styles.floatingLabelStyle, !isFieldCorrect && styles.floatingLabelErrorStyle, props.viewStyle]}>
+				{icon ? <Icon name={icon.name} style={!props.iconStyle ? styles.iconStyle : [styles.iconStyle, props.iconStyle]} /> : <View />}
+				<Animated.Text style={[labelStyle(), icon && styles.labelWithIcon]}>{label}</Animated.Text>
 
-			<View style={styles.inputContent}>
-				{mask ? (
-					<TextInputMask
-						{...restProps}
-						style={[styles.inputStyle, icon && styles.inputWithIcon]}
-						onFocus={handleFocus}
-						onSubmitEditing={props.onSubmitEditing}
-						ref={maskedTextInput}
-						onBlur={handleBlur}
-						placeholderTextColor={'rgba(255,255,255,0.7)'}
-						underlineColorAndroid={'transparent'}
-						autoCapitalize={autoCapitalize ? autoCapitalize : 'none'}
-						maxLength={props.maxLength ? props.maxLength : 100}
-						type={mask}
-						options={maskOptions}
-						onChangeText={(text: string) => {
-							props.onChangeText!(text);
-						}}
-						autoCorrect={false}
-					/>
-				) : (
-						<TextInput
+				<View style={styles.inputContent}>
+					{mask ? (
+						<TextInputMask
 							{...restProps}
 							style={[styles.inputStyle, icon && styles.inputWithIcon]}
-							onSubmitEditing={props.onSubmitEditing}
-							ref={textInput}
 							onFocus={handleFocus}
+							onSubmitEditing={props.onSubmitEditing}
+							ref={maskedTextInput}
 							onBlur={handleBlur}
-							autoCapitalize={autoCapitalize ? autoCapitalize : 'none'}
+							placeholderTextColor={'rgba(255,255,255,0.7)'}
 							underlineColorAndroid={'transparent'}
-							value={props.value}
-							editable={isFieldEditable !== undefined ? isFieldEditable : true}
+							autoCapitalize={autoCapitalize ? autoCapitalize : 'none'}
 							maxLength={props.maxLength ? props.maxLength : 100}
-							onChangeText={(text) => {
+							type={mask}
+							options={maskOptions}
+							onChangeText={(text: string) => {
 								props.onChangeText!(text);
 							}}
-							keyboardType={props.keyboardType ? props.keyboardType : 'default'}
-							secureTextEntry={props.secureTextEntry ? props.secureTextEntry : false}
+							autoCorrect={false}
 						/>
-					)}
+					) : (
+							<TextInput
+								{...restProps}
+								style={[styles.inputStyle, icon && styles.inputWithIcon]}
+								onSubmitEditing={props.onSubmitEditing}
+								ref={textInput}
+								onFocus={handleFocus}
+								onBlur={handleBlur}
+								autoCapitalize={autoCapitalize ? autoCapitalize : 'none'}
+								underlineColorAndroid={'transparent'}
+								value={props.value}
+								editable={isFieldEditable !== undefined ? isFieldEditable : true}
+								maxLength={props.maxLength ? props.maxLength : 100}
+								onChangeText={(text) => {
+									props.onChangeText!(text);
+								}}
+								keyboardType={props.keyboardType ? props.keyboardType : 'default'}
+								secureTextEntry={props.secureTextEntry ? props.secureTextEntry : false}
+							/>
+						)}
+				</View>
 			</View>
+			<Text style={styles.errorText}>{error}</Text>
 		</View>
 	);
 };
