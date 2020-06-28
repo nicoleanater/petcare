@@ -1,3 +1,3 @@
 export default {
-		petCareLogo: require('../../assets/images/petcare-logo.png'),
+	petCareLogo: require('../../assets/images/petcare-logo.png'),
 }
