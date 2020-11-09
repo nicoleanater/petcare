@@ -8,11 +8,12 @@ import { useForm } from '../../hooks';
 import { Colors, Images } from '../../themes';
 import styles from './LoginScreenStyles';
 import RoundedButton from '../../components/RoundedButton/RoundedButton';
+import { login } from '../../services/usuario';
 
 interface IState {
 	formValues: {
 		email: string;
-		password: string;
+		senha: string;
 	};
 	formErrors: {
 		[name: string]: string | null;
@@ -22,15 +23,14 @@ interface IState {
 const LoginScreen: FunctionComponent<any> = () => {
 	const inputRefs: { [field: string]: MutableRefObject<IRefFloatingLabel> } = {
 		email: useRef(null),
-		password: useRef(null)
+		senha: useRef(null)
 	};
-	const emailRef: MutableRefObject<IRefFloatingLabel> = useRef(null);
 	const navigation = useNavigation();
 
 	const initialState: IState = {
 		formValues: {
 			email: '',
-			password: '',
+			senha: '',
 		},
 		formErrors: {}
 	};
@@ -54,6 +54,10 @@ const LoginScreen: FunctionComponent<any> = () => {
 		}
 	};
 
+	const onLoginSubmit = () => {
+		login(formState).then((res) => console.log({res})).catch(err => console.log({err: err.message}));
+	}
+
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 			<KeyboardAvoidingView contentContainerStyle={styles.fullContainer}>
@@ -74,20 +78,20 @@ const LoginScreen: FunctionComponent<any> = () => {
 							onSubmitEditing={() => onEndEditingField('email')}
 						/>
 						<FloatingLabelInput
-							ref={inputRefs['password']}
+							ref={inputRefs['senha']}
 							label={'Senha'}
-							value={formState['password']}
-							error={formErrors['password']}
-							isFieldCorrect={_.isEmpty(formErrors['password'])}
+							value={formState['senha']}
+							error={formErrors['senha']}
+							isFieldCorrect={_.isEmpty(formErrors['senha'])}
 							maxLength={60}
 							icon={{ name: 'lock' }}
-							onChangeText={(value: string) => onChangeFormValue('password', value)}
+							onChangeText={(value: string) => onChangeFormValue('senha', value)}
 							returnKeyType={'done'}
 							secureTextEntry={true}
-							onSubmitEditing={() => onEndEditingField('email')}
+							onSubmitEditing={() => onEndEditingField('senha')}
 						/>
 						<RoundedButton
-							onPress={() => console.log('oi')}
+							onPress={onLoginSubmit}
 							label={'Entrar'}
 						/>
 					</View>
