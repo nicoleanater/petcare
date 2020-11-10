@@ -9,6 +9,7 @@ import { Colors, Images } from '../../themes';
 import styles from './LoginScreenStyles';
 import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { login } from '../../services/usuario';
+import { validateEmail } from '../../utils/ValidationForms';
 
 interface IState {
 	formValues: {
@@ -54,8 +55,25 @@ const LoginScreen: FunctionComponent<any> = () => {
 		}
 	};
 
+	const validateFields = () => {
+		let valid = true;
+		Object.entries(formState).forEach(([key, value]) => {
+			if (_.isEmpty(value)) {
+				dispatchErrorUpdate({field: key, value: 'obrigarório'})
+				valid = false;
+			} else if (key === 'email' && !validateEmail(value)) {
+				dispatchErrorUpdate({field: key, value: 'email inválido'})
+				valid = false;
+			}
+		});
+
+		return valid;
+};
+
 	const onLoginSubmit = () => {
-		login(formState).then((res) => console.log({res})).catch(err => console.log({err: err.message}));
+		if (validateFields()) {
+			login(formState).then((res) => console.log({res})).catch(err => console.log({err: err.message}));
+		}
 	}
 
 	return (
