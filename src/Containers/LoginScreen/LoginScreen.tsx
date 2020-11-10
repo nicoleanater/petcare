@@ -59,7 +59,7 @@ const LoginScreen: FunctionComponent<any> = () => {
 		let valid = true;
 		Object.entries(formState).forEach(([key, value]) => {
 			if (_.isEmpty(value)) {
-				dispatchErrorUpdate({field: key, value: 'obrigarório'})
+				dispatchErrorUpdate({field: key, value: 'obrigatório'})
 				valid = false;
 			} else if (key === 'email' && !validateEmail(value)) {
 				dispatchErrorUpdate({field: key, value: 'email inválido'})
@@ -70,9 +70,14 @@ const LoginScreen: FunctionComponent<any> = () => {
 		return valid;
 };
 
-	const onLoginSubmit = () => {
+	const onLoginSubmit = async () => {
 		if (validateFields()) {
-			login(formState).then((res) => console.log({res})).catch(err => console.log({err: err.message}));
+			try {
+				const res = await login(formState);
+				console.log({res});
+			} catch (error) {
+				console.error({error});
+			}
 		}
 	}
 
