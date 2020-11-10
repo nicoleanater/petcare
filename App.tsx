@@ -7,6 +7,7 @@ declare const global: {HermesInternal: null | {}};
 
 if(__DEV__) {
   import('./ReactotronConfig').then(() => console.log('Reactotron Configured'))
+  require('react-devtools');
 }
 
 const App = () => {
