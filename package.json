@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
+    "android": "react-native run-android && adb reverse tcp:9090 tcp:9090",
     "ios": "react-native run-ios",
     "start": "react-native start",
-		"test": "jest"
+    "test": "jest"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
@@ -14,9 +14,10 @@
     "@react-navigation/drawer": "^5.8.1",
     "@react-navigation/native": "^5.5.0",
     "axios": "^0.21.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "react": "16.11.0",
+    "react-combine-reducers": "^1.0.4",
     "react-native": "0.62.2",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-linear-gradient": "^2.5.6",

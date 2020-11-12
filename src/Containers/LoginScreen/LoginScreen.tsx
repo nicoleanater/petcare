@@ -10,6 +10,8 @@ import styles from './LoginScreenStyles';
 import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { login } from '../../services/usuario';
 import { validateEmail } from '../../utils/ValidationForms';
+import { useStore } from '../../store';
+import { usuarioActions } from '../../store/usuario';
 
 interface IState {
 	formValues: {
@@ -26,7 +28,6 @@ const LoginScreen: FunctionComponent<any> = () => {
 		email: useRef(null),
 		senha: useRef(null)
 	};
-	const navigation = useNavigation();
 
 	const initialState: IState = {
 		formValues: {
@@ -38,7 +39,8 @@ const LoginScreen: FunctionComponent<any> = () => {
 
 	const [formState, dispatchFormUpdate] = useForm(initialState.formValues);
 	const [formErrors, dispatchErrorUpdate] = useForm(initialState.formErrors);
-
+	const navigation = useNavigation();
+	const [state, dispatch] = useStore();
 	const onChangeFormValue = (field: string, value: string) => {
 		dispatchFormUpdate({field, value});
 		dispatchErrorUpdate({field, value: null});
@@ -75,6 +77,7 @@ const LoginScreen: FunctionComponent<any> = () => {
 			try {
 				const res = await login(formState);
 				console.log({res});
+				dispatch(usuarioActions.setUsuario(res));
 			} catch (error) {
 				console.error({error});
 			}
