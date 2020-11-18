@@ -7,7 +7,7 @@ const [rootReducerCombined, initialStateCombined] = combineReducers({
 });
 
 // Application Store
-export const StateContext = React.createContext();
+export const StateContext = React.createContext(null);
 
 export const StoreProvider = ({ children }) => {
 	const contextReducersAndState = useReducer(
