@@ -5,6 +5,7 @@ const sizes = {
 	small: responsiveFont(12),
 	regular: responsiveFont(14),
 	big: responsiveFont(16),
+	bigger: responsiveFont(18),
 	icon: 20,
 	giant: responsiveFont(24),
 	logo: responsiveFont(28)

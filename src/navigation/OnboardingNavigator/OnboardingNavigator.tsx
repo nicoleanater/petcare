@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 
 function OnboardingNavigator() {
   return (
-    <Stack.Navigator initialRouteName="TipoCadastro">
+    <Stack.Navigator initialRouteName="Login">
       <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
       <Stack.Screen name="TipoCadastro" component={TipoCadastro} options={{title: ''}}/>
     </Stack.Navigator>

@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { Text, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Colors } from '../../themes';
+import { Colors, Images } from '../../themes';
 import styles from './TipoCadastroStyles';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export const TipoCadastro: FunctionComponent<any> = () => {
     return (
@@ -17,7 +18,16 @@ export const TipoCadastro: FunctionComponent<any> = () => {
 						<Text style={styles.textDescription}>gostaria de criar</Text>
 					</LinearGradient>
 					<View style={styles.optionsContainer}>
-						<Text>Down part</Text>
+						<TouchableOpacity onPress={() => console.log('oi')} style={[styles.optionTile, styles.tileDivider]}>
+							<Image source={Images.pawGradient} style={styles.smallMarginRight}/>
+							<Text style={styles.tileText}>Sou Dono de Animal</Text>
+							<Icon name={'keyboard-arrow-right'} style={styles.arrowRightStyle} size={42}/>
+						</TouchableOpacity>
+						<TouchableOpacity onPress={() => console.log('oi')} style={styles.optionTile}>
+							<Image source={Images.dogGradient} style={styles.smallMarginRight}/>
+							<Text style={styles.tileText}>Sou Pet Sitter</Text>
+							<Icon name={'keyboard-arrow-right'} style={styles.arrowRightStyle} size={42}/>
+						</TouchableOpacity>
 					</View>
 					
         </View>
