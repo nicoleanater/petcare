@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import _ from 'lodash';
 import React, { FunctionComponent, MutableRefObject, useRef } from 'react';
-import { Image, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, View } from 'react-native';
+import { Image, Keyboard, KeyboardAvoidingView, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import FloatingLabelInput, { IRefFloatingLabel } from '../../components/FloatingLabelInput/FloatingLabelInput';
 import { useForm } from '../../hooks';
@@ -53,7 +53,7 @@ const LoginScreen: FunctionComponent<any> = () => {
 		if (!_.isEmpty(nextInputKey)) {
 			inputRefs[nextInputKey].current.focus();
 		} else {
-			// submit button
+			onLoginSubmit();
 		}
 	};
 
@@ -76,8 +76,8 @@ const LoginScreen: FunctionComponent<any> = () => {
 		if (validateFields()) {
 			try {
 				const res = await login(formState);
-				console.log({res});
-				dispatch(usuarioActions.setUsuario(res));
+				dispatch(usuarioActions.setUsuario(res.data));
+				// navigation.navigate('');
 			} catch (error) {
 				console.error({error});
 			}
@@ -120,6 +120,10 @@ const LoginScreen: FunctionComponent<any> = () => {
 							onPress={onLoginSubmit}
 							label={'Entrar'}
 						/>
+						<View style={styles.registerContainer}>
+							<Text style={styles.createAccountText}>Não possui uma conta? </Text>
+							<TouchableOpacity onPress={() => navigation.navigate('TipoCadastro')}><Text style={styles.registerLink}>Cadastre-se!</Text></TouchableOpacity>
+						</View>
 					</View>
 				</LinearGradient>
 			</KeyboardAvoidingView>
