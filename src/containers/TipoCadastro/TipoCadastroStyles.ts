@@ -14,7 +14,7 @@ export default {
 	upperGradientContainer: {
 		flex: 1,
 		width: '100%',
-		paddingTop: responsiveHeight(10),
+		paddingTop: responsiveHeight(20),
 		paddingHorizontal: responsiveWidth(12)
 	} as ViewStyle,
 	optionsContainer: {
