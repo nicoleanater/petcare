@@ -4,8 +4,20 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Colors, Images } from '../../themes';
 import styles from './TipoCadastroStyles';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { TipoUsuario } from '../../models/Usuario';
+import { useStore } from '../../store';
+import { usuarioActions } from '../../store/usuario';
+import { useNavigation } from '@react-navigation/native';
 
 export const TipoCadastro: FunctionComponent<any> = () => {
+	const [state, dispatch] = useStore();
+	const navigation = useNavigation();
+
+	const onTipoSelected = (tipoUsuario: TipoUsuario) => {
+		dispatch(usuarioActions.setUsuario({tipo: tipoUsuario}));
+		navigation.navigate('CadastroDadosPessoais');
+	}
+
     return (
         <View style={styles.mainContainer}>
 					<LinearGradient
@@ -18,12 +30,12 @@ export const TipoCadastro: FunctionComponent<any> = () => {
 						<Text style={styles.textDescription}>gostaria de criar</Text>
 					</LinearGradient>
 					<View style={styles.optionsContainer}>
-						<TouchableOpacity onPress={() => console.log('oi')} style={[styles.optionTile, styles.tileDivider]}>
+						<TouchableOpacity onPress={() => onTipoSelected(TipoUsuario.DONO_DE_ANIMAL)} style={[styles.optionTile, styles.tileDivider]}>
 							<Image source={Images.pawGradient} style={styles.smallMarginRight}/>
 							<Text style={styles.tileText}>Sou Dono de Animal</Text>
 							<Icon name={'keyboard-arrow-right'} style={styles.arrowRightStyle} size={42}/>
 						</TouchableOpacity>
-						<TouchableOpacity onPress={() => console.log('oi')} style={styles.optionTile}>
+						<TouchableOpacity onPress={() => onTipoSelected(TipoUsuario.PET_SITTER)} style={styles.optionTile}>
 							<Image source={Images.dogGradient} style={styles.smallMarginRight}/>
 							<Text style={styles.tileText}>Sou Pet Sitter</Text>
 							<Icon name={'keyboard-arrow-right'} style={styles.arrowRightStyle} size={42}/>

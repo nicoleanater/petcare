@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginScreen from "../../containers/LoginScreen/LoginScreen";
 import { createStackNavigator } from '@react-navigation/stack'
-import { Cadastro } from '../../containers/Cadastro/Cadastro';
+import { CadastroDadosPessoais } from '../../containers/Cadastro/CadastroDadosPessoais';
 import { TipoCadastro } from '../../containers/TipoCadastro/TipoCadastro';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../AppNavigatorStyles';
@@ -24,6 +24,8 @@ function OnboardingNavigator() {
 				)
 			
 			}}/>
+      <Stack.Screen name="CadastroDadosPessoais" component={CadastroDadosPessoais} />
+
     </Stack.Navigator>
   );
 }
