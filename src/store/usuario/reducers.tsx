@@ -4,7 +4,7 @@ import types from "./types";
 const usuarioReducers = (state: UsuarioState, action) => {
 	switch (action.type) {
 		case types.SET_USUARIO:
-			return { ...state, usuario: action.payload };;
+			return { ...state, ...action.payload };;
 		default:
 			return state;
 	}

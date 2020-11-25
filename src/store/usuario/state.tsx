@@ -5,7 +5,7 @@ export interface UsuarioState {
 }
 
 const usuarioState = {
-	usuario: null 
+	tipo: null
 }
 
 export default usuarioState;

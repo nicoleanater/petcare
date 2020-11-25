@@ -3,9 +3,8 @@ import LoginScreen from "../../containers/LoginScreen/LoginScreen";
 import { createStackNavigator } from '@react-navigation/stack'
 import { CadastroDadosPessoais } from '../../containers/Cadastro/CadastroDadosPessoais';
 import { TipoCadastro } from '../../containers/TipoCadastro/TipoCadastro';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from '../AppNavigatorStyles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { BackButton } from '../../components/BackButton/BackButton';
 
 const Stack = createStackNavigator();
 
@@ -18,7 +17,6 @@ function OnboardingNavigator() {
 				headerTransparent: true,
 				headerStyle: styles.header,
 				headerLeft: (props) => <BackButton {...props} />
-			}}/>
 			}}/>
       <Stack.Screen name="CadastroDadosPessoais" component={CadastroDadosPessoais} />
 

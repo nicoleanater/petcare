@@ -1,5 +1,9 @@
-import React, { FunctionComponent } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { FunctionComponent, useLayoutEffect } from 'react';
 import { Text, View } from 'react-native';
+import { HeaderCadastro } from '../../components/HeaderCadastro/HeaderCadastro';
+import { TipoUsuario } from '../../models/Usuario';
+import { useStore } from '../../store';
 import styles from './CadastroDadosPessoaisStyles';
 interface IProps {
     // Props type definition
@@ -8,19 +12,24 @@ interface IProps {
 interface IState {
     // State type definition
 }
-
 export const CadastroDadosPessoais: FunctionComponent <IProps> = (props) => {
-    const initialState: IState = {
-    };
+		const navigation = useNavigation();
+		const [state] = useStore();
+		const initialState: IState = {
+		};
+		
+		useLayoutEffect(() => {
+			console.log({state});
+			
+			navigation.setOptions({
+				header: (props) => <HeaderCadastro {...props} userType={state.usuario.tipo} screenStep={'Dados Pessoais'}/>,
+			});
+		}, [navigation]);
 
-
-		//@ts-ignore
-		// const teste: string = props.route.params.teste;
 
     return (
         <View>
-					<Text>Billie Eilish</Text>
-					{/* <Text>Props: {teste}</Text> */}
+					<Text>Cadastro</Text>
         </View>
     );
 };
