@@ -1,3 +1,4 @@
+import { StackHeaderProps } from '@react-navigation/stack';
 import React, { useEffect, FunctionComponent } from 'react';
 import { Image, Text, View } from 'react-native';
 import { TipoUsuario } from '../../models/Usuario';
@@ -15,11 +16,11 @@ const userTypeText = {
 	[TipoUsuario.PET_SITTER]: 'PET SITTER',
 }
 
-export const HeaderCadastro: FunctionComponent<IProps> = (props) => {
+export const HeaderCadastro: FunctionComponent<IProps & StackHeaderProps> = (props) => {
 	return (
 		<View style={styles.headerContainer}>
 			<View style={styles.upperHeaderContainer}>
-				<BackButton />
+				{props.previous ? <BackButton onPress={props.navigation.goBack}/> : undefined}
 				<Text style={styles.headerTextStyle}>Cadastro</Text>
 			</View>
 			<View style={styles.lowerHeaderContainer}>

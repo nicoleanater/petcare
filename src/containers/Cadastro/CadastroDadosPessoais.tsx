@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import { StackHeaderProps } from '@react-navigation/stack';
 import React, { FunctionComponent, useLayoutEffect } from 'react';
 import { Text, View } from 'react-native';
 import { HeaderCadastro } from '../../components/HeaderCadastro/HeaderCadastro';
@@ -19,10 +20,8 @@ export const CadastroDadosPessoais: FunctionComponent <IProps> = (props) => {
 		};
 		
 		useLayoutEffect(() => {
-			console.log({state});
-			
 			navigation.setOptions({
-				header: (props) => <HeaderCadastro {...props} userType={state.usuario.tipo} screenStep={'Dados Pessoais'}/>,
+				header: (props: StackHeaderProps) => <HeaderCadastro {...props} userType={state.usuario.tipo} screenStep={'Dados Pessoais'}/>,
 			});
 		}, [navigation]);
 
