@@ -17,12 +17,8 @@ function OnboardingNavigator() {
 				title: '',
 				headerTransparent: true,
 				headerStyle: styles.header,
-				headerLeft: (props) => (
-					<TouchableOpacity onPress={props.onPress} style={styles.backButtonContainer}>
-						<Icon name={'keyboard-arrow-left'} style={styles.backButton} size={46}/>
-					</TouchableOpacity>
-				)
-			
+				headerLeft: (props) => <BackButton {...props} />
+			}}/>
 			}}/>
       <Stack.Screen name="CadastroDadosPessoais" component={CadastroDadosPessoais} />
 
