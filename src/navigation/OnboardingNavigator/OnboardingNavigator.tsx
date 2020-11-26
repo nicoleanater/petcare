@@ -16,7 +16,7 @@ function OnboardingNavigator() {
 				title: '',
 				headerTransparent: true,
 				headerStyle: styles.header,
-				headerLeft: (props) => <BackButton {...props} />
+				headerLeft: (props) => <BackButton {...props} theme={'light'}/>
 			}}/>
       <Stack.Screen name="CadastroDadosPessoais" component={CadastroDadosPessoais} />
 

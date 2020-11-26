@@ -20,7 +20,7 @@ export const HeaderCadastro: FunctionComponent<IProps & StackHeaderProps> = (pro
 	return (
 		<View style={styles.headerContainer}>
 			<View style={styles.upperHeaderContainer}>
-				{props.previous ? <BackButton onPress={props.navigation.goBack}/> : undefined}
+				{props.previous ? <BackButton onPress={props.navigation.goBack} theme={'dark'}/> : undefined}
 				<Text style={styles.headerTextStyle}>Cadastro</Text>
 			</View>
 			<View style={styles.lowerHeaderContainer}>

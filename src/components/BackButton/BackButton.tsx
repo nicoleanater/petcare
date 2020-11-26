@@ -5,13 +5,13 @@ import styles from './BackButtonStyles';
 import { StackHeaderLeftButtonProps } from '@react-navigation/stack';
 
 interface IProps {
-	onPress: () => void;
+	theme: 'light' | 'dark';
 }
 
-export const BackButton: FunctionComponent<IProps | StackHeaderLeftButtonProps> = (props) => {
+export const BackButton: FunctionComponent<IProps & StackHeaderLeftButtonProps> = (props) => {
     return (
 			<TouchableOpacity onPress={props.onPress} style={styles.backButtonContainer}>
-				<Icon name={'keyboard-arrow-left'} style={styles.backButton} size={40}/>
+				<Icon name={'keyboard-arrow-left'} style={props.theme === 'light' ? styles.backButtonLight : styles.backButtonDark} size={40}/>
 			</TouchableOpacity>
     );
 };

@@ -7,7 +7,10 @@ export default {
 	backButtonContainer: {
 		marginHorizontal: responsiveHeight(1),
 	} as ViewStyle,
-	backButton: {
+	backButtonLight: {
+		color: Colors.white
+	} as TextStyle,
+	backButtonDark: {
 		color: Colors.watermelonDark
 	} as TextStyle
 };
