@@ -21,7 +21,7 @@ interface IState {
 	formErrors: {
 		[name: string]: string | null;
 	};
-}3
+}
 
 const LoginScreen: FunctionComponent<any> = () => {
 	const inputRefs: { [field: string]: MutableRefObject<IRefFloatingLabel> } = {
