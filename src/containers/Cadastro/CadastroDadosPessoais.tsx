@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
-import React, { FunctionComponent, useLayoutEffect } from 'react';
-import { View } from 'react-native';
+import React, { FunctionComponent, useLayoutEffect, useState } from 'react';
+import { Image, View } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { HeaderCadastro } from '../../components/HeaderCadastro/HeaderCadastro';
 import { useStore } from '../../store';
@@ -16,13 +16,17 @@ interface IProps {
 }
 
 interface IState {
-    // State type definition
+	image: String;
 }
+
 export const CadastroDadosPessoais: FunctionComponent <IProps> = (props) => {
 		const navigation = useNavigation();
 		const [state] = useStore();
 		const initialState: IState = {
+			image: null
 		};
+	const [image, setImage] = useState(initialState.image);
+
 		
 		useLayoutEffect(() => {
 			navigation.setOptions({
@@ -33,11 +37,10 @@ export const CadastroDadosPessoais: FunctionComponent <IProps> = (props) => {
 		const openGalery = () => {
 			ImagePicker.launchImageLibrary({
 				mediaType: 'photo',
-				// includeBase64: false,
-				// maxHeight: 200,
-				// maxWidth: 200
+				maxHeight: 200,
+				maxWidth: 200
 			}, 
-			(response) => {console.log({response})})
+			(response) => {setImage(response.data)})
 		}
 
 
@@ -48,9 +51,13 @@ export const CadastroDadosPessoais: FunctionComponent <IProps> = (props) => {
 						start={{x: 0.4, y: 0}} end={{x: 0.8, y: 1.5}}
 						style={styles.gradientBorder}
 						>
-							<TouchableWithoutFeedback onPress={openGalery} style={styles.addPhoto}>
+							{image != null
+							? <Image style={styles.viewPhoto} source={{uri: `data:image/jpeg;base64,${image}`}} /> 
+							
+							: <TouchableWithoutFeedback onPress={openGalery} style={styles.addPhoto}>
 								<Icon name={'add-a-photo'} style={styles.photoIcon} size={42}/>
-							</TouchableWithoutFeedback>
+							</TouchableWithoutFeedback>}
+							
 					</LinearGradient>
         </View>
     );

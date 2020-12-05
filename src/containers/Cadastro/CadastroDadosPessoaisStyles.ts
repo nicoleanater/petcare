@@ -1,4 +1,4 @@
-import { TextStyle, ViewStyle } from 'react-native';
+import { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 import { ApplicationStyles, Colors } from '../../themes';
 
 export default {
@@ -22,6 +22,12 @@ export default {
 			justifyContent: 'center',
 			alignItems: 'center'
 		} as ViewStyle,
+		viewPhoto: {
+			borderRadius: 100,
+			width: 125,
+			height: 125,
+			resizeMode: 'cover'
+		} as ImageStyle,
 		photoIcon: {
 			color: Colors.grayOne,
 		} as TextStyle
