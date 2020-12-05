@@ -6,7 +6,8 @@
     "android": "react-native run-android && adb reverse tcp:9090 tcp:9090",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest"
+		"test": "jest",
+		"reverse": "adb reverse tcp:9090 tcp:9090"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
