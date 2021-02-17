@@ -54,7 +54,7 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 		},
 		formErrors: {}
 	};
-	const [formState, dispatchFormUpdate] = useForm(initialState.formValues);
+	const [formValues, dispatchFormUpdate] = useForm(initialState.formValues);
 	const [formErrors, dispatchErrorUpdate] = useForm(initialState.formErrors);
 
 	const onChangeFormValue = (field: string, value: string) => {
@@ -75,14 +75,14 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 
 	const validateFields = () => {
 		let valid = true;
-		Object.entries(formState).forEach(([key, value]) => {
+		Object.entries(formValues).forEach(([key, value]) => {
 			if (key != 'foto' && _.isEmpty(value)) {
 				dispatchErrorUpdate({field: key, value: 'obrigatório'})
 				valid = false;
 			} else if (key === 'celular' && !validateCelular(value)) {
 				dispatchErrorUpdate({field: key, value: 'celular inválido'})
 				valid = false;
-			} else if (key === 'data_nasc' && !validateData(value)) {
+			} else if (key === 'data_nasc' && !validateDate(value)) {
 				dispatchErrorUpdate({field: key, value: 'data inválida'})
 				valid = false;
 			}
@@ -95,13 +95,13 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 		return true;
 	}
 
-	const validateData = (data: string) => {
+	const validateDate = (data: string) => {
 		return true;
 	}
 
 	const onContinuar = () => {
 		if (validateFields()) {
-			dispatch(usuarioActions.setUsuario(formState));
+			dispatch(usuarioActions.setUsuario(formValues));
 				// navigation.navigate('');
 		}
 	}
@@ -109,11 +109,11 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 
     return (
 			<ScrollView contentContainerStyle={styles.mainContainer}>
-				<ImageGradientPicker isPicker image={formState['foto']} pickerCallback={(value) => onChangeFormValue('foto', value)}/>
+				<ImageGradientPicker isPicker image={formValues['foto']} pickerCallback={(value) => onChangeFormValue('foto', value)}/>
 				<FloatingLabelInput
 						ref={inputRefs['nome']}
 						label={'Nome'}
-						value={formState['nome']}
+						value={formValues['nome']}
 						error={formErrors['nome']}
 						isFieldCorrect={_.isEmpty(formErrors['nome'])}
 						maxLength={60}
@@ -124,7 +124,7 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 					<FloatingLabelInput
 						ref={inputRefs['sobrenome']}
 						label={'Sobrenome'}
-						value={formState['sobrenome']}
+						value={formValues['sobrenome']}
 						error={formErrors['sobrenome']}
 						isFieldCorrect={_.isEmpty(formErrors['sobrenome'])}
 						maxLength={60}
@@ -135,7 +135,7 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 					<FloatingLabelInput
 						ref={inputRefs['data_nasc']}
 						label={'Data de Nascimento'}
-						value={formState['data_nasc']}
+						value={formValues['data_nasc']}
 						error={formErrors['data_nasc']}
 						isFieldCorrect={_.isEmpty(formErrors['data_nasc'])}
 						maxLength={60}
@@ -146,7 +146,7 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 					<FloatingLabelInput
 						ref={inputRefs['celular']}
 						label={'Celular'}
-						value={formState['celular']}
+						value={formValues['celular']}
 						error={formErrors['celular']}
 						isFieldCorrect={_.isEmpty(formErrors['celular'])}
 						maxLength={60}
