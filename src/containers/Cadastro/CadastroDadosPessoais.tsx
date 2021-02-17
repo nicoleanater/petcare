@@ -93,7 +93,7 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 	};
 
 	const validateCelular = (numero: string) => {
-		return true;
+		return inputRefs['celular'].current.isValid();;
 	}
 
 	const validateDate = (date: string) => {
