@@ -31,6 +31,7 @@ interface IProps {
 
 export interface IRefFloatingLabel {
 	focus: () => void;
+	isValid: () => boolean;
 }
 
 interface IState {
@@ -64,6 +65,12 @@ export const FloatingLabelInput: RefForwardingComponent<IRefFloatingLabel, IProp
 				textInput.current.focus();
 			}
 		},
+		isValid: () => {
+			if (mask === 'datetime' && maskedTextInput.current) {
+				return maskedTextInput.current.isValid();
+			}
+			return;
+		}
 	}));
 
 	const handleFocus = () => {

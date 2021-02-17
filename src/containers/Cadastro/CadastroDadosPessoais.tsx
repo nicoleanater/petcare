@@ -12,6 +12,7 @@ import _ from 'lodash';
 import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { ScrollView } from 'react-native-gesture-handler';
 import { usuarioActions } from '../../store/usuario';
+import moment from 'moment';
 
 interface IProps { }
 interface IState {
@@ -95,8 +96,10 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 		return true;
 	}
 
-	const validateDate = (data: string) => {
-		return true;
+	const validateDate = (date: string) => {
+		const dateValid = inputRefs['data_nasc'].current.isValid();
+		const dateInThePast = moment(date, 'DD/MM/YYYY').isBefore();
+		return dateValid && dateInThePast;
 	}
 
 	const onContinuar = () => {
@@ -137,6 +140,8 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 						label={'Data de Nascimento'}
 						value={formValues['data_nasc']}
 						error={formErrors['data_nasc']}
+						mask={'datetime'}
+						maskOptions={{format: 'DD/MM/YYYY'}}
 						isFieldCorrect={_.isEmpty(formErrors['data_nasc'])}
 						maxLength={60}
 						onChangeText={(value: string) => onChangeFormValue('data_nasc', value)}
