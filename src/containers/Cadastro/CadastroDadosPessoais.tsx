@@ -104,7 +104,13 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 
 	const onContinuar = () => {
 		if (validateFields()) {
-			dispatch(usuarioActions.setUsuario(formValues));
+			const usuario = {
+				...formValues,
+				celular: inputRefs['celular'].current.getRawValue(),
+				data_nasc: inputRefs['data_nasc'].current.getRawValue()
+				
+			}
+			dispatch(usuarioActions.setUsuario(usuario));
 				// navigation.navigate('');
 		}
 	}
@@ -153,6 +159,7 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 						label={'Celular'}
 						value={formValues['celular']}
 						error={formErrors['celular']}
+						mask={'cel-phone'}
 						isFieldCorrect={_.isEmpty(formErrors['celular'])}
 						maxLength={60}
 						onChangeText={(value: string) => onChangeFormValue('celular', value)}

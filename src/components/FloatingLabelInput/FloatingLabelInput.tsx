@@ -32,6 +32,7 @@ interface IProps {
 export interface IRefFloatingLabel {
 	focus: () => void;
 	isValid: () => boolean;
+	getRawValue: () => any;
 }
 
 interface IState {
@@ -68,6 +69,12 @@ export const FloatingLabelInput: RefForwardingComponent<IRefFloatingLabel, IProp
 		isValid: () => {
 			if (mask === 'datetime' && maskedTextInput.current) {
 				return maskedTextInput.current.isValid();
+			}
+			return;
+		},
+		getRawValue: () => {
+			if (mask && maskedTextInput.current) {
+				return maskedTextInput.current.getRawValue();
 			}
 			return;
 		}
