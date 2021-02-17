@@ -8,7 +8,8 @@ export default {
 		width: 140,
 		height: 140,
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		marginBottom: 20
 	} as ViewStyle,
 	addPhoto: {
 		borderRadius: 100,

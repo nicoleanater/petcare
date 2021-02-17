@@ -5,6 +5,7 @@ export default {
 		...ApplicationStyles,
 		mainContainer: {
 			paddingVertical: 25,
+			paddingHorizontal: 44,
 			alignItems: 'center'
 		} as ViewStyle
 };
