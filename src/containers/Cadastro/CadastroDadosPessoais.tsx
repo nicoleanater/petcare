@@ -80,10 +80,10 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 			if (key != 'foto' && _.isEmpty(value)) {
 				dispatchErrorUpdate({field: key, value: 'obrigatório'})
 				valid = false;
-			} else if (key === 'celular' && !validateCelular(value)) {
+			} else if (key === 'celular' && !validateCelular()) {
 				dispatchErrorUpdate({field: key, value: 'celular inválido'})
 				valid = false;
-			} else if (key === 'data_nasc' && !validateDate(value)) {
+			} else if (key === 'data_nasc' && !validateDate()) {
 				dispatchErrorUpdate({field: key, value: 'data inválida'})
 				valid = false;
 			}
@@ -92,13 +92,14 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 		return valid;
 	};
 
-	const validateCelular = (numero: string) => {
-		return inputRefs['celular'].current.isValid();;
+	const validateCelular = () => {
+		return inputRefs['celular'].current.isValid();
 	}
 
-	const validateDate = (date: string) => {
+	const validateDate = () => {
+		const rawValue = inputRefs['data_nasc'].current.getRawValue();
 		const dateValid = inputRefs['data_nasc'].current.isValid();
-		const dateInThePast = moment(date, 'DD/MM/YYYY').isBefore();
+		const dateInThePast = moment(rawValue).isBefore();
 		return dateValid && dateInThePast;
 	}
 
