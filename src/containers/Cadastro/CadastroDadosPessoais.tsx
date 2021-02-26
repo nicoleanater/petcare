@@ -7,7 +7,7 @@ import { HeaderCadastro } from '../../components/HeaderCadastro/HeaderCadastro';
 import { ImageGradientPicker } from '../../components/ImageGradientPicker/ImageGradientPicker';
 import { useForm } from '../../hooks';
 import { useStore } from '../../store';
-import styles from './CadastroDadosPessoaisStyles';
+import styles from './CadastroStyles';
 import _ from 'lodash';
 import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { ScrollView } from 'react-native-gesture-handler';

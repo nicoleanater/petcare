@@ -15,7 +15,7 @@ import { buscaCidades } from '../../services/cidade';
 import { buscaEstados } from '../../services/estado';
 import { useStore } from '../../store';
 import { usuarioActions } from '../../store/usuario';
-import styles from './CadastroEnderecoStyles';
+import styles from './CadastroStyles';
 
 interface IProps { }
 
