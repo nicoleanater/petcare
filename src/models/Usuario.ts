@@ -10,6 +10,7 @@ export interface Usuario {
 	email?: string;
 	senha?: string;
 	nome?: string;
+	sobrenome?: string;
 	data_nasc?: Moment;
 	celular?: string;
 	foto?: string;

@@ -40,18 +40,18 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			header: (props: StackHeaderProps) => <HeaderCadastro {...props} userType={state.usuario.tipo} screenStep={'Dados Pessoais'}/>,
+			header: (props: StackHeaderProps) => <HeaderCadastro {...props} userType={usuario.tipo} screenStep={'Dados Pessoais'}/>,
 		});
 	}, [navigation]);
 
-	const [state, dispatch] = useStore();
+	const [{ usuario }, dispatch] = useStore();
 	const initialState: IState = {
 		formValues: {
-			foto: null,
-			nome: '',
-			sobrenome: '',
-			data_nasc: '',
-			celular: ''
+			foto: usuario.foto,
+			nome: usuario.nome,
+			sobrenome: usuario.sobrenome,
+			data_nasc: usuario.data_nasc,
+			celular: usuario.celular
 		},
 		formErrors: {}
 	};
