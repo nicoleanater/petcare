@@ -116,10 +116,17 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 			if (key != 'complemento' && _.isEmpty(value)) {
 				dispatchErrorUpdate({field: key, value: 'obrigatório'})
 				valid = false;
+			} else if (key === 'cep' && !validateCEP()) {
+				dispatchErrorUpdate({field: key, value: 'cep inválido'})
+				valid = false;
 			}
 		});
 		return valid;
 	};
+
+	const validateCEP = () => {
+		return inputRefs['cep'].current.isValid();
+	}
 
 	const onContinuar = () => {
 		if (validateFields()) {
