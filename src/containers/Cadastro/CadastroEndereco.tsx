@@ -217,6 +217,7 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 					onSelect={(value) => onChangeFormValue('uf', value)}
 					value={formValues['uf']}
 					list={estados}
+					error={formErrors['uf']}
 				/>
 				<RoundedButton
 					onPress={onContinuar}

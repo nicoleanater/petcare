@@ -4,7 +4,6 @@ import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 export default {
 	...ApplicationStyles,
-
 	inputContainer: {
 		position: 'relative',
 		alignItems: 'center',
@@ -73,7 +72,6 @@ export default {
 	labelWithIcon: {
 		left: 55
 	},
-
 	errorText: {
 		position: 'absolute',
 		bottom: 9,
