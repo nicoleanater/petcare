@@ -16,7 +16,12 @@ interface IProps<T> {
 	error?: string | null;
 }
 
-
+export function transformArrayIntoPickerOptions<T extends {descricao: string}>(values: Array<T>) {
+	return values.map((item: T) => ({
+		label: item.descricao,
+		value: item
+	}))
+}
 
 export function CustomPicker<T>({ onSelect, value, list, error }: IProps<T> & { children?: React.ReactNode }): React.ReactElement {
 		const onValueChange = (itemValue: number) => {
