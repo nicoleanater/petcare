@@ -106,10 +106,10 @@ export const FloatingLabelInput: RefForwardingComponent<IRefFloatingLabel, IProp
 
 	const { label, icon, mask, maskOptions, isFieldEditable, autoCapitalize, isFieldCorrect, error, ...restProps } = props;
 	return (
-		<View style={styles.inputContainer}>
+		<View style={[styles.inputContainer, props.viewStyle]}>
 			<View
 				pointerEvents={props.isFieldEditable === false ? 'none' : 'auto'}
-				style={[styles.floatingLabelStyle, !isFieldCorrect && styles.floatingLabelErrorStyle, props.viewStyle]}>
+				style={[styles.floatingLabelStyle, !isFieldCorrect && styles.floatingLabelErrorStyle]}>
 				{icon ? <Icon name={icon.name} style={!props.iconStyle ? styles.iconStyle : [styles.iconStyle, props.iconStyle]} /> : <View />}
 				<Animated.Text style={[labelStyle(), icon && styles.labelWithIcon]}>{label}</Animated.Text>
 

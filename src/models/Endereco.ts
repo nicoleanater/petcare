@@ -1,9 +1,9 @@
 import { Cidade } from "./Cidade";
 
 export interface Endereco {
-	cep?: number;
+	cep?: string;
 	rua?: string;
-	numero?: string;
+	numero?: number;
 	bairro?: string;
 	complemento?: string;
 	cidade?: Cidade;

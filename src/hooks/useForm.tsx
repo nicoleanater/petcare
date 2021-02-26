@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 
-const useForm = (initialState: {[key: string]: string}) => {
+const useForm = (initialState: {[key: string]: string | number}) => {
 	
 	const reducer = (state, { field, value }) => {
 		return {

@@ -7,7 +7,8 @@ export default {
 
 	inputContainer: {
 		position: 'relative',
-		alignItems: 'center'
+		alignItems: 'center',
+		flex: 1
 	} as ViewStyle,
 	// input general styles
 	floatingLabelStyle: {

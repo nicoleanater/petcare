@@ -4,4 +4,9 @@ import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 export default {
 	...ApplicationStyles,
+	mainContainer: {
+		paddingVertical: 25,
+		paddingHorizontal: 44,
+		alignItems: 'center'
+	} as ViewStyle
 };
