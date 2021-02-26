@@ -194,6 +194,7 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 				viewStyle={{flex: 3}}
 			/>
 			<CustomPicker<Estado>
+				label={'UF'}
 				onSelect={(value) => onChangeFormValue('uf', value)}
 				value={formValues['uf']}
 				list={estados}
