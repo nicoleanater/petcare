@@ -23,16 +23,19 @@ export function CustomPicker<T>({ onSelect, value, list }: IProps<T> & { childre
 		}
 
     return (
-			<Picker
-				style={{height: 50, width: 100}}
-				selectedValue={value?.id}
-				onValueChange={onValueChange}
-			>
-				{list.map((item: Option<T>, i) => {
-					return (
-						<Picker.Item label={item.label} value={item.value.id} key={i}/>
-					)
-				})}
-			</Picker>
+			<View style={styles.pickerContainer}>
+				<Picker
+					style={styles.pickerStyle}
+					selectedValue={value?.id}
+					onValueChange={onValueChange}
+				>
+					{list.map((item: Option<T>, i) => {
+						return (
+							<Picker.Item label={item.label} value={item.value.id} key={i}/>
+						)
+					})}
+				</Picker>
+			</View>
+			
     );
 };
