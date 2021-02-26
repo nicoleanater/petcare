@@ -37,6 +37,7 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 	};
 
 	const navigation = useNavigation();
+	const [{ usuario }, dispatch] = useStore();
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -44,7 +45,6 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 		});
 	}, [navigation]);
 
-	const [{ usuario }, dispatch] = useStore();
 	const initialState: IState = {
 		formValues: {
 			foto: usuario.foto,
@@ -112,7 +112,7 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 				
 			}
 			dispatch(usuarioActions.setUsuario(usuario));
-				// navigation.navigate('');
+				navigation.navigate('CadastroEndereco');
 		}
 	}
 

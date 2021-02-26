@@ -5,6 +5,7 @@ import { CadastroDadosPessoais } from '../../containers/Cadastro/CadastroDadosPe
 import { TipoCadastro } from '../../containers/TipoCadastro/TipoCadastro';
 import styles from '../AppNavigatorStyles';
 import { BackButton } from '../../components/BackButton/BackButton';
+import { CadastroEndereco } from '../../containers/Cadastro/CadastroEndereco';
 
 const Stack = createStackNavigator();
 
@@ -19,7 +20,7 @@ function OnboardingNavigator() {
 				headerLeft: (props) => <BackButton {...props} theme={'light'}/>
 			}}/>
       <Stack.Screen name="CadastroDadosPessoais" component={CadastroDadosPessoais} />
-
+      <Stack.Screen name="CadastroEndereco" component={CadastroEndereco} />
     </Stack.Navigator>
   );
 }
