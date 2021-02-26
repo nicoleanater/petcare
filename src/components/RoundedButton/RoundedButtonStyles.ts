@@ -21,6 +21,11 @@ export default {
 				borderWidth: 2,
 				borderColor: Colors.watermelonDark
 		} as ViewStyle,
+		smallButton: {
+			height: 42,
+			minWidth: 120,
+			paddingHorizontal: 25,
+		} as ViewStyle,
 		
 		// button text styles
     defaultTextStyle: {
