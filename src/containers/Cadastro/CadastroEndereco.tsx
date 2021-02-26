@@ -1,14 +1,16 @@
-import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
 import _ from 'lodash';
 import React, { FunctionComponent, MutableRefObject, useLayoutEffect, useRef } from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { CustomPicker } from '../../components/CustomPicker/CustomPicker';
 import FloatingLabelInput, { IRefFloatingLabel } from '../../components/FloatingLabelInput/FloatingLabelInput';
 import { HeaderCadastro } from '../../components/HeaderCadastro/HeaderCadastro';
 import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { useForm } from '../../hooks';
+import { Cidade } from '../../models/Cidade';
+import { Estado } from '../../models/Estado';
 import { useStore } from '../../store';
 import styles from './CadastroEnderecoStyles';
 
@@ -21,8 +23,8 @@ interface IState {
 		numero: number;
 		bairro: string;
 		complemento: string;
-		uf: number;
-		cidade: number;
+		uf: Estado;
+		cidade: Cidade;
 	};
 	formErrors: {
 		[name: string]: string | null;
@@ -57,8 +59,8 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 			numero: usuario.endereco?.numero,
 			bairro: usuario.endereco?.bairro,
 			complemento: usuario.endereco?.complemento,
-			uf: usuario.endereco?.cidade.estado.id,
-			cidade: usuario.endereco?.cidade.id
+			uf: usuario.endereco?.cidade.estado,
+			cidade: usuario.endereco?.cidade
 		},
 		formErrors: {}
 	};
@@ -66,7 +68,7 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 	const [formValues, dispatchFormUpdate] = useForm(initialState.formValues);
 	const [formErrors, dispatchErrorUpdate] = useForm(initialState.formErrors);
 
-	const onChangeFormValue = (field: string, value: string) => {
+	const onChangeFormValue = (field: string, value: any) => {
 		dispatchFormUpdate({field, value});
 		dispatchErrorUpdate({field, value: null});
 	};
@@ -112,6 +114,41 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 		// 		navigation.navigate('CadastroEndereco');
 		// }
 	}
+
+	const estados = [
+		{
+			label: 'Acre',
+			value: {
+				"descricao": "Acre",
+				"id": 1,
+				"sigla": "AC"
+			}
+		},
+		{
+			label: 'Alagoas',
+			value: {
+				"descricao": "Alagoas",
+				"id": 2,
+				"sigla": "AL"
+			}
+		},
+		{
+			label: 'Amazonas',
+			value: {
+				"descricao": "Amazonas",
+				"id": 3,
+				"sigla": "AM"
+			}
+		},
+		{
+			label: 'Amapá',
+			value: {
+				"descricao": "Amapá",
+				"id": 4,
+				"sigla": "AP"
+			}
+		}
+	]
 
     return (
 			<ScrollView contentContainerStyle={styles.mainContainer}>
@@ -176,15 +213,11 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 					onSubmitEditing={() => onEndEditingField('complemento')}
 					viewStyle={{flex: 3}}
 				/>
-				<Picker
-					selectedValue={'java'}
-					style={{height: 50, width: 100}}
-					onValueChange={(itemValue, itemIndex) =>
-						onChangeFormValue('uf', itemValue)
-					}>
-					<Picker.Item label="Java" value="java" />
-					<Picker.Item label="JavaScript" value="js" />
-				</Picker>
+				<CustomPicker<Estado>
+					onSelect={(value) => onChangeFormValue('uf', value)}
+					value={formValues['uf']}
+					list={estados}
+				/>
 				<RoundedButton
 					onPress={onContinuar}
 					label={'Continuar'}
