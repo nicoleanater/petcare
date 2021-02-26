@@ -1,16 +1,17 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
 import _ from 'lodash';
-import React, { FunctionComponent, MutableRefObject, useLayoutEffect, useRef } from 'react';
+import React, { FunctionComponent, MutableRefObject, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { CustomPicker } from '../../components/CustomPicker/CustomPicker';
+import { CustomPicker, transformArrayIntoPickerOptions } from '../../components/CustomPicker/CustomPicker';
 import FloatingLabelInput, { IRefFloatingLabel } from '../../components/FloatingLabelInput/FloatingLabelInput';
 import { HeaderCadastro } from '../../components/HeaderCadastro/HeaderCadastro';
 import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { useForm } from '../../hooks';
 import { Cidade } from '../../models/Cidade';
 import { Estado } from '../../models/Estado';
+import { buscaEstados } from '../../services/estado';
 import { useStore } from '../../store';
 import styles from './CadastroEnderecoStyles';
 
@@ -44,6 +45,20 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 
 	const navigation = useNavigation();
 	const [{ usuario }, dispatch] = useStore();
+	const [estados, setEstados] = useState([]);
+
+	useEffect(() => {
+		loadComboBoxes();
+	}, []);
+
+	const loadComboBoxes = async () => {
+		try {
+			const res = await buscaEstados();
+			setEstados(transformArrayIntoPickerOptions(res.data));
+		} catch (error) {
+			console.error({error});
+		}
+	}
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -115,115 +130,80 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 		// }
 	}
 
-	const estados = [
-		{
-			label: 'Acre',
-			value: {
-				"descricao": "Acre",
-				"id": 1,
-				"sigla": "AC"
-			}
-		},
-		{
-			label: 'Alagoas',
-			value: {
-				"descricao": "Alagoas",
-				"id": 2,
-				"sigla": "AL"
-			}
-		},
-		{
-			label: 'Amazonas',
-			value: {
-				"descricao": "Amazonas",
-				"id": 3,
-				"sigla": "AM"
-			}
-		},
-		{
-			label: 'Amapá',
-			value: {
-				"descricao": "Amapá",
-				"id": 4,
-				"sigla": "AP"
-			}
-		}
-	]
-
-    return (
-			<ScrollView contentContainerStyle={styles.mainContainer}>
+	return (
+		<ScrollView contentContainerStyle={styles.mainContainer}>
+			<FloatingLabelInput
+				ref={inputRefs['cep']}
+				label={'CEP'}
+				value={formValues['cep']}
+				error={formErrors['cep']}
+				mask={'zip-code'}
+				isFieldCorrect={_.isEmpty(formErrors['cep'])}
+				onChangeText={(value: string) => onChangeFormValue('cep', value)}
+				returnKeyType={'next'}
+				onSubmitEditing={() => onEndEditingField('cep')}
+			/>
+			<FloatingLabelInput
+				ref={inputRefs['rua']}
+				label={'Rua'}
+				value={formValues['rua']}
+				error={formErrors['rua']}
+				isFieldCorrect={_.isEmpty(formErrors['rua'])}
+				maxLength={60}
+				onChangeText={(value: string) => onChangeFormValue('rua', value)}
+				returnKeyType={'next'}
+				onSubmitEditing={() => onEndEditingField('rua')}
+			/>
+			<View style={styles.row}>
 				<FloatingLabelInput
-					ref={inputRefs['cep']}
-					label={'CEP'}
-					value={formValues['cep']}
-					error={formErrors['cep']}
-					mask={'zip-code'}
-					isFieldCorrect={_.isEmpty(formErrors['cep'])}
-					onChangeText={(value: string) => onChangeFormValue('cep', value)}
+					ref={inputRefs['numero']}
+					label={'Número'}
+					value={formValues['numero']}
+					error={formErrors['numero']}
+					keyboardType={'numeric'}
+					isFieldCorrect={_.isEmpty(formErrors['numero'])}
+					maxLength={10}
+					onChangeText={(value: string) => onChangeFormValue('numero', value)}
 					returnKeyType={'next'}
-					onSubmitEditing={() => onEndEditingField('cep')}
+					onSubmitEditing={() => onEndEditingField('numero')}
+					viewStyle={{flex: 2, marginRight: 10}}
 				/>
 				<FloatingLabelInput
-					ref={inputRefs['rua']}
-					label={'Rua'}
-					value={formValues['rua']}
-					error={formErrors['rua']}
-					isFieldCorrect={_.isEmpty(formErrors['rua'])}
+					ref={inputRefs['bairro']}
+					label={'Bairro'}
+					value={formValues['bairro']}
+					error={formErrors['bairro']}
+					isFieldCorrect={_.isEmpty(formErrors['bairro'])}
 					maxLength={60}
-					onChangeText={(value: string) => onChangeFormValue('rua', value)}
+					onChangeText={(value: string) => onChangeFormValue('bairro', value)}
 					returnKeyType={'next'}
-					onSubmitEditing={() => onEndEditingField('rua')}
-				/>
-				<View style={styles.row}>
-					<FloatingLabelInput
-						ref={inputRefs['numero']}
-						label={'Número'}
-						value={formValues['numero']}
-						error={formErrors['numero']}
-						keyboardType={'numeric'}
-						isFieldCorrect={_.isEmpty(formErrors['numero'])}
-						maxLength={10}
-						onChangeText={(value: string) => onChangeFormValue('numero', value)}
-						returnKeyType={'next'}
-						onSubmitEditing={() => onEndEditingField('numero')}
-						viewStyle={{flex: 2, marginRight: 10}}
-					/>
-					<FloatingLabelInput
-						ref={inputRefs['bairro']}
-						label={'Bairro'}
-						value={formValues['bairro']}
-						error={formErrors['bairro']}
-						isFieldCorrect={_.isEmpty(formErrors['bairro'])}
-						maxLength={60}
-						onChangeText={(value: string) => onChangeFormValue('bairro', value)}
-						returnKeyType={'next'}
-						onSubmitEditing={() => onEndEditingField('bairro')}
-						viewStyle={{flex: 3}}
-					/>
-				</View>
-				<FloatingLabelInput
-					ref={inputRefs['complemento']}
-					label={'Complemento'}
-					value={formValues['complemento']}
-					error={formErrors['complemento']}
-					isFieldCorrect={_.isEmpty(formErrors['complemento'])}
-					maxLength={60}
-					onChangeText={(value: string) => onChangeFormValue('complemento', value)}
-					returnKeyType={'next'}
-					onSubmitEditing={() => onEndEditingField('complemento')}
+					onSubmitEditing={() => onEndEditingField('bairro')}
 					viewStyle={{flex: 3}}
 				/>
-				<CustomPicker<Estado>
-					onSelect={(value) => onChangeFormValue('uf', value)}
-					value={formValues['uf']}
-					list={estados}
-					error={formErrors['uf']}
-				/>
-				<RoundedButton
-					onPress={onContinuar}
-					label={'Continuar'}
-					progressButton
-				/>
-			</ScrollView>
-    );
+			</View>
+			<FloatingLabelInput
+				ref={inputRefs['complemento']}
+				label={'Complemento'}
+				value={formValues['complemento']}
+				error={formErrors['complemento']}
+				isFieldCorrect={_.isEmpty(formErrors['complemento'])}
+				maxLength={60}
+				onChangeText={(value: string) => onChangeFormValue('complemento', value)}
+				returnKeyType={'next'}
+				onSubmitEditing={() => onEndEditingField('complemento')}
+				viewStyle={{flex: 3}}
+			/>
+			<CustomPicker<Estado>
+				onSelect={(value) => onChangeFormValue('uf', value)}
+				value={formValues['uf']}
+				list={estados}
+				error={formErrors['uf']}
+			/>
+			<RoundedButton
+				onPress={onContinuar}
+				label={'Continuar'}
+				progressButton
+			/>
+		</ScrollView>
+	);
 };
