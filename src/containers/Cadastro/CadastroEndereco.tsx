@@ -11,6 +11,7 @@ import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { useForm } from '../../hooks';
 import { Cidade } from '../../models/Cidade';
 import { Estado } from '../../models/Estado';
+import { buscaCidades } from '../../services/cidade';
 import { buscaEstados } from '../../services/estado';
 import { useStore } from '../../store';
 import styles from './CadastroEnderecoStyles';
@@ -46,15 +47,25 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 	const navigation = useNavigation();
 	const [{ usuario }, dispatch] = useStore();
 	const [estados, setEstados] = useState([]);
+	const [cidades, setCidades] = useState([]);
 
 	useEffect(() => {
-		loadComboBoxes();
+		loadEstadosCombobox();
 	}, []);
 
-	const loadComboBoxes = async () => {
+	const loadEstadosCombobox = async () => {
 		try {
 			const res = await buscaEstados();
-			setEstados(transformArrayIntoPickerOptions(res.data));
+			setEstados(transformArrayIntoPickerOptions(res.data, 'sigla'));
+		} catch (error) {
+			console.error({error});
+		}
+	}
+
+	const loadCidadesCombobox = async (estadoId) => {
+		try {
+			const res = await buscaCidades(estadoId);
+			setCidades(transformArrayIntoPickerOptions(res.data, 'descricao'));
 		} catch (error) {
 			console.error({error});
 		}
@@ -84,6 +95,9 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 	const [formErrors, dispatchErrorUpdate] = useForm(initialState.formErrors);
 
 	const onChangeFormValue = (field: string, value: any) => {
+		if (field === 'uf') {
+			loadCidadesCombobox(value.id);
+		}
 		dispatchFormUpdate({field, value});
 		dispatchErrorUpdate({field, value: null});
 	};
@@ -193,13 +207,24 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 				onSubmitEditing={() => onEndEditingField('complemento')}
 				viewStyle={{flex: 3}}
 			/>
-			<CustomPicker<Estado>
-				label={'UF'}
-				onSelect={(value) => onChangeFormValue('uf', value)}
-				value={formValues['uf']}
-				list={estados}
-				error={formErrors['uf']}
-			/>
+			<View style={styles.row}>
+				<CustomPicker<Estado>
+					label={'UF'}
+					onSelect={(value) => onChangeFormValue('uf', value)}
+					value={formValues['uf']}
+					list={estados}
+					error={formErrors['uf']}
+					mainContainerStyle={{flex: 2}}
+				/>
+				<CustomPicker<Cidade>
+					label={'Cidade'}
+					onSelect={(value) => onChangeFormValue('cidade', value)}
+					value={formValues['cidade']}
+					list={cidades}
+					error={formErrors['cidade']}
+					mainContainerStyle={{flex: 3}}
+				/>
+			</View>
 			<RoundedButton
 				onPress={onContinuar}
 				label={'Continuar'}

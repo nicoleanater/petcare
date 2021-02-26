@@ -5,7 +5,7 @@ import { responsiveHeight } from 'react-native-responsive-dimensions';
 export default {
 	...ApplicationStyles,
 	mainContainer: {
-		width: '100%',
+		flex: 1,
 	},
 	pickerContainer: {
 		position: 'relative',

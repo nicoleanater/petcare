@@ -1,6 +1,6 @@
 import { Picker } from '@react-native-picker/picker';
 import React, { useEffect, FunctionComponent } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ViewStyle } from 'react-native';
 import styles from './CustomPickerStyles';
 import _ from 'lodash';
 
@@ -15,16 +15,17 @@ interface IProps<T> {
 	value: T & { id: number };
 	list: Array<Option<T>>;
 	error?: string | null;
+	mainContainerStyle?: ViewStyle[] | ViewStyle;
 }
 
-export function transformArrayIntoPickerOptions<T extends {descricao: string}>(values: Array<T>) {
+export function transformArrayIntoPickerOptions<T>(values: Array<T>, valueLabelKey: string) {
 	return values.map((item: T) => ({
-		label: item.descricao,
+		label: item[valueLabelKey],
 		value: item
 	}))
 }
 
-export function CustomPicker<T>({ label, onSelect, value, list, error }: IProps<T> & { children?: React.ReactNode }): React.ReactElement {
+export function CustomPicker<T>({ label, onSelect, value, list, error, mainContainerStyle }: IProps<T> & { children?: React.ReactNode }): React.ReactElement {
 		const onValueChange = (itemValue: number | null) => {
 			if (itemValue == null) {
 				onSelect(itemValue as null);
@@ -35,7 +36,7 @@ export function CustomPicker<T>({ label, onSelect, value, list, error }: IProps<
 		}
 
     return (
-			<View style={styles.mainContainer}>
+			<View style={[styles.mainContainer, mainContainerStyle]}>
 				<View style={[styles.pickerContainer, !_.isEmpty(error) && styles.pickerContainerError]}>
 					<Picker
 						style={styles.pickerStyle}
