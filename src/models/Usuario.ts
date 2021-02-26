@@ -1,4 +1,5 @@
 import { Moment } from "moment";
+import { Animal } from "./Animal";
 import { Endereco } from "./Endereco";
 
 export enum TipoUsuario {
@@ -18,4 +19,5 @@ export interface Usuario {
 	nota_media?: number;
 	tipo?: TipoUsuario;
 	endereco?: Endereco;
+	animais?: Array<Animal>;
 }

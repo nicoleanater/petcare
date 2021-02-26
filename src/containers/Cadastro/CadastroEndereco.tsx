@@ -132,7 +132,7 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 		if (validateFields()) {
 			const usuario = { endereco: formValues };
 			dispatch(usuarioActions.setUsuario(usuario));
-			// 	navigation.navigate('CadastroEndereco');
+				navigation.navigate('CadastroAnimais');
 		}
 	}
 
