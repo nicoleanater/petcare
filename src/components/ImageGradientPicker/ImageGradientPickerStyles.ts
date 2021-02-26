@@ -11,6 +11,10 @@ export default {
 		alignItems: 'center',
 		marginBottom: 20
 	} as ViewStyle,
+	smallPicker: {
+		width: 85,
+		height: 85,
+	} as ViewStyle,
 	addPhoto: {
 		borderRadius: 100,
 		width: 125,
@@ -24,6 +28,37 @@ export default {
 		width: 125,
 		height: 125,
 		resizeMode: 'cover'
+	} as ImageStyle,
+	viewPhotoSmall: {
+		width: 70,
+		height: 70,
+		resizeMode: 'cover'
+	} as ImageStyle,
+	iconContainer: {
+		borderRadius: 100,
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'center',
+		backgroundColor: Colors.white,
+		width: 125,
+		height: 125,
+	} as ImageStyle,
+	iconContainerSmall: {
+		borderRadius: 100,
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'center',
+		backgroundColor: Colors.white,
+		width: 78,
+		height: 78,
+	} as ImageStyle,
+	viewIcon: {
+		width: 95,
+		height: 95,
+	} as ImageStyle,
+	viewIconSmall: {
+		width: 50,
+		height: 50,
 	} as ImageStyle,
 	photoIcon: {
 		color: Colors.grayOne,
