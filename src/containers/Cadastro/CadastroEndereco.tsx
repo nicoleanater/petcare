@@ -1,3 +1,4 @@
+import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
 import _ from 'lodash';
@@ -175,6 +176,15 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 					onSubmitEditing={() => onEndEditingField('complemento')}
 					viewStyle={{flex: 3}}
 				/>
+				<Picker
+					selectedValue={'java'}
+					style={{height: 50, width: 100}}
+					onValueChange={(itemValue, itemIndex) =>
+						onChangeFormValue('uf', itemValue)
+					}>
+					<Picker.Item label="Java" value="java" />
+					<Picker.Item label="JavaScript" value="js" />
+				</Picker>
 				<RoundedButton
 					onPress={onContinuar}
 					label={'Continuar'}
