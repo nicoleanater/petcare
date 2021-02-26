@@ -2,7 +2,6 @@ import { Endereco } from "../../models/Endereco";
 import { Usuario, TipoUsuario } from "../../models/Usuario";
 
 export interface UsuarioState extends Usuario {
-	endereco: Endereco;
 	// animais: Array<Animal>
 }
 

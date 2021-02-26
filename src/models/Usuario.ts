@@ -1,4 +1,5 @@
 import { Moment } from "moment";
+import { Endereco } from "./Endereco";
 
 export enum TipoUsuario {
   PET_SITTER = 'PET_SITTER',
@@ -16,4 +17,5 @@ export interface Usuario {
 	foto?: string;
 	nota_media?: number;
 	tipo?: TipoUsuario;
+	endereco?: Endereco;
 }

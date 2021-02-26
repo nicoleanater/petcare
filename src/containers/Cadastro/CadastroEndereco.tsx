@@ -14,6 +14,7 @@ import { Estado } from '../../models/Estado';
 import { buscaCidades } from '../../services/cidade';
 import { buscaEstados } from '../../services/estado';
 import { useStore } from '../../store';
+import { usuarioActions } from '../../store/usuario';
 import styles from './CadastroEnderecoStyles';
 
 interface IProps { }
@@ -39,9 +40,7 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 		rua: useRef(null),
 		numero: useRef(null),
 		bairro: useRef(null),
-		complemento: useRef(null),
-		uf: useRef(null),
-		cidade: useRef(null)
+		complemento: useRef(null)
 	};
 
 	const navigation = useNavigation();
@@ -108,40 +107,26 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 		
 		if (!_.isEmpty(nextInputKey)) {
 			inputRefs[nextInputKey].current.focus();
-		} else {
-			onContinuar();
 		}
 	};
 
 	const validateFields = () => {
 		let valid = true;
-		// Object.entries(formValues).forEach(([key, value]) => {
-		// 	if (key != 'foto' && _.isEmpty(value)) {
-		// 		dispatchErrorUpdate({field: key, value: 'obrigatório'})
-		// 		valid = false;
-		// 	} else if (key === 'celular' && !validateCelular()) {
-		// 		dispatchErrorUpdate({field: key, value: 'celular inválido'})
-		// 		valid = false;
-		// 	} else if (key === 'data_nasc' && !validateDate()) {
-		// 		dispatchErrorUpdate({field: key, value: 'data inválida'})
-		// 		valid = false;
-		// 	}
-		// });
-
+		Object.entries(formValues).forEach(([key, value]) => {
+			if (key != 'complemento' && _.isEmpty(value)) {
+				dispatchErrorUpdate({field: key, value: 'obrigatório'})
+				valid = false;
+			}
+		});
 		return valid;
 	};
 
 	const onContinuar = () => {
-		// if (validateFields()) {
-		// 	const usuario = {
-		// 		...formValues,
-		// 		celular: inputRefs['celular'].current.getRawValue(),
-		// 		data_nasc: inputRefs['data_nasc'].current.getRawValue()
-				
-		// 	}
-		// 	dispatch(usuarioActions.setUsuario(usuario));
-		// 		navigation.navigate('CadastroEndereco');
-		// }
+		if (validateFields()) {
+			const usuario = { endereco: formValues };
+			dispatch(usuarioActions.setUsuario(usuario));
+			// 	navigation.navigate('CadastroEndereco');
+		}
 	}
 
 	return (
@@ -214,7 +199,7 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 					value={formValues['uf']}
 					list={estados}
 					error={formErrors['uf']}
-					mainContainerStyle={{flex: 2}}
+					mainContainerStyle={{flex: 2, marginRight: 10}}
 				/>
 				<CustomPicker<Cidade>
 					label={'Cidade'}
