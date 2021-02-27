@@ -191,8 +191,7 @@ export const CadastroNovoAnimal: FunctionComponent<IProps> = ({ route }) => {
 			/>
 			<RoundedButton
 				onPress={onContinuar}
-				label={'Continuar'}
-				progressButton
+				label={'Salvar'}
 			/>
 		</ScrollView>
 	);
