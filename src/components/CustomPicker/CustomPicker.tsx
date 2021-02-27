@@ -26,6 +26,10 @@ export function transformArrayIntoPickerOptions<T>(values: Array<T>, valueLabelK
 	}))
 }
 
+export function transformEnumOptionIntoPickerOption(array: Array<EnumPicker>, value: string)  {
+	return array.find(item => item.id === value);
+}
+
 export function CustomPicker<T>({ label, onSelect, value, list, error, mainContainerStyle }: IProps<T> & { children?: React.ReactNode }): React.ReactElement {
 		const onValueChange = (itemValue: number | string | null) => {
 			if (itemValue == null) {

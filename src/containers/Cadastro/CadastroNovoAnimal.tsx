@@ -4,7 +4,7 @@ import _ from 'lodash';
 import React, { FunctionComponent, MutableRefObject, useLayoutEffect, useRef } from 'react';
 import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { CustomPicker, EnumPicker, transformArrayIntoPickerOptions } from '../../components/CustomPicker/CustomPicker';
+import { CustomPicker, EnumPicker, transformArrayIntoPickerOptions, transformEnumOptionIntoPickerOption } from '../../components/CustomPicker/CustomPicker';
 import FloatingLabelInput, { IRefFloatingLabel } from '../../components/FloatingLabelInput/FloatingLabelInput';
 import { HeaderCadastro } from '../../components/HeaderCadastro/HeaderCadastro';
 import RoundedButton from '../../components/RoundedButton/RoundedButton';
@@ -18,6 +18,7 @@ interface IProps {
 	route: {
 		params?: {
 			animalEdit?: Animal;
+			index?: number;
 		}
 	}
 }
@@ -28,13 +29,23 @@ interface IState {
 		idade: number;
 		raca: string;
 		descricao: string;
-		tipo_animal: TipoAnimal;
-		genero: Genero;
+		tipo_animal: EnumPicker;
+		genero: EnumPicker;
 	};
 	formErrors: {
 		[name: string]: string | null;
 	};
 }
+
+const tiposAnimal: Array<EnumPicker> = [
+	{id: TipoAnimal.GATO, descricao: 'Gato'},
+	{id: TipoAnimal.CACHORRO, descricao: 'Cachorro'}
+];
+
+const generos: Array<EnumPicker> = [
+	{id: Genero.FEMEA, descricao: 'Fêmea'},
+	{id: Genero.MACHO, descricao: 'Macho'}
+];
 
 export const CadastroNovoAnimal: FunctionComponent<IProps> = ({ route }) => {
 	const inputRefs: { [field: string]: MutableRefObject<IRefFloatingLabel> } = {
@@ -46,6 +57,7 @@ export const CadastroNovoAnimal: FunctionComponent<IProps> = ({ route }) => {
 
 	const navigation = useNavigation();
 	const animalEdit = route.params?.animalEdit;
+	const index = route.params?.index;	
 	const [{ usuario }, dispatch] = useStore();
 
 	useLayoutEffect(() => {
@@ -61,8 +73,8 @@ export const CadastroNovoAnimal: FunctionComponent<IProps> = ({ route }) => {
 			idade: animalEdit ? animalEdit.idade : null,
 			raca: animalEdit ? animalEdit.raca : '',
 			descricao: animalEdit ? animalEdit.descricao : '',
-			tipo_animal: animalEdit ? animalEdit.tipo_animal : null,
-			genero: animalEdit ? animalEdit.genero : null,
+			tipo_animal: animalEdit ? transformEnumOptionIntoPickerOption(tiposAnimal, animalEdit.tipo_animal) : null,
+			genero: animalEdit ? transformEnumOptionIntoPickerOption(generos, animalEdit.genero) : null,
 		},
 		formErrors: {}
 	};
@@ -102,20 +114,14 @@ export const CadastroNovoAnimal: FunctionComponent<IProps> = ({ route }) => {
 				tipo_animal: formValues.tipo_animal.id,
 				genero: formValues.genero.id,
 			};
-			dispatch(usuarioActions.addAnimal(animal));
+			if (animalEdit) {
+				dispatch(usuarioActions.editAnimal(animal, index));
+			} else {
+				dispatch(usuarioActions.addAnimal(animal));
+			}
 			navigation.navigate('CadastroAnimais');
 		}
 	}
-
-	const tiposAnimal: Array<EnumPicker> = [
-		{id: TipoAnimal.GATO, descricao: 'Gato'},
-		{id: TipoAnimal.CACHORRO, descricao: 'Cachorro'}
-	]
-	
-	const generos: Array<EnumPicker> = [
-		{id: Genero.FEMEA, descricao: 'Fêmea'},
-		{id: Genero.MACHO, descricao: 'Macho'}
-	]
 
 	return (
 		<ScrollView contentContainerStyle={styles.mainContainer}>

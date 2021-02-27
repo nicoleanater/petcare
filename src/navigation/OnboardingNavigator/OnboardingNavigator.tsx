@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 
 function OnboardingNavigator() {
   return (
-    <Stack.Navigator initialRouteName="CadastroNovoAnimal">
+    <Stack.Navigator initialRouteName="CadastroAnimais">
       <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
       <Stack.Screen name="TipoCadastro" component={TipoCadastro} options={{
 				title: '',

@@ -4,16 +4,20 @@ import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Animal, TipoAnimal } from '../../models/Animal';
+import { useStore } from '../../store';
+import { usuarioActions } from '../../store/usuario';
 import { Images } from '../../themes';
 import { ImageGradientPicker } from '../ImageGradientPicker/ImageGradientPicker';
 import styles from './AddAnimalCardStyles';
 
 interface IProps {
   animal: Animal;
+	index: number;
 }
 
-export const AddAnimalCard: FunctionComponent<IProps> = ({ animal }) => {
+export const AddAnimalCard: FunctionComponent<IProps> = ({ animal, index }) => {
 	const navigation = useNavigation();
+	const [, dispatch] = useStore();
 
 	const renderAnimalTypeAndGender = () => {
 		let typeAndGender = '';
@@ -39,11 +43,11 @@ export const AddAnimalCard: FunctionComponent<IProps> = ({ animal }) => {
 	}
 
 	const onEditPressed = () => {
-		navigation.navigate('CadastroNovoAnimal', { animalEdit: animal } );
+		navigation.navigate('CadastroNovoAnimal', { animalEdit: animal, index } );
 	}
 
 	const onRemovePressed = () => {
-		// remove the animal from store
+		dispatch(usuarioActions.removeAnimal(index));
 	}
 
 

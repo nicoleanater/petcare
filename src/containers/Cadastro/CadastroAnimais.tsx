@@ -1,12 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
 import React, { FunctionComponent, useLayoutEffect } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { AddAnimalCard } from '../../components/AddAnimalCard/AddAnimalCard';
 import { HeaderCadastro } from '../../components/HeaderCadastro/HeaderCadastro';
 import RoundedButton from '../../components/RoundedButton/RoundedButton';
-import { Animal, Genero, TipoAnimal } from '../../models/Animal';
 import { useStore } from '../../store';
 import styles from './CadastroStyles';
 
@@ -55,7 +54,8 @@ export const CadastroAnimais: FunctionComponent<IProps> = () => {
 				small
 			/>
 			<View style={[styles.fullWidthContainer , styles.mediumPaddingVertical]}>
-				{usuario.animais.map((animal, i) => <AddAnimalCard animal={animal} key={i}/>)}
+				{usuario.animais.length === 0 && <Text style={[styles.alignSelfCenter, styles.text.cardTitle]}>Nenhum animal adicionado!</Text>}
+				{usuario.animais.map((animal, i) => <AddAnimalCard animal={animal} key={i} index={i}/>)}
 			</View>
 			<RoundedButton
 				onPress={onContinuar}
