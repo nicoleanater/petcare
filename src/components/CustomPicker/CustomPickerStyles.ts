@@ -6,6 +6,7 @@ export default {
 	...ApplicationStyles,
 	mainContainer: {
 		flex: 1,
+		width: '100%'
 	},
 	pickerContainer: {
 		position: 'relative',

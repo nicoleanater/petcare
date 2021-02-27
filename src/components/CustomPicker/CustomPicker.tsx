@@ -4,15 +4,16 @@ import { Text, View, ViewStyle } from 'react-native';
 import styles from './CustomPickerStyles';
 import _ from 'lodash';
 
+export type EnumPicker = { id: string, descricao: string }
 export interface Option<T> {
 	label: string;
-	value: T & { id: number };
+	value: T & { id: number | string };
 }
 
 interface IProps<T> {
 	label: string;
   onSelect: (value: T | null) => void;
-	value: T & { id: number };
+	value: T & { id: number | string };
 	list: Array<Option<T>>;
 	error?: string | null;
 	mainContainerStyle?: ViewStyle[] | ViewStyle;
@@ -26,7 +27,7 @@ export function transformArrayIntoPickerOptions<T>(values: Array<T>, valueLabelK
 }
 
 export function CustomPicker<T>({ label, onSelect, value, list, error, mainContainerStyle }: IProps<T> & { children?: React.ReactNode }): React.ReactElement {
-		const onValueChange = (itemValue: number | null) => {
+		const onValueChange = (itemValue: number | string | null) => {
 			if (itemValue == null) {
 				onSelect(itemValue as null);
 			} else {
