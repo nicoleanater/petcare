@@ -103,7 +103,7 @@ export const CadastroDadosProfissionais: FunctionComponent<IProps> = () => {
 				maxLength={200}
 				onChangeText={(value: string) => onChangeFormValue('descricao', value)}
 				onSubmitEditing={() => onEndEditingField('descricao')}
-				multiline={'medium'}
+				multiline={'big'}
 			/>
 			<FloatingLabelInput
 				ref={inputRefs['preco']}

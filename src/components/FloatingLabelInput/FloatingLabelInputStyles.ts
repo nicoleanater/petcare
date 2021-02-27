@@ -26,6 +26,10 @@ export default {
 		height: 135,
 		borderRadius: 12,
 	} as ViewStyle,
+	textAreaInputBig: {
+		height: 250,
+		borderRadius: 12,
+	} as ViewStyle,
 	inputStyle: {
 		fontFamily: Fonts.fontFamilies.latoRegular,
 		color: Colors.blackTwo,
