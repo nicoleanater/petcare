@@ -167,6 +167,18 @@ export const CadastroNovoAnimal: FunctionComponent<IProps> = ({ route }) => {
 				onSubmitEditing={() => onEndEditingField('raca')}
 				viewStyle={{flex: 3}}
 			/>
+			<FloatingLabelInput
+				ref={inputRefs['descricao']}
+				placeholder={'Descreva seu animal: \npersonalidade, preferências, comportamento, etc.'}
+				value={formValues['descricao']}
+				error={formErrors['descricao']}
+				isFieldCorrect={_.isEmpty(formErrors['descricao'])}
+				maxLength={200}
+				onChangeText={(value: string) => onChangeFormValue('descricao', value)}
+				returnKeyType={'done'}
+				onSubmitEditing={() => onEndEditingField('descricao')}
+				multiline={'medium'}
+			/>
 			<RoundedButton
 				onPress={onContinuar}
 				label={'Continuar'}
