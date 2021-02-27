@@ -11,6 +11,7 @@ import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { useForm } from '../../hooks';
 import { Animal, Genero, TipoAnimal } from '../../models/Animal';
 import { useStore } from '../../store';
+import { usuarioActions } from '../../store/usuario';
 import styles from './CadastroStyles';
 
 interface IProps {
@@ -78,9 +79,9 @@ export const CadastroNovoAnimal: FunctionComponent<IProps> = ({ route }) => {
 		const refsKeys: string[] = Object.keys(inputRefs);
 		const nextInputKey: string = refsKeys[refsKeys.indexOf(key) + 1];
 		
-		// if (!_.isEmpty(nextInputKey)) {
-		// 	inputRefs[nextInputKey].current.focus();
-		// }
+		if (!_.isEmpty(nextInputKey)) {
+			inputRefs[nextInputKey].current.focus();
+		}
 	};
 
 	const validateFields = () => {
@@ -96,9 +97,13 @@ export const CadastroNovoAnimal: FunctionComponent<IProps> = ({ route }) => {
 
 	const onContinuar = () => {
 		if (validateFields()) {
-			// const usuario = { endereco: formValues };
-			// dispatch(usuarioActions.setUsuario(usuario));
-			// 	navigation.navigate('CadastroAnimais');
+			const animal = { 
+				...formValues ,
+				tipo_animal: formValues.tipo_animal.id,
+				genero: formValues.genero.id,
+			};
+			dispatch(usuarioActions.addAnimal(animal));
+			navigation.navigate('CadastroAnimais');
 		}
 	}
 
@@ -175,7 +180,6 @@ export const CadastroNovoAnimal: FunctionComponent<IProps> = ({ route }) => {
 				isFieldCorrect={_.isEmpty(formErrors['descricao'])}
 				maxLength={200}
 				onChangeText={(value: string) => onChangeFormValue('descricao', value)}
-				returnKeyType={'done'}
 				onSubmitEditing={() => onEndEditingField('descricao')}
 				multiline={'medium'}
 			/>

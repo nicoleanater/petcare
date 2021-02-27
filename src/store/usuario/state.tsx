@@ -1,9 +1,7 @@
 import { Endereco } from "../../models/Endereco";
 import { Usuario, TipoUsuario } from "../../models/Usuario";
 
-export interface UsuarioState extends Usuario {
-	// animais: Array<Animal>
-}
+export interface UsuarioState extends Usuario { }
 
 const usuarioState: UsuarioState = {
 	id: null,
@@ -16,7 +14,8 @@ const usuarioState: UsuarioState = {
 	foto: null,
 	nota_media: null,
 	tipo: TipoUsuario.DONO_DE_ANIMAL,
-	endereco: null
+	endereco: null,
+	animais: []
 }
 
 export default usuarioState;

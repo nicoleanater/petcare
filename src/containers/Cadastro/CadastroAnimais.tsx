@@ -45,25 +45,6 @@ export const CadastroAnimais: FunctionComponent<IProps> = () => {
 			navigation.navigate('CadastroNovoAnimal');
 	}
 
-	const animais: Array<Animal> = [
-		{
-			nome: 'Fuzzy',
-			idade: 3,
-			raca: 'SRD',
-			descricao: 'Querida',
-			tipo_animal: TipoAnimal.GATO,
-			genero: Genero.FEMEA
-		},
-		{
-			nome: 'Pantera',
-			idade: 1,
-			raca: 'São Bernardo',
-			descricao: 'Perigoso',
-			tipo_animal: TipoAnimal.CACHORRO,
-			genero: Genero.MACHO
-		}
-	]
-
 	return (
 		<ScrollView contentContainerStyle={styles.mainContainerAnimais}>
 			<RoundedButton 
@@ -74,8 +55,7 @@ export const CadastroAnimais: FunctionComponent<IProps> = () => {
 				small
 			/>
 			<View style={[styles.fullWidthContainer , styles.mediumPaddingVertical]}>
-				<AddAnimalCard animal={animais[0]}/>
-				<AddAnimalCard animal={animais[1]} />
+				{usuario.animais.map((animal, i) => <AddAnimalCard animal={animal} key={i}/>)}
 			</View>
 			<RoundedButton
 				onPress={onContinuar}
