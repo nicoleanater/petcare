@@ -8,12 +8,13 @@ import { BackButton } from '../../components/BackButton/BackButton';
 import { CadastroEndereco } from '../../containers/Cadastro/CadastroEndereco';
 import { CadastroAnimais } from '../../containers/Cadastro/CadastroAnimais';
 import { CadastroNovoAnimal } from '../../containers/Cadastro/CadastroNovoAnimal';
+import { CadastroLogin } from '../../containers/Cadastro/CadastroLogin';
 
 const Stack = createStackNavigator();
 
 function OnboardingNavigator() {
   return (
-    <Stack.Navigator initialRouteName="CadastroAnimais">
+    <Stack.Navigator initialRouteName="Login">
       <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
       <Stack.Screen name="TipoCadastro" component={TipoCadastro} options={{
 				title: '',
@@ -25,6 +26,7 @@ function OnboardingNavigator() {
       <Stack.Screen name="CadastroEndereco" component={CadastroEndereco} />
       <Stack.Screen name="CadastroAnimais" component={CadastroAnimais} />
       <Stack.Screen name="CadastroNovoAnimal" component={CadastroNovoAnimal} />
+      <Stack.Screen name="CadastroLogin" component={CadastroLogin} />
     </Stack.Navigator>
   );
 }

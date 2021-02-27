@@ -31,9 +31,7 @@ export const CadastroAnimais: FunctionComponent<IProps> = () => {
 
 	const onContinuar = () => {
 		if (validateFields()) {
-		// 	const usuario = { endereco: formValues };
-		// 	dispatch(usuarioActions.setUsuario(usuario));
-		// 	navigation.navigate('CadastroEndereco');
+			navigation.navigate('CadastroLogin');
 		} else {
 			Alert.alert(
 				"Alerta",
