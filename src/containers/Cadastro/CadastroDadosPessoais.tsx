@@ -40,7 +40,7 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			header: (props: StackHeaderProps) => <HeaderCadastro {...props} userType={usuario.tipo} screenStep={'Dados Pessoais'}/>,
+			header: (props: StackHeaderProps) => <HeaderCadastro {...props} userType={usuario.tipo_usuario} screenStep={'Dados Pessoais'}/>,
 		});
 	}, [navigation]);
 

@@ -14,7 +14,7 @@ export const TipoCadastro: FunctionComponent<any> = () => {
 	const navigation = useNavigation();
 
 	const onTipoSelected = (tipoUsuario: TipoUsuario) => {
-		dispatch(usuarioActions.setUsuario({tipo: tipoUsuario}));
+		dispatch(usuarioActions.setUsuario({tipo_usuario: tipoUsuario}));
 		navigation.navigate('CadastroDadosPessoais');
 	}
 

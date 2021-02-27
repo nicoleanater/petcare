@@ -17,7 +17,7 @@ export interface Usuario {
 	celular?: string;
 	foto?: string;
 	nota_media?: number;
-	tipo?: TipoUsuario;
+	tipo_usuario?: TipoUsuario;
 	endereco?: Endereco;
 	animais?: Array<Animal>;
 }

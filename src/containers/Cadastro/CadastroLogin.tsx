@@ -2,12 +2,15 @@ import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
 import _ from 'lodash';
 import React, { FunctionComponent, MutableRefObject, useLayoutEffect, useRef } from 'react';
+import { Alert } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import FloatingLabelInput, { IRefFloatingLabel } from '../../components/FloatingLabelInput/FloatingLabelInput';
 import { HeaderCadastro } from '../../components/HeaderCadastro/HeaderCadastro';
 import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { useForm } from '../../hooks';
+import { salvarUsuario } from '../../services/usuario';
 import { useStore } from '../../store';
+import { usuarioActions } from '../../store/usuario';
 import { validateEmail } from '../../utils/ValidationForms';
 import styles from './CadastroStyles';
 
@@ -36,7 +39,7 @@ export const CadastroLogin: FunctionComponent<IProps> = () => {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			header: (props: StackHeaderProps) => <HeaderCadastro {...props} userType={usuario.tipo} screenStep={'Dados de Login'} />,
+			header: (props: StackHeaderProps) => <HeaderCadastro {...props} userType={usuario.tipo_usuario} screenStep={'Dados de Login'} />,
 		});
 	}, [navigation]);
 
@@ -86,16 +89,38 @@ export const CadastroLogin: FunctionComponent<IProps> = () => {
 		return valid;
 	};
 
-	const onSalvar = () => {
+	const onSalvar = async () => {
 		if (validateFields()) {
-			// const usuario = { 
-			// 	...formValues ,
-			// 	tipo_animal: formValues.tipo_animal.id,
-			// 	genero: formValues.genero.id,
-			// };
-
-			// dispatch(usuarioActions.addAnimal(animal));
-			// navigation.navigate('CadastroAnimais');
+			const newUsuario = {
+				...usuario,
+				nome: `${usuario.nome} ${usuario.sobrenome}`,
+				email: formValues.email,
+				senha: formValues.senha,
+				endereco: {
+					...usuario.endereco,
+					uf: usuario.endereco.cidade.estado.id,
+					cidade:  usuario.endereco.cidade.id
+				}
+			}
+			delete newUsuario.id;
+			delete newUsuario.nota_media;
+			delete newUsuario.sobrenome;
+			// clean state after
+			// dispatch(usuarioActions.setUsuario(newUsuario));
+			try {
+				const res = await salvarUsuario(newUsuario);
+				// dispatch(usuarioActions.setUsuario(res.data));
+				Alert.alert(
+					"Sucesso",
+					"Seu usuário foi criado com sucesso!",
+					[
+						{ text: "OK", onPress: () => navigation.navigate('Login')}
+					],
+					{ cancelable: false }
+				);
+			} catch (error) {
+				console.error({error});
+			}
 		}
 	}
 

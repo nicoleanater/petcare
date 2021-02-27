@@ -72,7 +72,7 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			header: (props: StackHeaderProps) => <HeaderCadastro {...props} userType={usuario.tipo} screenStep={'Endereço'}/>,
+			header: (props: StackHeaderProps) => <HeaderCadastro {...props} userType={usuario.tipo_usuario} screenStep={'Endereço'}/>,
 		});
 	}, [navigation]);
 
@@ -130,7 +130,12 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 
 	const onContinuar = () => {
 		if (validateFields()) {
-			const usuario = { endereco: formValues };
+			const usuario = { 
+				endereco: {
+					...formValues,
+					cep: inputRefs['cep'].current.getRawValue()
+				}
+			};
 			dispatch(usuarioActions.setUsuario(usuario));
 			navigation.navigate('CadastroAnimais');
 		}

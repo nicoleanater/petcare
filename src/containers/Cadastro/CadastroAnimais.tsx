@@ -17,7 +17,7 @@ export const CadastroAnimais: FunctionComponent<IProps> = () => {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			header: (props: StackHeaderProps) => <HeaderCadastro {...props} userType={usuario.tipo} screenStep={'Animais'}/>,
+			header: (props: StackHeaderProps) => <HeaderCadastro {...props} userType={usuario.tipo_usuario} screenStep={'Animais'}/>,
 		});
 	}, [navigation]);
 

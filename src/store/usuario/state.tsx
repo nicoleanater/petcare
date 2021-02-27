@@ -13,7 +13,7 @@ const usuarioState: UsuarioState = {
 	celular: '',
 	foto: null,
 	nota_media: null,
-	tipo: TipoUsuario.DONO_DE_ANIMAL,
+	tipo_usuario: TipoUsuario.DONO_DE_ANIMAL,
 	endereco: null,
 	animais: []
 }
