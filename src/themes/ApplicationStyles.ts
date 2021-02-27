@@ -1,6 +1,7 @@
 import { ViewStyle, TextStyle } from "react-native";
 import { Colors, Metrics } from "../themes";
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import TextStyles from "./TextStyles";
 
 export default {
 		// global styles
@@ -271,4 +272,7 @@ export default {
 			alignSelf: 'flex-end',
 		} as ViewStyle,
 
+		text: {
+			...TextStyles
+		}
 }
