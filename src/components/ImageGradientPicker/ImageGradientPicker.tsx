@@ -41,7 +41,6 @@ export const ImageGradientPicker: FunctionComponent<IProps> = ({ isPicker, image
 		);
 
 		const renderImageViewer = () => {
-			console.log({image, test: typeof image});
 			if (typeof image == 'number') {
 				return (
 					<View style={small ? styles.iconContainerSmall : styles.iconContainer}>

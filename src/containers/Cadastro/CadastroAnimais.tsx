@@ -42,7 +42,7 @@ export const CadastroAnimais: FunctionComponent<IProps> = () => {
 	}
 
 	const onAddAnimal = () => {
-		//	navigation.navigate('CadastroEndereco');
+			navigation.navigate('CadastroNovoAnimal');
 	}
 
 	const animais: Array<Animal> = [

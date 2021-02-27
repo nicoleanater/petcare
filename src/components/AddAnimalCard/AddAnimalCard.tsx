@@ -1,5 +1,7 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { FunctionComponent } from 'react';
 import { Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Animal, TipoAnimal } from '../../models/Animal';
 import { Images } from '../../themes';
@@ -11,6 +13,7 @@ interface IProps {
 }
 
 export const AddAnimalCard: FunctionComponent<IProps> = ({ animal }) => {
+	const navigation = useNavigation();
 
 	const renderAnimalTypeAndGender = () => {
 		let typeAndGender = '';
@@ -35,6 +38,15 @@ export const AddAnimalCard: FunctionComponent<IProps> = ({ animal }) => {
 		return age;
 	}
 
+	const onEditPressed = () => {
+		navigation.navigate('CadastroNovoAnimal', { animalEdit: animal } );
+	}
+
+	const onRemovePressed = () => {
+		// remove the animal from store
+	}
+
+
 	return (
 		<View style={styles.cardContainer}>
 			<ImageGradientPicker 
@@ -48,8 +60,12 @@ export const AddAnimalCard: FunctionComponent<IProps> = ({ animal }) => {
 					<Text style={[styles.text.cardContent, { marginBottom: 3 }]}>{renderAnimalAge()}</Text>
 				</View>
 				<View>
-					<Icon name={'edit'} style={styles.iconStyle} size={28}/>
-					<Icon name={'remove-circle-outline'} style={styles.iconStyle} size={28}/>
+					<TouchableOpacity onPress={onEditPressed}>
+						<Icon name={'edit'} style={styles.iconStyle} size={28}/>
+					</TouchableOpacity>
+					<TouchableOpacity onPress={onRemovePressed}>
+						<Icon name={'remove-circle-outline'} style={styles.iconStyle} size={28}/>
+					</TouchableOpacity>
 				</View>
 			</View>
 		</View>
