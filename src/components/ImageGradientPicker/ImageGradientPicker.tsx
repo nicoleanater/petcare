@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import { Image, ImageSourcePropType, View } from 'react-native';
+import { Image, ImageSourcePropType, View, ViewStyle } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
 import LinearGradient from 'react-native-linear-gradient';
@@ -12,9 +12,10 @@ interface IProps {
 	image: string | ImageSourcePropType;
 	pickerCallback?: (response) => void;
 	small?: boolean;
+	style?: ViewStyle | ViewStyle[];
 }
 
-export const ImageGradientPicker: FunctionComponent<IProps> = ({isPicker, image, pickerCallback, small}) => {
+export const ImageGradientPicker: FunctionComponent<IProps> = ({ isPicker, image, pickerCallback, small, style }) => {
 
 		const openGalery = () => {
 			ImagePicker.launchImageLibrary({
@@ -58,7 +59,7 @@ export const ImageGradientPicker: FunctionComponent<IProps> = ({isPicker, image,
 			<LinearGradient
 			colors={[Colors.gradientPink, Colors.gradientPeach]}
 			start={{x: 0.4, y: 0}} end={{x: 0.8, y: 1.5}}
-			style={[styles.gradientBorder, small && styles.smallPicker]}
+			style={[styles.gradientBorder, small && styles.smallPicker, style]}
 			>
 				{!isPicker || image != null
 					? renderImageViewer()
