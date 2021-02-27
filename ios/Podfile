@@ -84,6 +84,8 @@ target 'petcare' do
 
   pod 'RNCPicker', :path => '../node_modules/@react-native-picker/picker'
 
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'petcareTests' do
     inherit! :complete
     # Pods for testing
