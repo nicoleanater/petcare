@@ -108,10 +108,9 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 				...formValues,
 				celular: inputRefs['celular'].current.getRawValue(),
 				data_nasc: inputRefs['data_nasc'].current.getRawValue()
-				
 			}
 			dispatch(usuarioActions.setUsuario(usuario));
-				navigation.navigate('CadastroEndereco');
+			navigation.navigate('CadastroEndereco');
 		}
 	}
 

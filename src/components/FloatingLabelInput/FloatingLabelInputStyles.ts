@@ -6,8 +6,7 @@ export default {
 	...ApplicationStyles,
 	inputContainer: {
 		position: 'relative',
-		alignItems: 'center',
-		flex: 1
+		alignItems: 'center'
 	} as ViewStyle,
 	// input general styles
 	floatingLabelStyle: {
