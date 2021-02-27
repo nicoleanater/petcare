@@ -6,6 +6,7 @@ import { TipoCadastro } from '../../containers/TipoCadastro/TipoCadastro';
 import styles from '../AppNavigatorStyles';
 import { BackButton } from '../../components/BackButton/BackButton';
 import { CadastroEndereco } from '../../containers/Cadastro/CadastroEndereco';
+import { CadastroAnimais } from '../../containers/Cadastro/CadastroAnimais';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,7 @@ function OnboardingNavigator() {
 			}}/>
       <Stack.Screen name="CadastroDadosPessoais" component={CadastroDadosPessoais} />
       <Stack.Screen name="CadastroEndereco" component={CadastroEndereco} />
+      <Stack.Screen name="CadastroAnimais" component={CadastroAnimais} />
     </Stack.Navigator>
   );
 }

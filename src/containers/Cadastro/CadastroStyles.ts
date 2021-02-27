@@ -7,5 +7,9 @@ export default {
 			paddingVertical: 25,
 			paddingHorizontal: 44,
 			alignItems: 'center'
+		} as ViewStyle,
+		mainContainerAnimais: {
+			paddingHorizontal: 20,
+			alignItems: 'center'
 		} as ViewStyle
 };

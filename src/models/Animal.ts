@@ -3,6 +3,11 @@ export enum TipoAnimal {
   CACHORRO = 'CACHORRO',
 }
 
+export enum Genero {
+	FEMEA = 'FEMEA',
+	MACHO = 'MACHO'
+}
+
 export interface Animal {
 	id?: number;
 	nome: string;
@@ -10,4 +15,5 @@ export interface Animal {
 	raca: string;
 	descricao: string;
 	tipo_animal: TipoAnimal;
+	genero: Genero;
 }

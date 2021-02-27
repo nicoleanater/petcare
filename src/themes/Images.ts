@@ -4,4 +4,6 @@ export default {
 	dogGradient: require('../../assets/images/dog-gradient.png'),
 	circlePaw: require('../../assets/images/circle-paw.png'),
 	circlePet: require('../../assets/images/circle-pet.png'),
+	catPlaceholder: require('../../assets/images/cat-placeholder.png'),
+	dogPlaceholder: require('../../assets/images/dog-placeholder.png'),
 }

@@ -1,10 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
 import React, { FunctionComponent, useLayoutEffect } from 'react';
-import { Text } from 'react-native';
+import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { AddAnimalCard } from '../../components/AddAnimalCard/AddAnimalCard';
 import { HeaderCadastro } from '../../components/HeaderCadastro/HeaderCadastro';
 import RoundedButton from '../../components/RoundedButton/RoundedButton';
+import { Animal, Genero, TipoAnimal } from '../../models/Animal';
 import { useStore } from '../../store';
 import styles from './CadastroStyles';
 
@@ -35,22 +37,46 @@ export const CadastroAnimais: FunctionComponent<IProps> = () => {
 		// if (validateFields()) {
 		// 	const usuario = { endereco: formValues };
 		// 	dispatch(usuarioActions.setUsuario(usuario));
-		// 	// 	navigation.navigate('CadastroEndereco');
+		// 	navigation.navigate('CadastroEndereco');
 		// }
 	}
 
 	const onAddAnimal = () => {
-
+		//	navigation.navigate('CadastroEndereco');
 	}
 
+	const animais: Array<Animal> = [
+		{
+			nome: 'Fuzzy',
+			idade: 3,
+			raca: 'SRD',
+			descricao: 'Querida',
+			tipo_animal: TipoAnimal.GATO,
+			genero: Genero.FEMEA
+		},
+		{
+			nome: 'Pantera',
+			idade: 1,
+			raca: 'São Bernardo',
+			descricao: 'Perigoso',
+			tipo_animal: TipoAnimal.CACHORRO,
+			genero: Genero.MACHO
+		}
+	]
+
 	return (
-		<ScrollView contentContainerStyle={styles.mainContainer}>
+		<ScrollView contentContainerStyle={styles.mainContainerAnimais}>
 			<RoundedButton 
 				onPress={onAddAnimal}
 				label={'+ Animal'}
 				theme={'secondary'}
+				style={styles.alignSelfEnd}
 				small
 			/>
+			<View style={[styles.fullWidthContainer , styles.mediumPaddingVertical]}>
+				<AddAnimalCard animal={animais[0]}/>
+				<AddAnimalCard animal={animais[1]} />
+			</View>
 			<RoundedButton
 				onPress={onContinuar}
 				label={'Continuar'}
