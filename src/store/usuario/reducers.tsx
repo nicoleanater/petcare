@@ -1,4 +1,4 @@
-import { UsuarioState } from "./state";
+import { UsuarioState, usuarioInitialState } from "./state";
 import types from "./types";
 
 const usuarioReducers = (state: UsuarioState, action) => {
@@ -15,6 +15,8 @@ const usuarioReducers = (state: UsuarioState, action) => {
 		case types.EDIT_ANIMAL:
 			const animais = Object.assign([], state.animais, {[action.payload.index]: action.payload.newAnimal})
 			return { ...state, animais };
+		case types.RESET_TO_INITIAL_STATE:
+			return usuarioInitialState;
 		default:
 			return state;
 	}

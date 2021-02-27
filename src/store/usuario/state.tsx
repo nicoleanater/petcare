@@ -1,9 +1,8 @@
-import { Endereco } from "../../models/Endereco";
-import { Usuario, TipoUsuario } from "../../models/Usuario";
+import { Usuario } from "../../models/Usuario";
 
 export interface UsuarioState extends Usuario { }
 
-const usuarioState: UsuarioState = {
+export const usuarioInitialState: UsuarioState = {
 	id: null,
 	email: '',
 	senha: '',
@@ -13,9 +12,9 @@ const usuarioState: UsuarioState = {
 	celular: '',
 	foto: null,
 	nota_media: null,
-	tipo_usuario: TipoUsuario.DONO_DE_ANIMAL,
+	tipo_usuario: null,
 	endereco: null,
 	animais: []
 }
 
-export default usuarioState;
+export default usuarioInitialState;

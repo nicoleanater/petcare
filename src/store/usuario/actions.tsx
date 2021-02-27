@@ -10,9 +10,12 @@ const removeAnimal = (index: number) => ({ type: types.REMOVE_ANIMAL, payload: i
 
 const editAnimal = (newAnimal: Animal, index: number) => ({ type: types.EDIT_ANIMAL, payload: { newAnimal, index } });
 
+const resetToInitialState = () => ({ type: types.RESET_TO_INITIAL_STATE });
+
 export default {
 	setUsuario,
 	addAnimal,
 	removeAnimal,
-	editAnimal
+	editAnimal,
+	resetToInitialState
 }

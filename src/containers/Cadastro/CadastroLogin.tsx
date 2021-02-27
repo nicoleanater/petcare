@@ -106,11 +106,10 @@ export const CadastroLogin: FunctionComponent<IProps> = () => {
 			delete newUsuario.id;
 			delete newUsuario.nota_media;
 			delete newUsuario.sobrenome;
-			// clean state after
-			// dispatch(usuarioActions.setUsuario(newUsuario));
 			try {
-				const res = await salvarUsuario(newUsuario);
-				// dispatch(usuarioActions.setUsuario(res.data));
+				await salvarUsuario(newUsuario);
+				dispatch(usuarioActions.resetToInitialState());
+				
 				Alert.alert(
 					"Sucesso",
 					"Seu usuário foi criado com sucesso!",
