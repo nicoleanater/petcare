@@ -1,4 +1,6 @@
 import { Moment } from "moment";
+import { Animal } from "./Animal";
+import { Endereco } from "./Endereco";
 
 export enum TipoUsuario {
   PET_SITTER = 'PET_SITTER',
@@ -10,9 +12,14 @@ export interface Usuario {
 	email?: string;
 	senha?: string;
 	nome?: string;
+	sobrenome?: string;
 	data_nasc?: Moment;
 	celular?: string;
 	foto?: string;
 	nota_media?: number;
-	tipo?: TipoUsuario;
+	tipo_usuario?: TipoUsuario;
+	endereco?: Endereco;
+	animais?: Array<Animal>;
+	descricao?: string;
+	preco?: number;
 }

@@ -10,11 +10,11 @@ import { usuarioActions } from '../../store/usuario';
 import { useNavigation } from '@react-navigation/native';
 
 export const TipoCadastro: FunctionComponent<any> = () => {
-	const [state, dispatch] = useStore();
+	const [, dispatch] = useStore();
 	const navigation = useNavigation();
 
 	const onTipoSelected = (tipoUsuario: TipoUsuario) => {
-		dispatch(usuarioActions.setUsuario({tipo: tipoUsuario}));
+		dispatch(usuarioActions.setUsuario({tipo_usuario: tipoUsuario}));
 		navigation.navigate('CadastroDadosPessoais');
 	}
 

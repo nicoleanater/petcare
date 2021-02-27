@@ -1,6 +1,7 @@
 import { ViewStyle, TextStyle } from "react-native";
 import { Colors, Metrics } from "../themes";
 import { responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
+import TextStyles from "./TextStyles";
 
 export default {
 		// global styles
@@ -8,12 +9,15 @@ export default {
 			width: '100%',
 			height: '100%'
 	} as ViewStyle,
+		fullWidthContainer: {
+			width: '100%',
+	} as ViewStyle,
 
     // regular padding
     padding: {
         padding: responsiveWidth(8)
     } as ViewStyle,
-    verticalPadding: {
+    paddingVertical: {
         paddingVertical: responsiveWidth(8)
     } as ViewStyle,
     paddingHorizontal: {
@@ -36,7 +40,7 @@ export default {
     mediumPadding: {
         padding: responsiveWidth(5)
     } as ViewStyle,
-    mediumVerticalPadding: {
+    mediumPaddingVertical: {
         paddingVertical: responsiveWidth(5)
     } as ViewStyle,
     mediumPaddingHorizontal: {
@@ -59,7 +63,7 @@ export default {
     smallPadding: {
         padding: responsiveWidth(3)
     } as ViewStyle,
-    smallVerticalPadding: {
+    smallPaddingVertical: {
         paddingVertical: responsiveWidth(3)
     } as ViewStyle,
     smallPaddingHorizontal: {
@@ -82,7 +86,7 @@ export default {
     xSmallPadding: {
         padding: responsiveWidth(1)
     } as ViewStyle,
-    xSmallVerticalPadding: {
+    xSmallPaddingVertical: {
         paddingVertical: responsiveWidth(1)
     } as ViewStyle,
     xSmallPaddingHorizontal: {
@@ -257,4 +261,18 @@ export default {
         flexDirection: 'column',
         alignItems: 'flex-end'
     } as ViewStyle,
+
+		alignSelfStart: {
+			alignSelf: 'flex-start',
+		} as ViewStyle,
+		alignSelfCenter: {
+			alignSelf: 'center',
+		} as ViewStyle,
+		alignSelfEnd: {
+			alignSelf: 'flex-end',
+		} as ViewStyle,
+
+		text: {
+			...TextStyles
+		}
 }

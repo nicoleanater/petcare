@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './FloatingLabelInputStyles';
 
 interface IProps {
-	label: string;
+	label?: string;
 	value?: string;
 	error?: string | null;
 	onFocus?: () => void;
@@ -27,10 +27,14 @@ interface IProps {
 	onSubmitEditing?: () => void;
 	onBlur?: () => void;
 	ref?: MutableRefObject<IRefFloatingLabel>;
+	placeholder?: string;
+	multiline?: 'medium' | 'big';
 }
 
 export interface IRefFloatingLabel {
 	focus: () => void;
+	isValid: () => boolean;
+	getRawValue: () => any;
 }
 
 interface IState {
@@ -64,6 +68,18 @@ export const FloatingLabelInput: RefForwardingComponent<IRefFloatingLabel, IProp
 				textInput.current.focus();
 			}
 		},
+		isValid: () => {
+			if (mask && maskedTextInput.current) {
+				return maskedTextInput.current.isValid();
+			}
+			return;
+		},
+		getRawValue: () => {
+			if (mask && maskedTextInput.current) {
+				return maskedTextInput.current.getRawValue();
+			}
+			return;
+		}
 	}));
 
 	const handleFocus = () => {
@@ -90,12 +106,12 @@ export const FloatingLabelInput: RefForwardingComponent<IRefFloatingLabel, IProp
 		return style;
 	};
 
-	const { label, icon, mask, maskOptions, isFieldEditable, autoCapitalize, isFieldCorrect, error, ...restProps } = props;
+	const { label, icon, mask, maskOptions, isFieldEditable, autoCapitalize, isFieldCorrect, error, placeholder, multiline, ...restProps } = props;
 	return (
-		<View style={styles.inputContainer}>
+		<View style={[styles.inputContainer, props.viewStyle]}>
 			<View
 				pointerEvents={props.isFieldEditable === false ? 'none' : 'auto'}
-				style={[styles.floatingLabelStyle, !isFieldCorrect && styles.floatingLabelErrorStyle, props.viewStyle]}>
+				style={[styles.floatingLabelStyle, !isFieldCorrect && styles.floatingLabelErrorStyle, multiline === 'medium' && styles.textAreaInputMedium,  multiline === 'big' && styles.textAreaInputBig]}>
 				{icon ? <Icon name={icon.name} style={!props.iconStyle ? styles.iconStyle : [styles.iconStyle, props.iconStyle]} /> : <View />}
 				<Animated.Text style={[labelStyle(), icon && styles.labelWithIcon]}>{label}</Animated.Text>
 
@@ -103,11 +119,12 @@ export const FloatingLabelInput: RefForwardingComponent<IRefFloatingLabel, IProp
 					{mask ? (
 						<TextInputMask
 							{...restProps}
-							style={[styles.inputStyle, icon && styles.inputWithIcon]}
+							style={[styles.inputStyle, icon && styles.inputWithIcon, multiline && styles.inputMultilineStyle]}
 							onFocus={handleFocus}
 							onSubmitEditing={props.onSubmitEditing}
 							ref={maskedTextInput}
 							onBlur={handleBlur}
+							placeholder={placeholder}
 							placeholderTextColor={'rgba(255,255,255,0.7)'}
 							underlineColorAndroid={'transparent'}
 							autoCapitalize={autoCapitalize ? autoCapitalize : 'none'}
@@ -118,15 +135,17 @@ export const FloatingLabelInput: RefForwardingComponent<IRefFloatingLabel, IProp
 								props.onChangeText!(text);
 							}}
 							autoCorrect={false}
+							multiline={multiline != null}
 						/>
 					) : (
 							<TextInput
 								{...restProps}
-								style={[styles.inputStyle, icon && styles.inputWithIcon]}
+								style={[styles.inputStyle, icon && styles.inputWithIcon, multiline && styles.inputMultilineStyle]}
 								onSubmitEditing={props.onSubmitEditing}
 								ref={textInput}
 								onFocus={handleFocus}
 								onBlur={handleBlur}
+								placeholder={placeholder}
 								autoCapitalize={autoCapitalize ? autoCapitalize : 'none'}
 								underlineColorAndroid={'transparent'}
 								value={props.value}
@@ -137,6 +156,7 @@ export const FloatingLabelInput: RefForwardingComponent<IRefFloatingLabel, IProp
 								}}
 								keyboardType={props.keyboardType ? props.keyboardType : 'default'}
 								secureTextEntry={props.secureTextEntry ? props.secureTextEntry : false}
+								multiline={multiline != null}
 							/>
 						)}
 				</View>

@@ -4,7 +4,6 @@ import { responsiveHeight } from 'react-native-responsive-dimensions';
 
 export default {
 	...ApplicationStyles,
-
 	inputContainer: {
 		position: 'relative',
 		alignItems: 'center'
@@ -23,27 +22,39 @@ export default {
 		borderColor: Colors.errorRed,
 		borderWidth: 1
 	} as ViewStyle,
+	textAreaInputMedium: {
+		height: 135,
+		borderRadius: 12,
+	} as ViewStyle,
+	textAreaInputBig: {
+		height: 250,
+		borderRadius: 12,
+	} as ViewStyle,
 	inputStyle: {
 		fontFamily: Fonts.fontFamilies.latoRegular,
 		color: Colors.blackTwo,
 		fontSize: Fonts.sizes.regular,
-		textAlignVertical: 'center',
+		textAlignVertical: 'top',
 		backgroundColor: 'transparent',
 		height: '100%',
 		width: '100%',
 		justifyContent: 'center',
 		margin: 0,
-		paddingVertical: 0,
+		paddingTop: 28,
+		paddingBottom: 0,
 		paddingHorizontal: 26,
 	} as ViewStyle,
 	inputWithIcon: {
 		paddingHorizontal: 55,
 	} as ViewStyle,
+	inputMultilineStyle: {
+		paddingTop: 18
+	} as ViewStyle,
 	inputContent: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		height: 24,
+		height: '100%',
 		paddingRight: 5
 	} as ViewStyle,
 	iconStyle: {
@@ -72,7 +83,6 @@ export default {
 	labelWithIcon: {
 		left: 55
 	},
-
 	errorText: {
 		position: 'absolute',
 		bottom: 9,

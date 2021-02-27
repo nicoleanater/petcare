@@ -13,6 +13,7 @@ import { validateEmail } from '../../utils/ValidationForms';
 import { useStore } from '../../store';
 import { usuarioActions } from '../../store/usuario';
 
+interface IProps { }
 interface IState {
 	formValues: {
 		email: string;
@@ -23,7 +24,7 @@ interface IState {
 	};
 }
 
-const LoginScreen: FunctionComponent<any> = () => {
+export const LoginScreen: FunctionComponent<IProps> = () => {
 	const inputRefs: { [field: string]: MutableRefObject<IRefFloatingLabel> } = {
 		email: useRef(null),
 		senha: useRef(null)
@@ -37,7 +38,7 @@ const LoginScreen: FunctionComponent<any> = () => {
 		formErrors: {}
 	};
 
-	const [formState, dispatchFormUpdate] = useForm(initialState.formValues);
+	const [formValues, dispatchFormUpdate] = useForm(initialState.formValues);
 	const [formErrors, dispatchErrorUpdate] = useForm(initialState.formErrors);
 	const navigation = useNavigation();
 	const [state, dispatch] = useStore();
@@ -59,7 +60,7 @@ const LoginScreen: FunctionComponent<any> = () => {
 
 	const validateFields = () => {
 		let valid = true;
-		Object.entries(formState).forEach(([key, value]) => {
+		Object.entries(formValues).forEach(([key, value]) => {
 			if (_.isEmpty(value)) {
 				dispatchErrorUpdate({field: key, value: 'obrigatório'})
 				valid = false;
@@ -75,7 +76,7 @@ const LoginScreen: FunctionComponent<any> = () => {
 	const onLoginSubmit = async () => {
 		if (validateFields()) {
 			try {
-				const res = await login(formState);
+				const res = await login(formValues);
 				dispatch(usuarioActions.setUsuario(res.data));
 				// navigation.navigate('');
 			} catch (error) {
@@ -93,7 +94,7 @@ const LoginScreen: FunctionComponent<any> = () => {
 						<FloatingLabelInput
 							ref={inputRefs['email']}
 							label={'Email'}
-							value={formState['email']}
+							value={formValues['email']}
 							error={formErrors['email']}
 							isFieldCorrect={_.isEmpty(formErrors['email'])}
 							maxLength={60}
@@ -106,7 +107,7 @@ const LoginScreen: FunctionComponent<any> = () => {
 						<FloatingLabelInput
 							ref={inputRefs['senha']}
 							label={'Senha'}
-							value={formState['senha']}
+							value={formValues['senha']}
 							error={formErrors['senha']}
 							isFieldCorrect={_.isEmpty(formErrors['senha'])}
 							maxLength={60}
@@ -130,5 +131,3 @@ const LoginScreen: FunctionComponent<any> = () => {
 		</TouchableWithoutFeedback>
 	);
 };
-
-export default LoginScreen;

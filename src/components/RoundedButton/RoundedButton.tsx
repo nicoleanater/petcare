@@ -14,6 +14,7 @@ interface IProps {
 	progressButton?: boolean;
 	theme?: 'primary' | 'secondary';
 	loading?: boolean;
+	small?: boolean;
 }
 
 export const RoundedButton: FunctionComponent<IProps> = (props) => {
@@ -26,7 +27,7 @@ export const RoundedButton: FunctionComponent<IProps> = (props) => {
 			friction={6}
 			disabled={props.disabled}
 			onPress={props.onPress}
-			style={[buttonStyle, props.style]}
+			style={[buttonStyle, props.small && styles.smallButton, props.style]}
 		>
 			{props.loading ? (
 				<ActivityIndicator style={styles.loadingStyle} color={props.theme === 'secondary' ? Colors.gradientPink : Colors.white} />
