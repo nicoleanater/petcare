@@ -8,6 +8,7 @@ import { HeaderCadastro } from '../../components/HeaderCadastro/HeaderCadastro';
 import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { useForm } from '../../hooks';
 import { useStore } from '../../store';
+import { usuarioActions } from '../../store/usuario';
 import styles from './CadastroStyles';
 
 interface IProps { }
@@ -78,17 +79,12 @@ export const CadastroDadosProfissionais: FunctionComponent<IProps> = () => {
 
 	const onContinuar = () => {
 		if (validateFields()) {
-			// const animal = { 
-			// 	...formValues ,
-			// 	tipo_animal: formValues.tipo_animal.id,
-			// 	genero: formValues.genero.id,
-			// };
-			// if (animalEdit) {
-			// 	dispatch(usuarioActions.editAnimal(animal, index));
-			// } else {
-			// 	dispatch(usuarioActions.addAnimal(animal));
-			// }
-			// navigation.navigate('CadastroAnimais');
+			const newUsuario = {
+				descricao: formValues.descricao,
+				preco: inputRefs['preco'].current.getRawValue()
+			}
+			dispatch(usuarioActions.setUsuario(newUsuario));
+			navigation.navigate('CadastroLogin');
 		}
 	}
 

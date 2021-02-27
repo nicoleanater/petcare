@@ -15,7 +15,7 @@ const Stack = createStackNavigator();
 
 function OnboardingNavigator() {
   return (
-    <Stack.Navigator initialRouteName="CadastroDadosProfissionais">
+    <Stack.Navigator initialRouteName="Login">
 			<Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
       <Stack.Screen name="TipoCadastro" component={TipoCadastro} options={{
 				title: '',
