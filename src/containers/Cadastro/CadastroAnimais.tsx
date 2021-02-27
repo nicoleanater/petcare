@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
 import React, { FunctionComponent, useLayoutEffect } from 'react';
-import { Text, View } from 'react-native';
+import { Alert, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { AddAnimalCard } from '../../components/AddAnimalCard/AddAnimalCard';
 import { HeaderCadastro } from '../../components/HeaderCadastro/HeaderCadastro';
@@ -23,21 +23,27 @@ export const CadastroAnimais: FunctionComponent<IProps> = () => {
 
 	const validateFields = () => {
 		let valid = true;
-		// Object.entries(formValues).forEach(([key, value]) => {
-		// 	if (key != 'complemento' && _.isEmpty(value)) {
-		// 		dispatchErrorUpdate({field: key, value: 'obrigatório'})
-		// 		valid = false;
-		// 	}
-		// });
+		if (usuario.animais.length === 0) {
+			valid = false;
+		}
 		return valid;
 	};
 
 	const onContinuar = () => {
-		// if (validateFields()) {
+		if (validateFields()) {
 		// 	const usuario = { endereco: formValues };
 		// 	dispatch(usuarioActions.setUsuario(usuario));
 		// 	navigation.navigate('CadastroEndereco');
-		// }
+		} else {
+			Alert.alert(
+				"Alerta",
+				"Você precisa adicionar pelo menos um animal!",
+				[
+					{ text: "OK" }
+				],
+				{ cancelable: false }
+			);
+		}
 	}
 
 	const onAddAnimal = () => {
