@@ -1,18 +1,17 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
-import React, { FunctionComponent, MutableRefObject, useLayoutEffect, useRef, useState } from 'react';
-import { View } from 'react-native';
+import _ from 'lodash';
+import moment from 'moment';
+import React, { FunctionComponent, MutableRefObject, useLayoutEffect, useRef } from 'react';
+import { ScrollView } from 'react-native-gesture-handler';
 import FloatingLabelInput, { IRefFloatingLabel } from '../../components/FloatingLabelInput/FloatingLabelInput';
 import { HeaderCadastro } from '../../components/HeaderCadastro/HeaderCadastro';
 import { ImageGradientPicker } from '../../components/ImageGradientPicker/ImageGradientPicker';
+import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { useForm } from '../../hooks';
 import { useStore } from '../../store';
-import styles from './CadastroStyles';
-import _ from 'lodash';
-import RoundedButton from '../../components/RoundedButton/RoundedButton';
-import { ScrollView } from 'react-native-gesture-handler';
 import { usuarioActions } from '../../store/usuario';
-import moment from 'moment';
+import styles from './CadastroStyles';
 
 interface IProps { }
 interface IState {
@@ -119,7 +118,12 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 
     return (
 			<ScrollView contentContainerStyle={styles.mainContainer}>
-				<ImageGradientPicker isPicker image={formValues['foto']} pickerCallback={(value) => onChangeFormValue('foto', value)}/>
+				<ImageGradientPicker
+					isPicker
+					image={formValues['foto']}
+					pickerCallback={(value) => onChangeFormValue('foto', value)}
+					style={styles.marginBottom}
+				/>
 				<FloatingLabelInput
 						ref={inputRefs['nome']}
 						label={'Nome'}

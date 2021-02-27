@@ -8,8 +8,7 @@ export default {
 		width: 140,
 		height: 140,
 		justifyContent: 'center',
-		alignItems: 'center',
-		marginBottom: 20
+		alignItems: 'center'
 	} as ViewStyle,
 	smallPicker: {
 		width: 85,
