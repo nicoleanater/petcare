@@ -13,6 +13,7 @@ import { validateEmail } from '../../utils/ValidationForms';
 import { useStore } from '../../store';
 import { usuarioActions } from '../../store/usuario';
 
+interface IProps { }
 interface IState {
 	formValues: {
 		email: string;
@@ -21,9 +22,9 @@ interface IState {
 	formErrors: {
 		[name: string]: string | null;
 	};
-}3
+}
 
-const LoginScreen: FunctionComponent<any> = () => {
+export const LoginScreen: FunctionComponent<IProps> = () => {
 	const inputRefs: { [field: string]: MutableRefObject<IRefFloatingLabel> } = {
 		email: useRef(null),
 		senha: useRef(null)
@@ -130,5 +131,3 @@ const LoginScreen: FunctionComponent<any> = () => {
 		</TouchableWithoutFeedback>
 	);
 };
-
-export default LoginScreen;

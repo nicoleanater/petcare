@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginScreen from "../../containers/LoginScreen/LoginScreen";
+import { LoginScreen } from "../../containers/LoginScreen/LoginScreen";
 import { createStackNavigator } from '@react-navigation/stack'
 import { CadastroDadosPessoais } from '../../containers/Cadastro/CadastroDadosPessoais';
 import { TipoCadastro } from '../../containers/TipoCadastro/TipoCadastro';
@@ -15,7 +15,7 @@ const Stack = createStackNavigator();
 function OnboardingNavigator() {
   return (
     <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
+			<Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false}} />
       <Stack.Screen name="TipoCadastro" component={TipoCadastro} options={{
 				title: '',
 				headerTransparent: true,

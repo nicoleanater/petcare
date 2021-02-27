@@ -7,7 +7,6 @@ export default {
 		mainContainer: {
 			width: '100%',
 			height: '100%',
-			flexDirection: 'column',
 			alignItems: 'center',
 			paddingTop: responsiveHeight(10),
 			paddingHorizontal: responsiveWidth(12)
