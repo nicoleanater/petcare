@@ -84,6 +84,7 @@ export const CadastroLogin: FunctionComponent<IProps> = () => {
 			} else if (key === 'senha' && formValues['senha'] !== formValues['confirme_senha']) {
 				dispatchErrorUpdate({field: 'senha', value: 'senhas não correspondem'})
 				dispatchErrorUpdate({field: 'confirme_senha', value: 'senhas não correspondem'})
+				valid = false;
 			}
 		});
 		return valid;

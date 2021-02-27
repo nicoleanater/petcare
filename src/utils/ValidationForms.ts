@@ -1,3 +1,6 @@
+import moment from 'moment';
+import { MutableRefObject } from "react";
+import { IRefFloatingLabel } from "../components/FloatingLabelInput/FloatingLabelInput";
 
 export const validateEmail = (newEmail?: string): boolean => {
 	let isEmailValid = true;
@@ -13,4 +16,19 @@ export const validateEmail = (newEmail?: string): boolean => {
 	}
 
 	return isEmailValid;
+}
+
+export const validateCelular = (inputRef: MutableRefObject<IRefFloatingLabel>) => {
+	return inputRef.current.isValid();
+}
+
+export const validateDate = (inputRef: MutableRefObject<IRefFloatingLabel>) => {
+	const rawValue = inputRef.current.getRawValue();
+	const dateValid = inputRef.current.isValid();
+	const dateInThePast = moment(rawValue).isBefore();
+	return dateValid && dateInThePast;
+}
+
+export const validateCEP = (inputRef: MutableRefObject<IRefFloatingLabel>) => {
+	return inputRef.current.isValid();
 }

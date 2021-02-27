@@ -11,6 +11,7 @@ import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { useForm } from '../../hooks';
 import { useStore } from '../../store';
 import { usuarioActions } from '../../store/usuario';
+import { validateCelular, validateDate } from '../../utils/ValidationForms';
 import styles from './CadastroStyles';
 
 interface IProps { }
@@ -79,10 +80,10 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 			if (key != 'foto' && _.isEmpty(value)) {
 				dispatchErrorUpdate({field: key, value: 'obrigatório'})
 				valid = false;
-			} else if (key === 'celular' && !validateCelular()) {
+			} else if (key === 'celular' && !validateCelular(inputRefs['celular'])) {
 				dispatchErrorUpdate({field: key, value: 'celular inválido'})
 				valid = false;
-			} else if (key === 'data_nasc' && !validateDate()) {
+			} else if (key === 'data_nasc' && !validateDate(inputRefs['data_nasc'])) {
 				dispatchErrorUpdate({field: key, value: 'data inválida'})
 				valid = false;
 			}
@@ -90,17 +91,6 @@ export const CadastroDadosPessoais: FunctionComponent<IProps> = () => {
 
 		return valid;
 	};
-
-	const validateCelular = () => {
-		return inputRefs['celular'].current.isValid();
-	}
-
-	const validateDate = () => {
-		const rawValue = inputRefs['data_nasc'].current.getRawValue();
-		const dateValid = inputRefs['data_nasc'].current.isValid();
-		const dateInThePast = moment(rawValue).isBefore();
-		return dateValid && dateInThePast;
-	}
 
 	const onContinuar = () => {
 		if (validateFields()) {

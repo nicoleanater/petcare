@@ -15,6 +15,7 @@ import { buscaCidades } from '../../services/cidade';
 import { buscaEstados } from '../../services/estado';
 import { useStore } from '../../store';
 import { usuarioActions } from '../../store/usuario';
+import { validateCEP } from '../../utils/ValidationForms';
 import styles from './CadastroStyles';
 
 interface IProps { }
@@ -116,17 +117,13 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 			if (key != 'complemento' && _.isEmpty(value)) {
 				dispatchErrorUpdate({field: key, value: 'obrigatório'})
 				valid = false;
-			} else if (key === 'cep' && !validateCEP()) {
+			} else if (key === 'cep' && !validateCEP(inputRefs['cep'])) {
 				dispatchErrorUpdate({field: key, value: 'cep inválido'})
 				valid = false;
 			}
 		});
 		return valid;
 	};
-
-	const validateCEP = () => {
-		return inputRefs['cep'].current.isValid();
-	}
 
 	const onContinuar = () => {
 		if (validateFields()) {
