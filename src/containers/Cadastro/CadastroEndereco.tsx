@@ -11,6 +11,7 @@ import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { useForm } from '../../hooks';
 import { Cidade } from '../../models/Cidade';
 import { Estado } from '../../models/Estado';
+import { TipoUsuario } from '../../models/Usuario';
 import { buscaCidades } from '../../services/cidade';
 import { buscaEstados } from '../../services/estado';
 import { useStore } from '../../store';
@@ -127,14 +128,18 @@ export const CadastroEndereco: FunctionComponent<IProps> = () => {
 
 	const onContinuar = () => {
 		if (validateFields()) {
-			const usuario = { 
+			const newUsuario = { 
 				endereco: {
 					...formValues,
 					cep: inputRefs['cep'].current.getRawValue()
 				}
 			};
-			dispatch(usuarioActions.setUsuario(usuario));
-			navigation.navigate('CadastroAnimais');
+			dispatch(usuarioActions.setUsuario(newUsuario));
+			if (usuario.tipo_usuario === TipoUsuario.DONO_DE_ANIMAL){
+				navigation.navigate('CadastroAnimais');
+			} else if (usuario.tipo_usuario === TipoUsuario.PET_SITTER) {
+				navigation.navigate('CadastroDadosProfissionais');
+			}
 		}
 	}
 

@@ -20,4 +20,6 @@ export interface Usuario {
 	tipo_usuario?: TipoUsuario;
 	endereco?: Endereco;
 	animais?: Array<Animal>;
+	descricao?: string;
+	preco?: number;
 }
