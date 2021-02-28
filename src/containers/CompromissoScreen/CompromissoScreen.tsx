@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { FunctionComponent, useLayoutEffect } from "react";
-import { Text, View } from "react-native";
 import { StackHeaderProps } from "@react-navigation/stack";
+import React, { FunctionComponent, useLayoutEffect } from "react";
+import { View } from "react-native";
 import { AuthHeader } from "../../components/AuthHeader/AuthHeader";
 import { TabBar } from "../../components/TabBar/TabBar";
 
@@ -10,9 +10,7 @@ const LoginScreen: FunctionComponent<any> = () => {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			header: (props: StackHeaderProps) => (
-				<AuthHeader {...props} title={"Compromisso"} />
-			),
+			header: (props: StackHeaderProps) => <AuthHeader {...props} title={"Compromisso"} theme={'light'} />,
 		});
 	}, [navigation]);
 
