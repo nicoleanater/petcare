@@ -28,7 +28,7 @@ export const CardCompromisso: FunctionComponent<IProps> = ({ compromisso }) => {
 		// to do
 	}
 
-	const renderDateInterval = () => `${moment(compromisso.data_inicio).format('DD/MM/YY')} - ${moment(compromisso.data_fim).format('DD/MM/YY')}`;
+	const renderDateInterval = () => `${moment(compromisso.data_inicio, 'YYYY-MM-DD').format('DD/MM/YY')} - ${moment(compromisso.data_fim, 'YYYY-MM-DD').format('DD/MM/YY')}`;
 
 	const renderAnimais = () => {
 		const gatos: Array<Animal> = compromisso.usuario.animais.filter((animal: Animal) => animal.tipo_animal === TipoAnimal.GATO);
