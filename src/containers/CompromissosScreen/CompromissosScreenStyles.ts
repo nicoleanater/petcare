@@ -14,5 +14,10 @@ export default {
 			fontFamily: Fonts.fontFamilies.latoBlack,
 			fontSize: Fonts.sizes.regular,
 			color: Colors.paleOyster
-		} as TextStyle
+		} as TextStyle,
+		tabsBackground: {
+			backgroundColor: Colors.gray,
+			paddingHorizontal: 20,
+			paddingVertical: 30
+		} as ViewStyle
 };
