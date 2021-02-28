@@ -1,7 +1,7 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import CompromissoScreen from '../../containers/CompromissoScreen/CompromissoScreen';
+import CompromissosScreen from '../../containers/CompromissosScreen/CompromissosScreen';
 import HomeScreen from '../../containers/HomeScreen/HomeScreen';
 import DrawerContent from "../DrawerContent/DrawerContent";
 
@@ -11,7 +11,7 @@ const Drawer = createDrawerNavigator();
 const DrawerStack = () => {
 	return (
 		<Stack.Navigator initialRouteName="DrawerNavigator">
-			<Stack.Screen name="Compromisso" component={CompromissoScreen} />
+			<Stack.Screen name="Compromissos" component={CompromissosScreen} />
       <Stack.Screen name="Feed" component={HomeScreen} />
 		</Stack.Navigator>
 	);

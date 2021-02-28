@@ -23,7 +23,7 @@ const CompromissosScreen: FunctionComponent<any> = () => {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			header: (props: StackHeaderProps) => <AuthHeader {...props} title={"Compromisso"} theme={'light'} />,
+			header: (props: StackHeaderProps) => <AuthHeader {...props} title={"Compromissos"} theme={'light'} />,
 		});
 	}, [navigation]);
 
