@@ -46,11 +46,11 @@ export const LoginScreen: FunctionComponent<IProps> = () => {
 		dispatchFormUpdate({field, value});
 		dispatchErrorUpdate({field, value: null});
 	};
-	
+
 	const onEndEditingField = (key: string) => {
 		const refsKeys: string[] = Object.keys(inputRefs);
 		const nextInputKey: string = refsKeys[refsKeys.indexOf(key) + 1];
-		
+
 		if (!_.isEmpty(nextInputKey)) {
 			inputRefs[nextInputKey].current.focus();
 		} else {
@@ -123,7 +123,7 @@ export const LoginScreen: FunctionComponent<IProps> = () => {
 						/>
 						<View style={styles.registerContainer}>
 							<Text style={styles.createAccountText}>Não possui uma conta? </Text>
-							<TouchableOpacity onPress={() => navigation.navigate('TipoCadastro')}><Text style={styles.registerLink}>Cadastre-se!</Text></TouchableOpacity>
+							<TouchableOpacity onPress={() => navigation.navigate('OnboardingNavigator', { screen: 'TipoCadastro' })}><Text style={styles.registerLink}>Cadastre-se!</Text></TouchableOpacity>
 						</View>
 					</View>
 				</LinearGradient>

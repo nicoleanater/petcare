@@ -10,10 +10,10 @@ export enum Genero {
 
 export interface Animal {
 	id?: number;
-	nome: string;
-	idade: number;
-	raca: string;
-	descricao: string;
-	tipo_animal: TipoAnimal;
-	genero: Genero;
+	nome?: string;
+	idade?: number;
+	raca?: string;
+	descricao?: string;
+	tipo_animal?: TipoAnimal;
+	genero?: Genero;
 }
