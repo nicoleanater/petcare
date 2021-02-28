@@ -5,7 +5,10 @@ import { responsiveHeight } from "react-native-responsive-dimensions";
 export default {
 	...ApplicationStyles,
 	menuButtonContainer: {
-		marginHorizontal: responsiveHeight(2),
+		height: 60,
+		width: 60,
+		alignItems: 'center',
+		justifyContent: 'center',
 	} as ViewStyle,
 	menuButtonLight: {
 		color: Colors.white,

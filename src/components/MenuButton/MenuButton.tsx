@@ -8,23 +8,10 @@ interface IProps {
 	theme: "light" | "dark";
 }
 
-export const MenuButton: FunctionComponent<
-	IProps & StackHeaderLeftButtonProps
-> = (props) => {
+export const MenuButton: FunctionComponent<IProps & StackHeaderLeftButtonProps> = (props) => {
 	return (
-		<TouchableOpacity
-			onPress={props.onPress}
-			style={styles.menuButtonContainer}
-		>
-			<Icon
-				name={"menu"}
-				style={
-					props.theme === "light"
-						? styles.menuButtonLight
-						: styles.menuButtonDark
-				}
-				size={18}
-			/>
+		<TouchableOpacity onPress={props.onPress} style={styles.menuButtonContainer}>
+			<Icon name={"menu"} style={props.theme === 'light' ? styles.menuButtonLight : styles.menuButtonDark} size={25} />
 		</TouchableOpacity>
 	);
 };
