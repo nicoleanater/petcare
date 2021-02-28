@@ -5,8 +5,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Animal, TipoAnimal } from '../../models/Animal';
 import { Compromisso, CompromissoStatus } from '../../models/Compromisso';
+import { TipoUsuario } from '../../models/Usuario';
 import { Colors } from '../../themes';
 import styles from './CardCompromissoStyles';
+import { MaskService } from 'react-native-masked-text';
 
 interface IProps {
 	compromisso: Compromisso;
@@ -23,6 +25,7 @@ const getStatusColor = (status: CompromissoStatus, theme: 'solid' | 'transparent
 }
 
 export const CardCompromisso: FunctionComponent<IProps> = ({ compromisso }) => {
+	const { tipo_usuario } = compromisso.usuario;
 
 	const openCompromissoDetails = () => {
 		// to do
@@ -60,6 +63,8 @@ export const CardCompromisso: FunctionComponent<IProps> = ({ compromisso }) => {
 		}
 	}
 
+	const renderPreco = () => `${MaskService.toMask('money', compromisso.usuario.preco.toFixed(2), { unit: 'R$ '})} / hora`;
+
 	return (
 		<TouchableOpacity style={styles.cardContainer} onPress={openCompromissoDetails}>
 			<View style={styles.cardLeftContainer}>
@@ -69,10 +74,18 @@ export const CardCompromisso: FunctionComponent<IProps> = ({ compromisso }) => {
 						<Icon name={'access-time'} style={styles.iconStyle} size={14}/>
 						<Text style={[styles.text.cardContent, styles.xSmallMarginBottom]}>{renderDateInterval()}</Text>
 					</View>
-					<View style={styles.row}>
-						<Icon name={'pets'} style={styles.iconStyle} size={14}/>
-						<Text style={[styles.text.cardContent, styles.xSmallMarginBottom]}>{renderAnimais()}</Text>
-					</View>
+					{ tipo_usuario === TipoUsuario.DONO_DE_ANIMAL &&
+						<View style={styles.row}>
+							<Icon name={'pets'} style={styles.iconStyle} size={14}/>
+							<Text style={[styles.text.cardContent, styles.xSmallMarginBottom]}>{renderAnimais()}</Text>
+						</View>
+					}
+					{ tipo_usuario === TipoUsuario.PET_SITTER &&
+						<View style={styles.row}>
+							<Icon name={'attach-money'} style={styles.iconStyle} size={14}/>
+							<Text style={[styles.text.cardContent, styles.xSmallMarginBottom]}>{renderPreco()}</Text>
+						</View>
+					}
 				</View>
 				<Text style={[styles.statusBadge, { backgroundColor: getStatusColor(compromisso.status, 'transparent')}]}>{renderCompromissoStatus(compromisso.status)}</Text>
 			</View>
