@@ -21,10 +21,14 @@ const CompromissosAtivos = ({ compromissos }) => (
 	</ScrollView>
 );
 
-const CompromissosHistorico = () => (
-	<View>
-		<Text>Historico</Text>
-	</View>
+const CompromissosHistorico = ({ compromissos }) => (
+	<ScrollView style={styles.tabsBackground}>
+		{compromissos.map((item: Compromisso, i) => {
+			return (
+				<CardCompromisso compromisso={item} key={i}/>
+			)
+		})}
+	</ScrollView>
 );
 
 const CompromissosScreen: FunctionComponent<any> = () => {
@@ -65,7 +69,7 @@ const CompromissosScreen: FunctionComponent<any> = () => {
 			case 'ativos':
 				return <CompromissosAtivos compromissos={compromissosAtivos} />;
 			case 'historico':
-				return <CompromissosHistorico />;
+				return <CompromissosHistorico compromissos={compromissosHistorico}/>;
 			default:
 				return null;
 		}
