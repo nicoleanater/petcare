@@ -2,6 +2,7 @@ import moment from 'moment';
 import React, { FunctionComponent } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Animal, TipoAnimal } from '../../models/Animal';
 import { Compromisso, CompromissoStatus } from '../../models/Compromisso';
 import { Colors } from '../../themes';
@@ -11,13 +12,13 @@ interface IProps {
 	compromisso: Compromisso;
 }
 
-const getStatusColor = (status: CompromissoStatus) => {
+const getStatusColor = (status: CompromissoStatus, theme: 'solid' | 'transparent') => {
 	switch (status) {
-		case CompromissoStatus.SOLICITACAO: return Colors.statusPurple;
-		case CompromissoStatus.AGENDADO: return Colors.statusBlue;
-		case CompromissoStatus.EM_ANDAMENTO: return Colors.statusYellow;
-		case CompromissoStatus.RECUSADO: return Colors.statusGray;
-		case CompromissoStatus.FINALIZADO: return Colors.statusGreen;
+		case CompromissoStatus.SOLICITACAO: return theme === 'solid' ? Colors.statusPurple : Colors.statusPurpleLight;
+		case CompromissoStatus.AGENDADO: return theme === 'solid' ? Colors.statusBlue : Colors.statusBlueLight;
+		case CompromissoStatus.EM_ANDAMENTO: return theme === 'solid' ? Colors.statusYellow : Colors.statusYellowLight;
+		case CompromissoStatus.RECUSADO: return theme === 'solid' ? Colors.statusGray : Colors.statusGrayLight;
+		case CompromissoStatus.FINALIZADO: return theme === 'solid' ? Colors.statusGreen : Colors.statusGreenLight;
 	}
 }
 
@@ -63,15 +64,19 @@ export const CardCompromisso: FunctionComponent<IProps> = ({ compromisso }) => {
 		<TouchableOpacity style={styles.cardContainer} onPress={openCompromissoDetails}>
 			<View style={styles.cardLeftContainer}>
 				<View>
-					<Text>{compromisso.usuario.nome}</Text>
-					<Text>{renderDateInterval()}</Text>
-					<Text>{renderAnimais()}</Text>
+					<Text style={[styles.text.cardTitle, styles.smallMarginBottom]}>{compromisso.usuario.nome}</Text>
+					<View style={styles.row}>
+						<Icon name={'access-time'} style={styles.iconStyle} size={14}/>
+						<Text style={[styles.text.cardContent, styles.xSmallMarginBottom]}>{renderDateInterval()}</Text>
+					</View>
+					<View style={styles.row}>
+						<Icon name={'pets'} style={styles.iconStyle} size={14}/>
+						<Text style={[styles.text.cardContent, styles.xSmallMarginBottom]}>{renderAnimais()}</Text>
+					</View>
 				</View>
-				<View style={styles.statusBadge}>
-					<Text>{renderCompromissoStatus(compromisso.status)}</Text>
-				</View>
+				<Text style={[styles.statusBadge, { backgroundColor: getStatusColor(compromisso.status, 'transparent')}]}>{renderCompromissoStatus(compromisso.status)}</Text>
 			</View>
-			<View style={[styles.statusRightBar, { backgroundColor: getStatusColor(compromisso.status)}]}/>
+			<View style={[styles.statusRightBar, { backgroundColor: getStatusColor(compromisso.status, 'solid')}]}/>
 		</TouchableOpacity>
 	);
 };

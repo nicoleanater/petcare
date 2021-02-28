@@ -23,9 +23,21 @@ export default {
 		paddingVertical: 20,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+		alignItems: 'flex-start',
 		flex: 1
 	} as ViewStyle,
 	statusBadge: {
-
-	} as ViewStyle
+		borderRadius: 5,
+		paddingVertical: 4,
+		paddingHorizontal: 11,
+		backgroundColor: Colors.statusPurpleLight,
+		fontFamily: Fonts.fontFamilies.latoLight,
+		fontSize: Fonts.sizes.small,
+		color: Colors.blackTwo
+	} as TextStyle,
+	iconStyle: {
+		color: Colors.grayTwo,
+		marginRight: 5,
+		marginTop: 2,
+	} as ViewStyle,
 };

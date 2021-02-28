@@ -44,7 +44,7 @@ const compromissos = [
 		},
 		data_inicio: "2021-10-10T14:48:00",
 		data_fim: "2021-10-14T14:48:00",
-		status: CompromissoStatus.AGENDADO
+		status: CompromissoStatus.SOLICITACAO
 	},
 ];
 
