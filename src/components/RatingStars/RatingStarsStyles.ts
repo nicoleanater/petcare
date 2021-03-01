@@ -8,6 +8,7 @@ export default {
 	} as TextStyle,
 	ratingsText: {
 		fontFamily: Fonts.fontFamilies.latoRegular,
-		fontSize: Fonts.sizes.xSmall
+		fontSize: Fonts.sizes.xSmall,
+		marginTop: 5
 	} as TextStyle
 };
