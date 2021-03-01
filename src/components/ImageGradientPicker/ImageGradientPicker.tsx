@@ -37,7 +37,7 @@ export const ImageGradientPicker: FunctionComponent<IProps> = ({ isPicker, image
 
 		const renderImagePicker = () => (
 			<TouchableWithoutFeedback onPress={openGalery} style={styles.addPhoto}>
-				<Icon name={'add-a-photo'} style={styles.photoIcon} size={42}/>
+				<Icon name={'add-a-photo'} style={styles.photoIcon} size={small ? 32 : 42}/>
 			</TouchableWithoutFeedback>
 		);
 
@@ -45,7 +45,7 @@ export const ImageGradientPicker: FunctionComponent<IProps> = ({ isPicker, image
 			if (image == null) {
 				return (
 					<View style={small ? [styles.iconContainerSmall, noBorder && styles.noBorderImageSmall] : [styles.iconContainer, noBorder && styles.noBorderImage] }>
-						<Icon name={'insert-photo'} style={styles.photoIcon} size={42}/>
+						<Icon name={'insert-photo'} style={styles.photoIcon} size={small ? 32 : 42}/>
 					</View>
 				);
 			}
