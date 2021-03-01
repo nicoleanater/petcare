@@ -1,6 +1,7 @@
 export default {
 	transparent: "rgba(0,0,0,0)",
 	black: "#000000",
+	blackOne: "#26332E",
 	blackTwo: "#0E0E0E",
 	gray: "#F2F2F2",
 	grayOne: "#6B6B6B",
