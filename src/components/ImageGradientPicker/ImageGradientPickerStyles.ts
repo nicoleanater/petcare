@@ -51,6 +51,14 @@ export default {
 		width: 78,
 		height: 78,
 	} as ImageStyle,
+	noBorderImage: {
+		width: 140,
+		height: 140,
+	} as ViewStyle,
+	noBorderImageSmall: {
+		width: 85,
+		height: 85,
+	} as ViewStyle,
 	viewIcon: {
 		width: 95,
 		height: 95,

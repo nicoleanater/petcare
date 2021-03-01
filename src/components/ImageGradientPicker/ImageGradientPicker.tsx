@@ -22,7 +22,7 @@ export const ImageGradientPicker: FunctionComponent<IProps> = ({ isPicker, image
 				mediaType: 'photo',
 				maxHeight: 200,
 				maxWidth: 200
-			}, 
+			},
 			(response) => pickerCallback(response.data))
 		}
 
@@ -33,7 +33,7 @@ export const ImageGradientPicker: FunctionComponent<IProps> = ({ isPicker, image
             //ComponentDidUnmount
         }
 		}, [])
-		
+
 		const renderImagePicker = () => (
 			<TouchableWithoutFeedback onPress={openGalery} style={styles.addPhoto}>
 				<Icon name={'add-a-photo'} style={styles.photoIcon} size={42}/>
@@ -41,15 +41,22 @@ export const ImageGradientPicker: FunctionComponent<IProps> = ({ isPicker, image
 		);
 
 		const renderImageViewer = () => {
+			if (image == null) {
+				return (
+					<View style={small ? [styles.iconContainerSmall, styles.noBorderImageSmall] : [styles.iconContainer, styles.noBorderImage] }>
+						<Icon name={'insert-photo'} style={styles.photoIcon} size={42}/>
+					</View>
+				);
+			}
 			if (typeof image == 'number') {
 				return (
 					<View style={small ? styles.iconContainerSmall : styles.iconContainer}>
-						<Image style={[small ? styles.viewIconSmall : styles.viewIcon]} source={image as ImageSourcePropType} /> 
+						<Image style={[small ? styles.viewIconSmall : styles.viewIcon]} source={image as ImageSourcePropType} />
 					</View>
 				);
 			} else if (typeof image == 'string') {
 				return (
-					<Image style={[small ? styles.viewPhotoSmall : styles.viewPhoto]} source={{uri: `data:image/jpeg;base64,${image}`}} /> 
+					<Image style={[small ? styles.viewPhotoSmall : styles.viewPhoto]} source={{uri: `data:image/jpeg;base64,${image}`}} />
 				);
 			}
 		}
