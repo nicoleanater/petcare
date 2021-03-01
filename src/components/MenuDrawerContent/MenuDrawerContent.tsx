@@ -3,12 +3,12 @@ import React, { FunctionComponent } from 'react';
 import { Text, View } from "react-native";
 import { Colors } from '../../themes';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { StackActions } from '@react-navigation/native';
+import styles from './MenuDrawerContentStyles';
 
-const DrawerContent: FunctionComponent<any> = (props) => {
+const MenuDrawerContent: FunctionComponent<any> = (props) => {
 	// const navigation = useNavigation<DrawerNavigationProp<any, any>>();
 	return (
-		<View style={{ flex: 1 }}>
+		<View style={styles.mainContainer}>
 			<DrawerContentScrollView {...props}>
 				<View style={{ backgroundColor: Colors.gray }}>
 					<Text>Drawer content</Text>
@@ -37,4 +37,4 @@ const DrawerContent: FunctionComponent<any> = (props) => {
 	);
 };
 
-export default DrawerContent;
+export default MenuDrawerContent;

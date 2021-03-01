@@ -1,9 +1,9 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
+import MenuDrawerContent from "../../components/MenuDrawerContent/MenuDrawerContent";
 import CompromissosScreen from '../../containers/CompromissosScreen/CompromissosScreen';
 import HomeScreen from '../../containers/HomeScreen/HomeScreen';
-import DrawerContent from "../DrawerContent/DrawerContent";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -19,7 +19,7 @@ const DrawerStack = () => {
 
 function AuthStack() {
 	return (
-		<Drawer.Navigator initialRouteName="DrawerStackNavigator" drawerContent={props => <DrawerContent {...props}/>}>
+		<Drawer.Navigator initialRouteName="DrawerStackNavigator" drawerContent={props => <MenuDrawerContent {...props}/>}>
 			<Drawer.Screen name="DrawerStackNavigator" component={DrawerStack} />
 		</Drawer.Navigator>
 	);
