@@ -23,7 +23,7 @@ const MenuDrawerContent: FunctionComponent<any> = (props) => {
 			<LinearGradient colors={[Colors.gradientPink, Colors.gradientPeach]} style={styles.gradientBackground} start={{x: 0, y: 0.5}} end={{x: 0.9, y: 0.6}}>
 				<DrawerContentScrollView {...props} style={styles.fullWidthContainer}>
 					<View>
-						<TouchableOpacity style={[styles.alignSelfEnd]}>
+						<TouchableOpacity onPress={() => props.navigation.closeDrawer()} style={[styles.alignSelfEnd]}>
 							<Icon name={'close'} style={styles.closeIconStyle} size={24} />
 						</TouchableOpacity>
 						<TouchableOpacity onPress={() => props.navigation.navigate('AuthStack', { screen: 'Perfil' })} style={styles.menuItemContainer}>
