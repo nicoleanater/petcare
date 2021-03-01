@@ -4,24 +4,14 @@ import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Animal, TipoAnimal } from '../../models/Animal';
-import { Compromisso, CompromissoStatus } from '../../models/Compromisso';
+import { Compromisso } from '../../models/Compromisso';
 import { TipoUsuario } from '../../models/Usuario';
-import { Colors } from '../../themes';
 import styles from './CardCompromissoStyles';
 import { MaskService } from 'react-native-masked-text';
+import { getStatusColor, getCompromissoStatus } from '../../utils/EnumToString';
 
 interface IProps {
 	compromisso: Compromisso;
-}
-
-const getStatusColor = (status: CompromissoStatus, theme: 'solid' | 'transparent') => {
-	switch (status) {
-		case CompromissoStatus.SOLICITACAO: return theme === 'solid' ? Colors.statusPurple : Colors.statusPurpleLight;
-		case CompromissoStatus.AGENDADO: return theme === 'solid' ? Colors.statusBlue : Colors.statusBlueLight;
-		case CompromissoStatus.EM_ANDAMENTO: return theme === 'solid' ? Colors.statusYellow : Colors.statusYellowLight;
-		case CompromissoStatus.RECUSADO: return theme === 'solid' ? Colors.statusGray : Colors.statusGrayLight;
-		case CompromissoStatus.FINALIZADO: return theme === 'solid' ? Colors.statusGreen : Colors.statusGreenLight;
-	}
 }
 
 export const CardCompromisso: FunctionComponent<IProps> = ({ compromisso }) => {
@@ -53,16 +43,6 @@ export const CardCompromisso: FunctionComponent<IProps> = ({ compromisso }) => {
 		if (length === 1) return `${word}`
 	}
 
-	const renderCompromissoStatus = (status: CompromissoStatus) => {
-		switch (status) {
-			case CompromissoStatus.SOLICITACAO: return 'Solicitação';
-			case CompromissoStatus.AGENDADO: return 'Agendado';
-			case CompromissoStatus.EM_ANDAMENTO: return 'Em Andamento';
-			case CompromissoStatus.RECUSADO: return 'Recusado';
-			case CompromissoStatus.FINALIZADO: return 'Finalizado';
-		}
-	}
-
 	const renderPreco = () => `${MaskService.toMask('money', compromisso.usuario.preco.toFixed(2), { unit: 'R$ '})} / hora`;
 
 	return (
@@ -87,7 +67,7 @@ export const CardCompromisso: FunctionComponent<IProps> = ({ compromisso }) => {
 						</View>
 					}
 				</View>
-				<Text style={[styles.statusBadge, { backgroundColor: getStatusColor(compromisso.status, 'transparent')}]}>{renderCompromissoStatus(compromisso.status)}</Text>
+				<Text style={[styles.statusBadge, { backgroundColor: getStatusColor(compromisso.status, 'transparent')}]}>{getCompromissoStatus(compromisso.status)}</Text>
 			</View>
 			<View style={[styles.statusRightBar, { backgroundColor: getStatusColor(compromisso.status, 'solid')}]}/>
 		</TouchableOpacity>
