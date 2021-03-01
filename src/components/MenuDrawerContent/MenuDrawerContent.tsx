@@ -36,16 +36,16 @@ const MenuDrawerContent: FunctionComponent<any> = (props) => {
 						<Text style={styles.userTypeTextStyle}>{getTipoUsuario(usuario.tipo_usuario)}</Text>
 					</View>
 					<View>
-						<TouchableOpacity onPress={() => props.navigation.navigate('Perfil')} style={styles.menuItemContainer}>
+						{/* <TouchableOpacity onPress={() => props.navigation.navigate('Perfil')} style={styles.menuItemContainer}>
 							<Text style={styles.menuLabelStyle}>Perfil</Text>
-						</TouchableOpacity>
+						</TouchableOpacity> */}
 						<TouchableOpacity onPress={() => props.navigation.navigate('Compromissos')} style={styles.menuItemContainer}>
 							<Text style={styles.menuLabelStyle}>Compromissos</Text>
 						</TouchableOpacity>
-						<TouchableOpacity onPress={() => props.navigation.navigate('Mensagens')} style={styles.menuItemContainer}>
+						{/* <TouchableOpacity onPress={() => props.navigation.navigate('Mensagens')} style={styles.menuItemContainer}>
 							<Text style={styles.menuLabelStyle}>Mensagens</Text>
-						</TouchableOpacity>
-						<TouchableOpacity onPress={() => props.navigation.navigate('Pesquisar')} style={styles.menuItemContainer}>
+						</TouchableOpacity> */}
+						<TouchableOpacity onPress={() => props.navigation.navigate('Pesquisar')} style={[styles.menuItemContainer,  styles.lastMenuItem]}>
 							<Text style={styles.menuLabelStyle}>Pesquisar</Text>
 						</TouchableOpacity>
 					</View>
