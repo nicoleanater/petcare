@@ -9,8 +9,10 @@ import { CustomPicker, Option, transformArrayIntoPickerOptions } from '../../com
 import { useForm } from '../../hooks';
 import { Cidade } from '../../models/Cidade';
 import { Estado } from '../../models/Estado';
+import { Usuario } from '../../models/Usuario';
 import { buscaCidades } from '../../services/cidade';
 import { buscaEstados } from '../../services/estado';
+import { buscarPetsitters } from '../../services/usuario';
 import { useStore } from '../../store';
 import styles from './PesquisarScreenStyles';
 
@@ -19,6 +21,7 @@ interface IProps { }
 interface IState {
 	estados: Array<Option<Estado>>;
 	cidades: Array<Option<Cidade>>;
+	petsitters: Array<Usuario>;
 	formValues: {
 		uf: Estado;
 		cidade: Cidade;
@@ -32,6 +35,7 @@ export const PesquisarScreen: FunctionComponent<IProps> = () => {
 	const initialState: IState = {
 		estados: [],
 		cidades: [],
+		petsitters: [],
 		formValues: {
 			uf: null,
 			cidade: null
@@ -40,11 +44,15 @@ export const PesquisarScreen: FunctionComponent<IProps> = () => {
 
 	const [estados, setEstados] = useState(initialState.estados);
 	const [cidades, setCidades] = useState(initialState.cidades);
+	const [petsitters, setPetsitters] = useState(initialState.petsitters);
 	const [formValues, dispatchFormUpdate] = useForm(initialState.formValues);
 
 	const onChangeFormValue = (field: string, value: any) => {
 		if (field === 'uf') {
 			loadCidadesCombobox(value.id);
+		}
+		if (field == 'cidade') {
+			loadPetsittersList(value.id);
 		}
 		dispatchFormUpdate({field, value});
 	};
@@ -54,8 +62,6 @@ export const PesquisarScreen: FunctionComponent<IProps> = () => {
 			header: (props: StackHeaderProps) => <AuthHeader {...props} title={"Pesquisar"} theme={'light'} />,
 		});
 	}, [navigation]);
-
-
 
 	useEffect(() => {
 		loadEstadosCombobox();
@@ -79,6 +85,15 @@ export const PesquisarScreen: FunctionComponent<IProps> = () => {
 		}
 	}
 
+	const loadPetsittersList = async (cidadeId) => {
+		try {
+			const res = await buscarPetsitters(cidadeId);
+			setPetsitters(res.data);
+		} catch (error) {
+			console.error({error});
+		}
+	}
+
 	return (
 		<ScrollView contentContainerStyle={styles.mainContainer}>
 			<View style={styles.row}>
@@ -97,7 +112,7 @@ export const PesquisarScreen: FunctionComponent<IProps> = () => {
 					mainContainerStyle={{flex: 3}}
 				/>
 			</View>
-			<CardPetSitter />
+			{petsitters.map((usuario, i) => <CardPetSitter key={i} usuario={usuario}/>)}
 		</ScrollView>
 	);
 };
