@@ -78,7 +78,7 @@ export const LoginScreen: FunctionComponent<IProps> = () => {
 			try {
 				const res = await login(formValues);
 				dispatch(usuarioActions.setUsuario(res.data));
-				navigation.navigate('AuthStack');
+				navigation.reset({ index: 0, routes: [{ name: 'AuthStack' }] });
 			} catch (error) {
 				Alert.alert(
 					"Erro",

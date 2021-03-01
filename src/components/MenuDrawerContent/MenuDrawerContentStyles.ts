@@ -30,5 +30,17 @@ export default {
 	menuLabelStyle: {
 		fontFamily: Fonts.fontFamilies.latoLight,
 		fontSize: Fonts.sizes.regular,
+	} as TextStyle,
+	logoutButton: {
+		flexDirection: 'row',
+		height: 56,
+		width: 130,
+		marginBottom: 25,
+		alignItems: 'center',
+		justifyContent: 'center',
+	} as ViewStyle,
+	logoutIconStyle: {
+		color: Colors.blackOne,
+		marginRight: 8,
 	} as TextStyle
 }
