@@ -1,4 +1,4 @@
-import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import { DrawerContentScrollView } from '@react-navigation/drawer';
 import React, { FunctionComponent } from 'react';
 import { Text, View } from "react-native";
 import { Colors } from '../../themes';
@@ -8,10 +8,10 @@ import LinearGradient from 'react-native-linear-gradient';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useStore } from '../../store';
 import { usuarioActions } from '../../store/usuario';
-import { StackActions } from '@react-navigation/native';
+import { ImageGradientPicker } from '../ImageGradientPicker/ImageGradientPicker'
 
 const MenuDrawerContent: FunctionComponent<any> = (props) => {
-	const [, dispatch] = useStore();
+	const [{ usuario }, dispatch] = useStore();
 
 	const onLogoutPressed = () => {
 		dispatch(usuarioActions.resetToInitialState());
@@ -22,10 +22,18 @@ const MenuDrawerContent: FunctionComponent<any> = (props) => {
 		<View style={styles.mainContainer}>
 			<LinearGradient colors={[Colors.gradientPink, Colors.gradientPeach]} style={styles.gradientBackground} start={{x: 0, y: 0.5}} end={{x: 0.9, y: 0.6}}>
 				<DrawerContentScrollView {...props} style={styles.fullWidthContainer}>
+					<TouchableOpacity onPress={() => props.navigation.closeDrawer()} style={[styles.alignSelfEnd]}>
+						<Icon name={'close'} style={styles.closeIconStyle} size={24} />
+					</TouchableOpacity>
+					<View style={styles.userInfoContainer}>
+						<ImageGradientPicker
+							image={usuario.foto}
+							style={styles.smallMarginBottom}
+						/>
+						<Text style={styles.nameTextStyle}>{usuario.nome}</Text>
+						<Text style={styles.userTypeTextStyle}>{usuario.nome}</Text>
+					</View>
 					<View>
-						<TouchableOpacity onPress={() => props.navigation.closeDrawer()} style={[styles.alignSelfEnd]}>
-							<Icon name={'close'} style={styles.closeIconStyle} size={24} />
-						</TouchableOpacity>
 						<TouchableOpacity onPress={() => props.navigation.navigate('AuthStack', { screen: 'Perfil' })} style={styles.menuItemContainer}>
 							<Text style={styles.menuLabelStyle}>Perfil</Text>
 						</TouchableOpacity>

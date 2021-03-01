@@ -1,4 +1,5 @@
 import { TextStyle, ViewStyle } from "react-native";
+import { responsiveHeight } from "react-native-responsive-dimensions";
 import { ApplicationStyles, Colors, Fonts } from "../../themes";
 
 export default {
@@ -14,6 +15,20 @@ export default {
 		color: Colors.blackOne,
 		paddingHorizontal: 22,
 		paddingVertical: 22,
+	} as TextStyle,
+	userInfoContainer: {
+		alignSelf: 'center',
+		alignItems: 'center',
+		marginBottom: responsiveHeight(5)
+	} as ViewStyle,
+	nameTextStyle: {
+		fontFamily: Fonts.fontFamilies.latoBlack,
+		fontSize: Fonts.sizes.big
+	} as TextStyle,
+	userTypeTextStyle: {
+		marginTop: 2,
+		fontFamily: Fonts.fontFamilies.latoRegular,
+		fontSize: Fonts.sizes.small
 	} as TextStyle,
 	menuItemContainer: {
 		height: 56,
