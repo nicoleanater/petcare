@@ -9,6 +9,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useStore } from '../../store';
 import { usuarioActions } from '../../store/usuario';
 import { ImageGradientPicker } from '../ImageGradientPicker/ImageGradientPicker'
+import { getTipoUsuario } from '../../utils/EnumToString';
 
 const MenuDrawerContent: FunctionComponent<any> = (props) => {
 	const [{ usuario }, dispatch] = useStore();
@@ -31,7 +32,7 @@ const MenuDrawerContent: FunctionComponent<any> = (props) => {
 							style={styles.smallMarginBottom}
 						/>
 						<Text style={styles.nameTextStyle}>{usuario.nome}</Text>
-						<Text style={styles.userTypeTextStyle}>{usuario.nome}</Text>
+						<Text style={styles.userTypeTextStyle}>{getTipoUsuario(usuario.tipo_usuario)}</Text>
 					</View>
 					<View>
 						<TouchableOpacity onPress={() => props.navigation.navigate('AuthStack', { screen: 'Perfil' })} style={styles.menuItemContainer}>
