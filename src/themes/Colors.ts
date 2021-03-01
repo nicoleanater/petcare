@@ -11,6 +11,7 @@ export default {
 	gradientPink: "#FF738C",
 	gradientPeach: "#FFD397",
 	watermelonDark: "#EE5F78",
+	redOne: "#FC6767",
 	errorRed: "#E03434",
 	paleOyster: "#96897B",
 	statusPurple: "#BA76E4",

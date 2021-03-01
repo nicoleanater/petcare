@@ -1,10 +1,13 @@
-import { ViewStyle, TextStyle, StyleProp, ImageStyle } from 'react-native';
-import { Colors, ApplicationStyles, Fonts } from '../../themes';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import { TextStyle } from 'react-native';
+import { ApplicationStyles, Colors, Fonts } from '../../themes';
 
 export default {
 	...ApplicationStyles,
 	iconStyle: {
 		color: Colors.errorRed
-	}
+	} as TextStyle,
+	ratingsText: {
+		fontFamily: Fonts.fontFamilies.latoRegular,
+		fontSize: Fonts.sizes.xSmall
+	} as TextStyle
 };
