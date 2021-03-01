@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
-import React, { useEffect, FunctionComponent, useState, useLayoutEffect } from 'react';
-import { Text, View } from 'react-native';
+import React, { FunctionComponent, useEffect, useLayoutEffect, useState } from 'react';
+import { View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader';
-import { CustomPicker, transformArrayIntoPickerOptions, Option } from '../../components/CustomPicker/CustomPicker';
+import { CardPetSitter } from '../../components/CardPetsitter/CardPetsitter';
+import { CustomPicker, Option, transformArrayIntoPickerOptions } from '../../components/CustomPicker/CustomPicker';
 import { useForm } from '../../hooks';
 import { Cidade } from '../../models/Cidade';
 import { Estado } from '../../models/Estado';
@@ -96,6 +97,7 @@ export const PesquisarScreen: FunctionComponent<IProps> = () => {
 					mainContainerStyle={{flex: 3}}
 				/>
 			</View>
+			<CardPetSitter />
 		</ScrollView>
 	);
 };
