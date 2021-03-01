@@ -1,6 +1,6 @@
-import { Colors } from "react-native/Libraries/NewAppScreen";
 import { CompromissoStatus } from "../models/Compromisso";
 import { TipoUsuario } from "../models/Usuario";
+import { Colors } from "../themes";
 
 export const getCompromissoStatus = (status: CompromissoStatus) => {
 	switch (status) {
