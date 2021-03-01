@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import _ from 'lodash';
 import React, { FunctionComponent, MutableRefObject, useRef } from 'react';
-import { Image, Keyboard, KeyboardAvoidingView, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { Alert, Image, Keyboard, KeyboardAvoidingView, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import FloatingLabelInput, { IRefFloatingLabel } from '../../components/FloatingLabelInput/FloatingLabelInput';
 import { useForm } from '../../hooks';
@@ -78,9 +78,17 @@ export const LoginScreen: FunctionComponent<IProps> = () => {
 			try {
 				const res = await login(formValues);
 				dispatch(usuarioActions.setUsuario(res.data));
-				// navigation.navigate('');
+				navigation.navigate('AuthStack');
 			} catch (error) {
-				console.error({error});
+				Alert.alert(
+					"Erro",
+					"Email e senha incorretos!",
+					[
+						{ text: "OK" }
+					],
+					{ cancelable: false }
+				);
+				console.log({error});
 			}
 		}
 	}
