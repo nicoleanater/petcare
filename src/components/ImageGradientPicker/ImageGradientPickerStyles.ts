@@ -29,8 +29,9 @@ export default {
 		resizeMode: 'cover'
 	} as ImageStyle,
 	viewPhotoSmall: {
-		width: 70,
-		height: 70,
+		borderRadius: 100,
+		width: 78,
+		height: 78,
 		resizeMode: 'cover'
 	} as ImageStyle,
 	iconContainer: {
