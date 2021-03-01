@@ -30,6 +30,7 @@ const MenuDrawerContent: FunctionComponent<any> = (props) => {
 						<ImageGradientPicker
 							image={usuario.foto}
 							style={styles.smallMarginBottom}
+							noBorder
 						/>
 						<Text style={styles.nameTextStyle}>{usuario.nome}</Text>
 						<Text style={styles.userTypeTextStyle}>{getTipoUsuario(usuario.tipo_usuario)}</Text>

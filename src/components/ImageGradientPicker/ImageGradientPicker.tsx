@@ -12,10 +12,11 @@ interface IProps {
 	image: string | ImageSourcePropType;
 	pickerCallback?: (response) => void;
 	small?: boolean;
+	noBorder?: boolean;
 	style?: ViewStyle | ViewStyle[];
 }
 
-export const ImageGradientPicker: FunctionComponent<IProps> = ({ isPicker, image, pickerCallback, small, style }) => {
+export const ImageGradientPicker: FunctionComponent<IProps> = ({ isPicker, image, pickerCallback, small, style, noBorder }) => {
 
 		const openGalery = () => {
 			ImagePicker.launchImageLibrary({
@@ -43,20 +44,20 @@ export const ImageGradientPicker: FunctionComponent<IProps> = ({ isPicker, image
 		const renderImageViewer = () => {
 			if (image == null) {
 				return (
-					<View style={small ? [styles.iconContainerSmall, styles.noBorderImageSmall] : [styles.iconContainer, styles.noBorderImage] }>
+					<View style={small ? [styles.iconContainerSmall, noBorder && styles.noBorderImageSmall] : [styles.iconContainer, noBorder && styles.noBorderImage] }>
 						<Icon name={'insert-photo'} style={styles.photoIcon} size={42}/>
 					</View>
 				);
 			}
 			if (typeof image == 'number') {
 				return (
-					<View style={small ? styles.iconContainerSmall : styles.iconContainer}>
+					<View style={small ? [styles.iconContainerSmall, noBorder && styles.noBorderImageSmall] : [styles.iconContainer, noBorder && styles.noBorderImage]}>
 						<Image style={[small ? styles.viewIconSmall : styles.viewIcon]} source={image as ImageSourcePropType} />
 					</View>
 				);
 			} else if (typeof image == 'string') {
 				return (
-					<Image style={[small ? styles.viewPhotoSmall : styles.viewPhoto]} source={{uri: `data:image/jpeg;base64,${image}`}} />
+					<Image style={[small ? [styles.viewPhotoSmall, noBorder && styles.noBorderImageSmall] : [styles.viewPhoto, noBorder && styles.noBorderImage]]} source={{uri: `data:image/jpeg;base64,${image}`}} />
 				);
 			}
 		}
