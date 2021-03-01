@@ -11,5 +11,15 @@ export default {
 		fontFamily: Fonts.fontFamilies.latoRegular,
 		fontSize: Fonts.sizes.regular,
 		color: Colors.grayOne
+	} as TextStyle,
+	priceText: {
+		fontFamily: Fonts.fontFamilies.latoBlack,
+		fontSize: Fonts.sizes.regular,
+		color: Colors.blackThree
+	} as TextStyle,
+	unitText: {
+		fontFamily: Fonts.fontFamilies.latoLight,
+		fontSize: Fonts.sizes.small,
+		color: Colors.blackThree
 	} as TextStyle
 }

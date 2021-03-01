@@ -3,6 +3,7 @@ export default {
 	black: "#000000",
 	blackOne: "#26332E",
 	blackTwo: "#0E0E0E",
+	blackThree: "#474747",
 	gray: "#F2F2F2",
 	grayOne: "#6B6B6B",
 	grayTwo: "#A9A9A9",

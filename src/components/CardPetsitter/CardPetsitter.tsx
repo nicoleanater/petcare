@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { MaskService } from 'react-native-masked-text';
 import { Usuario } from '../../models/Usuario';
 import { ImageGradientPicker } from '../ImageGradientPicker/ImageGradientPicker';
+import { RatingStars } from '../RatingStars/RatingStars';
 import styles from './CardPetsitterStyles';
 interface IProps {
 	usuario: Usuario;
@@ -41,18 +43,28 @@ export const CardPetSitter: FunctionComponent<IProps> = ({ usuario }) => {
 		//todo
 	}
 
+	const renderPrice = () => {
+		return MaskService.toMask('money', usuario.preco.toFixed(2), { unit: 'R$ '});
+	}
+
 	return (
 		<TouchableOpacity onPress={openPetsitterDetails} style={styles.cardContainer}>
 			<ImageGradientPicker
 				image={usuario.foto}
 				small
 			/>
-			<View style={styles.textInfoContainer}>
-				<Text style={[styles.text.cardTitle, styles.xSmallMarginBottom]}>{usuario.nome}</Text>
-				<Text style={[styles.text.cardContent, styles.xSmallMarginBottom]}>{`${usuario.endereco.cidade.descricao} - ${usuario.endereco.cidade.estado.sigla}`}</Text>
-				<Text style={[styles.text.cardContent, styles.xSmallMarginBottom]}>{usuario.endereco.bairro}</Text>
+			<View style={styles.rightContainer}>
+				<View style={styles.textInfoContainer}>
+					<Text style={[styles.text.cardTitle, styles.xSmallMarginBottom]}>{usuario.nome}</Text>
+					<Text style={[styles.text.cardContent, styles.xSmallMarginBottom]}>{`${usuario.endereco.cidade.descricao} - ${usuario.endereco.cidade.estado.sigla}`}</Text>
+					<Text style={[styles.text.cardContent, styles.xSmallMarginBottom]}>{usuario.endereco.bairro}</Text>
+				</View>
+				<RatingStars rating={3.5} amount={5} size={'small'}/>
 			</View>
-			<View></View>
+			<View style={styles.priceContainer}>
+				<Text style={styles.text.priceText}>{renderPrice()}</Text>
+				<Text style={[styles.text.unitText, styles.xSmallMarginLeft]}>/ hora</Text>
+			</View>
 		</TouchableOpacity>
 	);
 };
