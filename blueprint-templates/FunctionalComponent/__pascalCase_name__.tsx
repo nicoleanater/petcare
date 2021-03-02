@@ -2,20 +2,20 @@ import React, { useEffect, FunctionComponent } from 'react';
 import { Text, View } from 'react-native';
 import styles from './{{pascalCase name}}Styles';
 interface IProps {
-    // Props type definition
+	// Props type definition
 }
 
 interface IState {
-    // State type definition
+	// State type definition
 }
 
 export const {{ pascalCase name }}: FunctionComponent<IProps> = (props) => {
-    const initialState: IState = {
-    };
+	const initialState: IState = {
+	};
 
-    return (
-        <View>
-					<Text>{{pascalCase name}}</Text>
-        </View>
-    );
+	return (
+		<View>
+			<Text>{{ pascalCase name }}</Text>
+		</View>
+	);
 };
