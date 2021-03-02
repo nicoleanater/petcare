@@ -6,6 +6,7 @@ import { AuthHeader } from '../../components/AuthHeader/AuthHeader';
 import { CardDatesInterval } from '../../components/CardDatesInterval/CardDatesInterval';
 import { CardEndereco } from '../../components/CardEndereco/CardEndereco';
 import { CardUsuario } from '../../components/CardUsuario/CardUsuario';
+import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { StatusBadge } from '../../components/StatusBadge/StatusBadge';
 import { Compromisso, CompromissoStatus } from '../../models/Compromisso';
 import { TipoUsuario } from '../../models/Usuario';
@@ -30,7 +31,7 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
     const navigation = useNavigation();
 		const [{ usuario: { tipo_usuario } }] = useStore();
 		// const id = props.route.params?.id;
-		const id = 13;
+		const id = 16;
 
 		const initialState: IState = {
 			compromisso: null
@@ -80,6 +81,38 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
 			}
 		}
 
+		const onActionButtonPressed = (action: string) => {
+
+		}
+
+		const renderActionButtons = () => {
+			switch (compromisso.status) {
+				case CompromissoStatus.SOLICITACAO:
+					return (
+						<View style={styles.twoButtonsContainer}>
+							<RoundedButton label={'Recusar'} onPress={() => onActionButtonPressed('decline')} theme={'secondary'} style={styles.buttonStyle} />
+							<RoundedButton label={'Aceitar'} onPress={() => onActionButtonPressed('accept')} style={styles.buttonStyle} />
+						</View>
+					);
+				case CompromissoStatus.AGENDADO:
+					return (
+						<RoundedButton label={'Iniciar'} onPress={() => onActionButtonPressed('start')} style={styles.buttonStyle} />
+					);
+				case CompromissoStatus.EM_ANDAMENTO:
+					return (
+						<RoundedButton label={'Finalizar'} onPress={() => onActionButtonPressed('finish')} style={styles.buttonStyle} />
+					);
+				case CompromissoStatus.RECUSADO: return null;
+				case CompromissoStatus.FINALIZADO:
+					const avaliacao = tipo_usuario === TipoUsuario.PET_SITTER ? compromisso.avaliacao_petsitter : compromisso.avaliacao_dono_de_animal;
+					let label = avaliacao != null ? 'Ver Avaliação' : 'Avaliar';
+					return (
+						<RoundedButton label={label} onPress={() => onActionButtonPressed('review')} style={styles.buttonStyle} />
+					);
+
+			}
+		}
+
     return (
         <View style={styles.mainContainer}>
 					<StatusBadge status={compromisso.status}/>
@@ -90,6 +123,7 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
 					{renderDateInfo()}
 					<Text style={styles.cardTitleStyles}>Endereço</Text>
 					<CardEndereco endereco={compromisso.dono_de_animal.endereco}/>
+					{renderActionButtons()}
         </View>
     );
 };

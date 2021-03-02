@@ -1,6 +1,5 @@
-import { ViewStyle, TextStyle, StyleProp, ImageStyle } from 'react-native';
-import { Colors, ApplicationStyles, Fonts } from '../../themes';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import { TextStyle, ViewStyle } from 'react-native';
+import { ApplicationStyles } from '../../themes';
 
 export default {
 	...ApplicationStyles,
@@ -12,5 +11,14 @@ export default {
 		...ApplicationStyles.text.latoTitle,
 		...ApplicationStyles.smallMarginBottom,
 		marginTop: 10
-	} as TextStyle
+	} as TextStyle,
+	twoButtonsContainer: {
+		flexDirection: 'row',
+	} as ViewStyle,
+	buttonStyle: {
+		marginHorizontal: 10,
+		marginBottom: 10,
+		alignSelf: 'center'
+	} as ViewStyle
+
 };

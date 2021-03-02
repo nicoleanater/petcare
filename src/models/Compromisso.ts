@@ -1,5 +1,6 @@
 import { Moment } from "moment";
 import { Usuario } from "./Usuario";
+import { Avaliacao } from "./Avaliacao";
 
 export enum CompromissoStatus {
   SOLICITACAO = 'SOLICITACAO',
@@ -17,4 +18,6 @@ export interface Compromisso {
 	status: CompromissoStatus;
 	petsitter?: Usuario;
 	dono_de_animal?: Usuario;
+	avaliacao_petsitter: Avaliacao;
+	avaliacao_dono_de_animal: Avaliacao;
 };
