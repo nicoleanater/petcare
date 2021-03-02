@@ -10,7 +10,7 @@ import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { StatusBadge } from '../../components/StatusBadge/StatusBadge';
 import { Compromisso, CompromissoStatus } from '../../models/Compromisso';
 import { TipoUsuario } from '../../models/Usuario';
-import { buscaDetalhesCompromisso } from '../../services/compromisso';
+import { aceitarSolicitacaoCompromisso, buscaDetalhesCompromisso, finalizarCompromisso, iniciarCompromisso, recusarSolicitacaoCompromisso } from '../../services/compromisso';
 import { useStore } from '../../store';
 import { getTipoUsuario } from '../../utils/StringUtils';
 import styles from './DetalhesCompromissoScreenStyles';
@@ -46,12 +46,12 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
 		}, [navigation]);
 
 		useEffect(() => {
-			buscarCompromisso(id);
+			buscarCompromisso();
 		}, []);
 
-		const buscarCompromisso = async (idCompromisso) => {
+		const buscarCompromisso = async () => {
 			try {
-				const res = await buscaDetalhesCompromisso(idCompromisso);
+				const res = await buscaDetalhesCompromisso(id);
 				setCompromisso(res.data);
 			} catch (error) {
 				console.error({error});
@@ -81,8 +81,33 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
 			}
 		}
 
-		const onActionButtonPressed = (action: string) => {
-
+		const onActionButtonPressed = async (action: string) => {
+			try {
+				let res;
+				switch (action) {
+					case 'decline':
+						res = await recusarSolicitacaoCompromisso(id);
+						setCompromisso(res.data);
+					break;
+					case 'accept':
+						res = await aceitarSolicitacaoCompromisso(id);
+						setCompromisso(res.data);
+					break;
+					case 'start':
+						res = await iniciarCompromisso(id);
+						setCompromisso(res.data);
+					break;
+					case 'finish':
+						res = await finalizarCompromisso(id);
+						setCompromisso(res.data);
+					break;
+					case 'review':
+						// navegar avaliação
+					break;
+				}
+			} catch (error) {
+				console.error({error});
+			}
 		}
 
 		const renderActionButtons = () => {
