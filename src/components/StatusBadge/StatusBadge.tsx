@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Text, View } from 'react-native';
 import { CompromissoStatus } from '../../models/Compromisso';
-import { getCompromissoStatus, getStatusColor } from '../../utils/EnumToString';
+import { getCompromissoStatus, getStatusColor } from '../../utils/StringUtils';
 import styles from './StatusBadgeStyles';
 
 interface IProps {

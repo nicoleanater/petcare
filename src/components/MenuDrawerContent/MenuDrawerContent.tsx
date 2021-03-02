@@ -9,7 +9,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useStore } from '../../store';
 import { usuarioActions } from '../../store/usuario';
 import { ImageGradientPicker } from '../ImageGradientPicker/ImageGradientPicker'
-import { getTipoUsuario } from '../../utils/EnumToString';
+import { getTipoUsuario } from '../../utils/StringUtils';
 import { TipoUsuario } from '../../models/Usuario';
 
 const MenuDrawerContent: FunctionComponent<any> = (props) => {
