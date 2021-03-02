@@ -7,15 +7,14 @@ export default {
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		alignSelf: 'flex-start',
+		alignSelf: 'flex-end',
 		height: 52,
 		borderRadius: 71,
 		backgroundColor: Colors.white,
 		elevation: 2
 	} as ViewStyle,
 	statusText: {
-		fontFamily: Fonts.fontFamilies.latoBold,
-		fontSize: Fonts.sizes.bigger,
+		...ApplicationStyles.text.latoTitle,
 		color: Colors.grayOne,
 		paddingLeft: 25,
 		paddingRight: 10

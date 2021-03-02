@@ -21,5 +21,10 @@ export default {
 		fontFamily: Fonts.fontFamilies.latoLight,
 		fontSize: Fonts.sizes.small,
 		color: Colors.blackThree
-	} as TextStyle
+	} as TextStyle,
+	latoTitle: {
+		fontFamily: Fonts.fontFamilies.latoBold,
+		fontSize: Fonts.sizes.bigger,
+		color: Colors.blackThree
+	}
 }
