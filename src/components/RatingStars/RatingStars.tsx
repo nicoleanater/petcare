@@ -39,9 +39,11 @@ export const RatingStars: FunctionComponent<IProps> = ({ rating, size, amount })
 			<View style={[styles.row]}>
 				{ratingStarts(rating)}
 			</View>
-			{amount && <Text style={styles.ratingsText}>
-				{renderPlural()}
-			</Text>}
+			{amount != null &&
+				<Text style={styles.ratingsText}>
+					{renderPlural()}
+				</Text>
+			}
 		</View>
 	);
 };
