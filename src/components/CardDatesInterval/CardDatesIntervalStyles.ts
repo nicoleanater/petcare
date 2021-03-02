@@ -9,6 +9,7 @@ export default {
 		borderRadius: 20,
 		paddingVertical: 15,
 		paddingHorizontal: 20,
+		marginBottom: 15,
 		elevation: 2,
 		flexDirection: 'row',
 		alignItems: 'center',
@@ -25,10 +26,5 @@ export default {
 	iconStyle: {
 		color: Colors.blueOne,
 		marginRight: 15
-	} as TextStyle,
-	dateText: {
-		fontFamily: Fonts.fontFamilies.latoRegular,
-		fontSize: Fonts.sizes.bigger,
-		color: Colors.grayOne
 	} as TextStyle
 };

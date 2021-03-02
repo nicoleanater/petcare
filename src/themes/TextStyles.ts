@@ -26,5 +26,10 @@ export default {
 		fontFamily: Fonts.fontFamilies.latoBold,
 		fontSize: Fonts.sizes.bigger,
 		color: Colors.blackThree
-	}
+	},
+	cardRegularText: {
+		fontFamily: Fonts.fontFamilies.latoRegular,
+		fontSize: Fonts.sizes.bigger,
+		color: Colors.grayOne
+	} as TextStyle
 }

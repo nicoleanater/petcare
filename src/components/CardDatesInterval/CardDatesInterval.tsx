@@ -17,7 +17,7 @@ export const CardDatesInterval: FunctionComponent<IProps> = ({ dateStart, dateEn
 					<Text style={[styles.text.latoTitle, styles.xSmallMarginBottom]}>Início</Text>
 					<View style={styles.verticalCenterAlignedRow}>
 						<Icon name={'access-time'} style={styles.iconStyle} size={20}/>
-						<Text style={styles.dateText}>{moment(dateStart, 'YYYY-MM-DD').format('DD/MM/YY')}</Text>
+						<Text style={styles.text.cardRegularText}>{moment(dateStart, 'YYYY-MM-DD').format('DD/MM/YY')}</Text>
 					</View>
 				</View>
 			</View>
@@ -26,7 +26,7 @@ export const CardDatesInterval: FunctionComponent<IProps> = ({ dateStart, dateEn
 					<Text style={[styles.text.latoTitle, styles.xSmallMarginBottom]}>Fim</Text>
 					<View style={styles.verticalCenterAlignedRow}>
 						<Icon name={'access-time'} style={styles.iconStyle} size={20}/>
-						<Text style={styles.dateText}>{moment(dateEnd, 'YYYY-MM-DD').format('DD/MM/YY')}</Text>
+						<Text style={styles.text.cardRegularText}>{moment(dateEnd, 'YYYY-MM-DD').format('DD/MM/YY')}</Text>
 					</View>
 				</View>
 			</View>
