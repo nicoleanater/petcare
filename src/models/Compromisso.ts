@@ -10,6 +10,7 @@ export enum CompromissoStatus {
 }
 
 export interface Compromisso {
+	id?: number;
 	usuario: Usuario;
 	data_inicio: string;
 	data_fim: string,

@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import MenuDrawerContent from "../../components/MenuDrawerContent/MenuDrawerContent";
 import CompromissosScreen from '../../containers/CompromissosScreen/CompromissosScreen';
+import { DetalhesCompromissoScreen } from "../../containers/DetalhesCompromissoScreen/DetalhesCompromissoScreen";
 import HomeScreen from '../../containers/HomeScreen/HomeScreen';
 import { PesquisarScreen } from "../../containers/PesquisarScreen/PesquisarScreen";
 
@@ -11,8 +12,8 @@ const Drawer = createDrawerNavigator();
 
 const DrawerStack = () => {
 	return (
-		<Stack.Navigator initialRouteName="Compromissos">
-			<Stack.Screen name="Compromissos" component={CompromissosScreen} />
+		<Stack.Navigator initialRouteName="Compromissos" screenOptions={{ headerShown: false }}>
+			<Stack.Screen name="Compromissos" component={CompromissosStack} />
       <Stack.Screen name="Pesquisar" component={PesquisarScreen} />
       <Stack.Screen name="Feed" component={HomeScreen} />
 		</Stack.Navigator>
@@ -25,6 +26,15 @@ function AuthStack() {
 			<Drawer.Screen name="DrawerStackNavigator" component={DrawerStack} />
 		</Drawer.Navigator>
 	);
+}
+
+function CompromissosStack() {
+	return (
+		<Stack.Navigator initialRouteName="Compromissos">
+			<Stack.Screen name="Compromissos" component={CompromissosScreen} />
+			<Stack.Screen name="DetalhesCompromisso" component={DetalhesCompromissoScreen} />
+		</Stack.Navigator>
+	)
 }
 
 export default AuthStack;

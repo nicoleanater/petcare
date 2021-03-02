@@ -9,6 +9,7 @@ import { TipoUsuario } from '../../models/Usuario';
 import styles from './CardCompromissoStyles';
 import { MaskService } from 'react-native-masked-text';
 import { getStatusColor, getCompromissoStatus } from '../../utils/EnumToString';
+import { useNavigation } from '@react-navigation/native';
 
 interface IProps {
 	compromisso: Compromisso;
@@ -16,9 +17,10 @@ interface IProps {
 
 export const CardCompromisso: FunctionComponent<IProps> = ({ compromisso }) => {
 	const { tipo_usuario } = compromisso.usuario;
+	const navigation = useNavigation();
 
 	const openCompromissoDetails = () => {
-		// to do
+		navigation.navigate('DetalhesCompromisso', {id: compromisso.id});
 	}
 
 	const renderDateInterval = () => `${moment(compromisso.data_inicio, 'YYYY-MM-DD').format('DD/MM/YY')} - ${moment(compromisso.data_fim, 'YYYY-MM-DD').format('DD/MM/YY')}`;
