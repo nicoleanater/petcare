@@ -43,11 +43,11 @@ const MenuDrawerContent: FunctionComponent<any> = (props) => {
 						<TouchableOpacity onPress={() => props.navigation.navigate('Compromissos')} style={styles.menuItemContainer}>
 							<Text style={styles.menuLabelStyle}>Compromissos</Text>
 						</TouchableOpacity>
-						{/* <TouchableOpacity onPress={() => props.navigation.navigate('Mensagens')} style={styles.menuItemContainer}>
+						{/* <TouchableOpacity onPress={() => props.navigation.navigate('Mensagens')} style={[styles.menuItemContainer, usuario.tipo_usuario === TipoUsuario.PET_SITTER && styles.lastMenuItem]}>
 							<Text style={styles.menuLabelStyle}>Mensagens</Text>
 						</TouchableOpacity> */}
 						{usuario.tipo_usuario === TipoUsuario.DONO_DE_ANIMAL &&
-							<TouchableOpacity onPress={() => props.navigation.navigate('Pesquisar')} style={[styles.menuItemContainer,  styles.lastMenuItem]}>
+							<TouchableOpacity onPress={() => props.navigation.navigate('Pesquisar')} style={[styles.menuItemContainer, styles.lastMenuItem]}>
 								<Text style={styles.menuLabelStyle}>Pesquisar</Text>
 							</TouchableOpacity>
 						}
