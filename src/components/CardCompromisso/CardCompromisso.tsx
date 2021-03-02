@@ -1,15 +1,14 @@
+import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import React, { FunctionComponent } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { MaskService } from 'react-native-masked-text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Animal, TipoAnimal } from '../../models/Animal';
 import { Compromisso } from '../../models/Compromisso';
 import { TipoUsuario } from '../../models/Usuario';
+import { getCompromissoStatus, getStatusColor, renderAnimaisText } from '../../utils/StringUtils';
 import styles from './CardCompromissoStyles';
-import { MaskService } from 'react-native-masked-text';
-import { getStatusColor, getCompromissoStatus, renderAnimaisText } from '../../utils/StringUtils';
-import { useNavigation } from '@react-navigation/native';
 
 interface IProps {
 	compromisso: Compromisso;
