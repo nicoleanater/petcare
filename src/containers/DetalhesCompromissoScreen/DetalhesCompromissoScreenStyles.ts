@@ -7,5 +7,10 @@ export default {
 	mainContainer: {
 		paddingTop: 15,
 		paddingHorizontal: 20
-	} as ViewStyle
+	} as ViewStyle,
+	cardTitleStyles: {
+		...ApplicationStyles.text.latoTitle,
+		...ApplicationStyles.smallMarginBottom,
+		marginTop: 10
+	} as TextStyle
 };

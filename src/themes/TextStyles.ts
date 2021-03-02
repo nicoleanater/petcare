@@ -30,6 +30,7 @@ export default {
 	cardRegularText: {
 		fontFamily: Fonts.fontFamilies.latoRegular,
 		fontSize: Fonts.sizes.bigger,
-		color: Colors.grayOne
+		color: Colors.grayOne,
+		marginBottom: 3
 	} as TextStyle
 }

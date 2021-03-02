@@ -4,6 +4,7 @@ import React, { useEffect, FunctionComponent, useLayoutEffect, useState } from '
 import { ActivityIndicator, Text, View } from 'react-native';
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader';
 import { CardDatesInterval } from '../../components/CardDatesInterval/CardDatesInterval';
+import { CardEndereco } from '../../components/CardEndereco/CardEndereco';
 import { CardUsuario } from '../../components/CardUsuario/CardUsuario';
 import { StatusBadge } from '../../components/StatusBadge/StatusBadge';
 import { Compromisso, CompromissoStatus } from '../../models/Compromisso';
@@ -73,7 +74,7 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
 					</>);
 				default:
 					return (<>
-						<Text style={[styles.text.latoTitle, styles.smallMarginBottom, { marginTop: 10}]}>Data</Text>
+						<Text style={styles.cardTitleStyles}>Data</Text>
 						<CardDatesInterval dateStart={compromisso.data_inicio} dateEnd={compromisso.data_fim}/>
 					</>);
 			}
@@ -82,11 +83,13 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
     return (
         <View style={styles.mainContainer}>
 					<StatusBadge status={compromisso.status}/>
-					<Text style={[styles.text.latoTitle, styles.smallMarginBottom, { marginTop: 10}]}>
+					<Text style={styles.cardTitleStyles}>
 						{tipo_usuario === TipoUsuario.PET_SITTER ? getTipoUsuario(TipoUsuario.DONO_DE_ANIMAL) : getTipoUsuario(TipoUsuario.PET_SITTER) }
 					</Text>
 					<CardUsuario usuario={tipo_usuario === TipoUsuario.PET_SITTER ? compromisso.dono_de_animal : compromisso.petsitter}/>
 					{renderDateInfo()}
+					<Text style={styles.cardTitleStyles}>Endereço</Text>
+					<CardEndereco endereco={compromisso.dono_de_animal.endereco}/>
         </View>
     );
 };
