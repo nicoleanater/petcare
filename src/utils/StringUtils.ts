@@ -1,3 +1,4 @@
+import { Animal, TipoAnimal } from "../models/Animal";
 import { CompromissoStatus } from "../models/Compromisso";
 import { TipoUsuario } from "../models/Usuario";
 import { Colors } from "../themes";
@@ -27,4 +28,24 @@ export const getTipoUsuario = (tipo: TipoUsuario) => {
 		case TipoUsuario.PET_SITTER: return 'Pet Sitter';
 		case TipoUsuario.DONO_DE_ANIMAL: return 'Dono de Animal';
 	}
+}
+
+export const renderAnimaisText = (animais: Array<Animal>) => {
+	const gatos: Array<Animal> = animais.filter((animal: Animal) => animal.tipo_animal === TipoAnimal.GATO);
+	const cachorros: Array<Animal> = animais.filter((animal: Animal) => animal.tipo_animal === TipoAnimal.CACHORRO);
+
+	if (gatos.length > 0 && cachorros.length > 0) {
+		return `${gatos.length} ${renderPluralAnimais(gatos.length, 'gato')} e ${cachorros.length} ${renderPluralAnimais(cachorros.length, 'cachorro')}`
+	}
+	if (gatos.length > 0) {
+		return `${gatos.length} ${renderPluralAnimais(gatos.length, 'gato')}`
+	}
+	if (cachorros.length > 0) {
+		return `${cachorros.length} ${renderPluralAnimais(cachorros.length, 'cachorro')}`
+	}
+}
+
+export const renderPluralAnimais = (length: number, word: string) => {
+	if (length > 1) return `${word}s`
+	if (length === 1) return `${word}`
 }

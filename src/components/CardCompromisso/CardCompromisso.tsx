@@ -8,7 +8,7 @@ import { Compromisso } from '../../models/Compromisso';
 import { TipoUsuario } from '../../models/Usuario';
 import styles from './CardCompromissoStyles';
 import { MaskService } from 'react-native-masked-text';
-import { getStatusColor, getCompromissoStatus } from '../../utils/EnumToString';
+import { getStatusColor, getCompromissoStatus, renderAnimaisText } from '../../utils/StringUtils';
 import { useNavigation } from '@react-navigation/native';
 
 interface IProps {
@@ -25,26 +25,6 @@ export const CardCompromisso: FunctionComponent<IProps> = ({ compromisso }) => {
 
 	const renderDateInterval = () => `${moment(compromisso.data_inicio, 'YYYY-MM-DD').format('DD/MM/YY')} - ${moment(compromisso.data_fim, 'YYYY-MM-DD').format('DD/MM/YY')}`;
 
-	const renderAnimais = () => {
-		const gatos: Array<Animal> = compromisso.usuario.animais.filter((animal: Animal) => animal.tipo_animal === TipoAnimal.GATO);
-		const cachorros: Array<Animal> = compromisso.usuario.animais.filter((animal: Animal) => animal.tipo_animal === TipoAnimal.CACHORRO);
-
-		if (gatos.length > 0 && cachorros.length > 0) {
-			return `${gatos.length} ${renderPlural(gatos.length, 'gato')} e ${cachorros.length} ${renderPlural(cachorros.length, 'cachorro')}`
-		}
-		if (gatos.length > 0) {
-			return `${gatos.length} ${renderPlural(gatos.length, 'gato')}`
-		}
-		if (cachorros.length > 0) {
-			return `${cachorros.length} ${renderPlural(cachorros.length, 'cachorro')}`
-		}
-	}
-
-	const renderPlural = (length: number, word: string) => {
-		if (length > 1) return `${word}s`
-		if (length === 1) return `${word}`
-	}
-
 	const renderPreco = () => `${MaskService.toMask('money', compromisso.usuario.preco.toFixed(2), { unit: 'R$ '})} / hora`;
 
 	return (
@@ -59,7 +39,7 @@ export const CardCompromisso: FunctionComponent<IProps> = ({ compromisso }) => {
 					{ tipo_usuario === TipoUsuario.DONO_DE_ANIMAL &&
 						<View style={styles.row}>
 							<Icon name={'pets'} style={styles.iconStyle} size={14}/>
-							<Text style={[styles.text.cardContent, styles.xSmallMarginBottom]}>{renderAnimais()}</Text>
+							<Text style={[styles.text.cardContent, styles.xSmallMarginBottom]}>{renderAnimaisText(compromisso.usuario.animais)}</Text>
 						</View>
 					}
 					{ tipo_usuario === TipoUsuario.PET_SITTER &&
