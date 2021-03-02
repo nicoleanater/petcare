@@ -8,8 +8,6 @@ interface IProps {
 }
 
 export const CardEndereco: FunctionComponent<IProps> = ({ endereco }) => {
-	console.log({endereco});
-
 	return (
 		<View style={styles.cardContainer}>
 			<View style={styles.row}>
