@@ -12,8 +12,8 @@ const Drawer = createDrawerNavigator();
 
 const DrawerStack = () => {
 	return (
-		<Stack.Navigator initialRouteName="Compromissos" screenOptions={{ headerShown: false }}>
-			<Stack.Screen name="Compromissos" component={CompromissosStack} />
+		<Stack.Navigator initialRouteName="Compromissos">
+			<Stack.Screen name="Compromissos" component={CompromissosStack} options={{ headerShown: false }}/>
       <Stack.Screen name="Pesquisar" component={PesquisarScreen} />
       <Stack.Screen name="Feed" component={HomeScreen} />
 		</Stack.Navigator>
