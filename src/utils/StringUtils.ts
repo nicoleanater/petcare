@@ -15,8 +15,8 @@ export const getCompromissoStatus = (status: CompromissoStatus) => {
 
 export const getStatusColor = (status: CompromissoStatus, theme: 'solid' | 'transparent') => {
 	switch (status) {
-		case CompromissoStatus.SOLICITACAO: return theme === 'solid' ? Colors.statusPurple : Colors.statusPurpleLight;
-		case CompromissoStatus.AGENDADO: return theme === 'solid' ? Colors.statusBlue : Colors.statusBlueLight;
+		case CompromissoStatus.SOLICITACAO: return theme === 'solid' ? Colors.statusBlue : Colors.statusBlueLight;
+		case CompromissoStatus.AGENDADO: return theme === 'solid' ? Colors.statusPurple : Colors.statusPurpleLight;
 		case CompromissoStatus.EM_ANDAMENTO: return theme === 'solid' ? Colors.statusYellow : Colors.statusYellowLight;
 		case CompromissoStatus.RECUSADO: return theme === 'solid' ? Colors.statusGray : Colors.statusGrayLight;
 		case CompromissoStatus.FINALIZADO: return theme === 'solid' ? Colors.statusGreen : Colors.statusGreenLight;
