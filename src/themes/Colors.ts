@@ -15,6 +15,7 @@ export default {
 	redOne: "#FC6767",
 	errorRed: "#E03434",
 	paleOyster: "#96897B",
+	blueOne: "#2F80ED",
 	statusPurple: "#BA76E4",
 	statusPurpleLight: "rgba(186, 118, 228, 0.4)",
 	statusBlue: "#88CFDF",
