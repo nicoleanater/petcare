@@ -5,12 +5,12 @@ import { MaskService } from 'react-native-masked-text';
 import { Usuario } from '../../models/Usuario';
 import { ImageGradientPicker } from '../ImageGradientPicker/ImageGradientPicker';
 import { RatingStars } from '../RatingStars/RatingStars';
-import styles from './CardPetsitterStyles';
+import styles from './CardUsuarioStyles';
 interface IProps {
 	usuario: Usuario;
 }
 
-export const CardPetSitter: FunctionComponent<IProps> = ({ usuario }) => {
+export const CardUsuario: FunctionComponent<IProps> = ({ usuario }) => {
 
 	const openPetsitterDetails = () => {
 		//todo
