@@ -14,5 +14,7 @@ export interface Compromisso {
 	usuario: Usuario;
 	data_inicio: string;
 	data_fim: string,
-	status: CompromissoStatus
+	status: CompromissoStatus;
+	petsitter?: Usuario;
+	dono_de_animal?: Usuario;
 };
