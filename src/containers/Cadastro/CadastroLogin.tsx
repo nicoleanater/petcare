@@ -99,8 +99,8 @@ export const CadastroLogin: FunctionComponent<IProps> = () => {
 				senha: formValues.senha,
 				endereco: {
 					...usuario.endereco,
-					uf: usuario.endereco.cidade.estado.id,
-					cidade:  usuario.endereco.cidade.id
+					uf: usuario.endereco.cidade.estado,
+					cidade:  usuario.endereco.cidade
 				}
 			}
 			delete newUsuario.id;
@@ -109,7 +109,7 @@ export const CadastroLogin: FunctionComponent<IProps> = () => {
 			try {
 				await salvarUsuario(newUsuario);
 				dispatch(usuarioActions.resetToInitialState());
-				
+
 				Alert.alert(
 					"Sucesso",
 					"Seu usuário foi criado com sucesso!",
