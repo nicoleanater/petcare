@@ -25,6 +25,6 @@ export const getStatusColor = (status: CompromissoStatus, theme: 'solid' | 'tran
 export const getTipoUsuario = (tipo: TipoUsuario) => {
 	switch (tipo) {
 		case TipoUsuario.PET_SITTER: return 'Pet Sitter';
-		case TipoUsuario.DONO_DE_ANIMAL: return 'Solicitação';
+		case TipoUsuario.DONO_DE_ANIMAL: return 'Dono de Animal';
 	}
 }
