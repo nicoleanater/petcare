@@ -2,19 +2,30 @@ import React, { FunctionComponent, ReactNode } from 'react';
 import { Text, View } from 'react-native';
 import styles from './RatingStarsStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface IProps {
 	rating: number;
-	size: 'small' | 'big';
+	size: 'small' | 'medium' | 'big';
 	amount?: number;
+	touchable?: boolean;
+	onStarPressed?: (rating: number) => void;
 }
 
-export const RatingStars: FunctionComponent<IProps> = ({ rating, size, amount }) => {
+export const RatingStars: FunctionComponent<IProps> = ({ rating, size, amount, touchable, onStarPressed }) => {
 
 	const ratingStarts = (rating: number) => {
-		const iconSize = size === 'small' ? 19 : 24;
+		let iconSize;
+		switch (size) {
+			case 'small': iconSize = 19; break;
+			case 'medium': iconSize = 24; break;
+			case 'big': iconSize = 38; break;
+		}
+
 		const stars: ReactNode[] = [];
+
 		for (let i = 0; i < 5; i++) {
+
 			if (rating >= i + 1) {
 				stars.push(<Icon name={'star'} style={styles.iconStyle} size={iconSize} key={i} />);
 			} else if (rating >= i + 0.5) {
@@ -23,6 +34,15 @@ export const RatingStars: FunctionComponent<IProps> = ({ rating, size, amount })
 				stars.push(<Icon name={'star-o'} style={styles.iconStyle} size={iconSize} key={i} />);
 			}
 		}
+
+		if (touchable) {
+			return stars.map(((item, i) => (
+				<TouchableOpacity style={styles.fullWidthContainer} onPress={() => onStarPressed(i+1)} key={i}>
+					{item}
+				</TouchableOpacity>
+			)));
+		}
+
 		return stars;
 	};
 
