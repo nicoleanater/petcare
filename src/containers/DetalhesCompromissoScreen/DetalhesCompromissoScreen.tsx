@@ -19,6 +19,7 @@ interface IProps {
 	route: {
 		params: {
 			id: number;
+			compromisso?: Compromisso;
 		}
 	}
 }
@@ -30,8 +31,8 @@ interface IState {
 export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
     const navigation = useNavigation();
 		const [{ usuario: { tipo_usuario } }] = useStore();
-		// const id = props.route.params?.id;
-		const id = 16;
+		const id = props.route.params?.id;
+		const compromissoParam = props.route.params?.compromisso;
 
 		const initialState: IState = {
 			compromisso: null
@@ -44,6 +45,13 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
 				header: (props: StackHeaderProps) => <AuthHeader {...props} title={"Compromissos"} theme={'light'} />,
 			});
 		}, [navigation]);
+
+		useEffect(() => {
+			if (compromissoParam != null) {
+				setCompromisso(compromissoParam);
+			}
+
+		}, [compromissoParam])
 
 		useEffect(() => {
 			buscarCompromisso();

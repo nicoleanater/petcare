@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import api from '.';
+import { Avaliacao } from '../models/Avaliacao';
 import { Compromisso } from '../models/Compromisso';
 
 export function buscaCompromissosAtivos(idUsuario: number): Promise<AxiosResponse<Array<Compromisso>>> {
@@ -32,4 +33,8 @@ export function iniciarCompromisso(idCompromisso: number): Promise<AxiosResponse
 
 export function finalizarCompromisso(idCompromisso: number): Promise<AxiosResponse<Compromisso>> {
 	return api.post<Compromisso>(`/compromissos/${idCompromisso}/finalizar`);
+}
+
+export function criarAvaliacao(avaliacao: Avaliacao, idCompromisso: number): Promise<AxiosResponse<Compromisso>> {
+	return api.post<Compromisso>(`/compromissos/${idCompromisso}/avaliacao`, avaliacao);
 }

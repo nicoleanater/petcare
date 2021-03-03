@@ -31,7 +31,7 @@ function AuthStack() {
 
 function CompromissosStack() {
 	return (
-		<Stack.Navigator initialRouteName="Avaliacao">
+		<Stack.Navigator initialRouteName="Compromissos">
 			<Stack.Screen name="Compromissos" component={CompromissosScreen} />
 			<Stack.Screen name="DetalhesCompromisso" component={DetalhesCompromissoScreen} />
 			<Stack.Screen name="Avaliacao" component={AvaliacaoScreen} />

@@ -15,9 +15,13 @@ export default {
 	} as TextStyle,
 	ratingContainer: {
 		...ApplicationStyles.paddingTop,
-		...ApplicationStyles.smallPaddingBottom,
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between'
+		...ApplicationStyles.smallPaddingBottom
+	} as ViewStyle,
+	descricaoCard: {
+		backgroundColor: Colors.white,
+		borderRadius: 20,
+		padding: 25,
+		marginBottom: 15,
+		elevation: 2
 	} as ViewStyle
 };

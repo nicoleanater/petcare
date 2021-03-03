@@ -3,4 +3,5 @@ export interface Avaliacao {
 	data?: string;
 	nota?: number;
 	descricao?: string;
+	tipo_usuario?: string;
 }
