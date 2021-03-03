@@ -1,7 +1,6 @@
 import { TextStyle } from "react-native";
 import { responsiveWidth } from "react-native-responsive-dimensions";
 import { Colors, Fonts } from "../themes";
-import ApplicationStyles from "./ApplicationStyles";
 
 export default {
 	cardTitle: {

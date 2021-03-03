@@ -15,7 +15,7 @@ import { useStore } from '../../store';
 import { getTipoUsuario } from '../../utils/StringUtils';
 import styles from './DetalhesCompromissoScreenStyles';
 interface IProps {
-  id: number;
+	id: number;
 	route: {
 		params: {
 			id: number;
@@ -102,7 +102,7 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
 						setCompromisso(res.data);
 					break;
 					case 'review':
-						// navegar avaliação
+						navigation.navigate('Avaliacao', { compromisso });
 					break;
 				}
 			} catch (error) {
@@ -134,7 +134,6 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
 					return (
 						<RoundedButton label={label} onPress={() => onActionButtonPressed('review')} style={styles.buttonStyle} />
 					);
-
 			}
 		}
 

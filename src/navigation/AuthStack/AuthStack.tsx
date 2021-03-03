@@ -2,6 +2,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import MenuDrawerContent from "../../components/MenuDrawerContent/MenuDrawerContent";
+import { AvaliacaoScreen } from "../../containers/AvaliacaoScreen/AvaliacaoScreen";
 import CompromissosScreen from '../../containers/CompromissosScreen/CompromissosScreen';
 import { DetalhesCompromissoScreen } from "../../containers/DetalhesCompromissoScreen/DetalhesCompromissoScreen";
 import HomeScreen from '../../containers/HomeScreen/HomeScreen';
@@ -30,9 +31,10 @@ function AuthStack() {
 
 function CompromissosStack() {
 	return (
-		<Stack.Navigator initialRouteName="DetalhesCompromisso">
+		<Stack.Navigator initialRouteName="Avaliacao">
 			<Stack.Screen name="Compromissos" component={CompromissosScreen} />
 			<Stack.Screen name="DetalhesCompromisso" component={DetalhesCompromissoScreen} />
+			<Stack.Screen name="Avaliacao" component={AvaliacaoScreen} />
 		</Stack.Navigator>
 	)
 }
