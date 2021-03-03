@@ -7,11 +7,6 @@ export default {
 		paddingTop: 15,
 		paddingHorizontal: 20
 	} as ViewStyle,
-	cardTitleStyles: {
-		...ApplicationStyles.text.latoTitle,
-		...ApplicationStyles.smallMarginBottom,
-		marginTop: 10
-	} as TextStyle,
 	twoButtonsContainer: {
 		flexDirection: 'row',
 	} as ViewStyle,

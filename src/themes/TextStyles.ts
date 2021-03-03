@@ -1,5 +1,7 @@
 import { TextStyle } from "react-native";
+import { responsiveWidth } from "react-native-responsive-dimensions";
 import { Colors, Fonts } from "../themes";
+import ApplicationStyles from "./ApplicationStyles";
 
 export default {
 	cardTitle: {
@@ -32,5 +34,12 @@ export default {
 		fontSize: Fonts.sizes.bigger,
 		color: Colors.grayOne,
 		marginBottom: 3
+	} as TextStyle,
+	cardTitleText: {
+		fontFamily: Fonts.fontFamilies.latoBold,
+		fontSize: Fonts.sizes.bigger,
+		color: Colors.blackThree,
+		marginBottom: responsiveWidth(3),
+		marginTop: 10
 	} as TextStyle
 }

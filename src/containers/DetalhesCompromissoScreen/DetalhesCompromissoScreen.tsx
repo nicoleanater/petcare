@@ -75,7 +75,7 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
 					</>);
 				default:
 					return (<>
-						<Text style={styles.cardTitleStyles}>Data</Text>
+						<Text style={styles.text.cardTitleText}>Data</Text>
 						<CardDatesInterval dateStart={compromisso.data_inicio} dateEnd={compromisso.data_fim}/>
 					</>);
 			}
@@ -141,12 +141,12 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
     return (
         <View style={styles.mainContainer}>
 					<StatusBadge status={compromisso.status}/>
-					<Text style={styles.cardTitleStyles}>
+					<Text style={styles.text.cardTitleText}>
 						{tipo_usuario === TipoUsuario.PET_SITTER ? getTipoUsuario(TipoUsuario.DONO_DE_ANIMAL) : getTipoUsuario(TipoUsuario.PET_SITTER) }
 					</Text>
 					<CardUsuario usuario={tipo_usuario === TipoUsuario.PET_SITTER ? compromisso.dono_de_animal : compromisso.petsitter}/>
 					{renderDateInfo()}
-					<Text style={styles.cardTitleStyles}>Endereço</Text>
+					<Text style={styles.text.cardTitleText}>Endereço</Text>
 					<CardEndereco endereco={compromisso.dono_de_animal.endereco}/>
 					{renderActionButtons()}
         </View>
