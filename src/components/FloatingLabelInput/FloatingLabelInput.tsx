@@ -41,7 +41,7 @@ interface IState {
 	isFocused: boolean;
 }
 
-export const FloatingLabelInput: RefForwardingComponent<IRefFloatingLabel, IProps> = (props, ref) => {
+const FloatingLabelInput: RefForwardingComponent<IRefFloatingLabel, IProps> = (props, ref) => {
 	let animatedIsFocused: Animated.Value<number> = useRef(new Animated.Value(_.isEmpty(props.value) ? 0 : 1)).current
 	const textInput: MutableRefObject<TextInput> = useRef(null);
 	const maskedTextInput: MutableRefObject<TextInputMask> = useRef(null);
