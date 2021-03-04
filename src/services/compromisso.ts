@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import api from '.';
+import { Agendamento } from '../models/Agendamento';
 import { Avaliacao } from '../models/Avaliacao';
 import { Compromisso } from '../models/Compromisso';
 
@@ -37,4 +38,8 @@ export function finalizarCompromisso(idCompromisso: number): Promise<AxiosRespon
 
 export function criarAvaliacao(avaliacao: Avaliacao, idCompromisso: number): Promise<AxiosResponse<Compromisso>> {
 	return api.post<Compromisso>(`/compromissos/${idCompromisso}/avaliacao`, avaliacao);
+}
+
+export function updateAgendamento(idCompromisso: number, agendamento: Agendamento): Promise<AxiosResponse<Agendamento>> {
+	return api.patch<Agendamento>(`/compromissos/${idCompromisso}/agendamento`, agendamento);
 }

@@ -10,6 +10,7 @@ import { CardUsuario } from '../../components/CardUsuario/CardUsuario';
 import { CollapseAgendamentos } from '../../components/CollapseAgendamentos/CollapseAgendamentos';
 import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { StatusBadge } from '../../components/StatusBadge/StatusBadge';
+import { Agendamento } from '../../models/Agendamento';
 import { Compromisso, CompromissoStatus } from '../../models/Compromisso';
 import { TipoUsuario } from '../../models/Usuario';
 import { aceitarSolicitacaoCompromisso, buscaDetalhesCompromisso, finalizarCompromisso, iniciarCompromisso, recusarSolicitacaoCompromisso } from '../../services/compromisso';
@@ -76,11 +77,15 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
 			);
 		}
 
+		const updateAgendamentos = (agendamentos: Array<Agendamento>) => {
+			setCompromisso((previousValue) => Object.assign({}, previousValue, { agendamentos }));
+		}
+
 		const renderDateInfo = () => {
 			switch (compromisso.status) {
 				case CompromissoStatus.EM_ANDAMENTO:
 				case CompromissoStatus.FINALIZADO:
-					return (<CollapseAgendamentos agendamentos={compromisso.agendamentos}/>);
+					return (<CollapseAgendamentos idCompromisso={compromisso.id} agendamentos={compromisso.agendamentos} updateAgendamentos={updateAgendamentos}/>);
 				default:
 					return (<>
 						<Text style={styles.text.cardTitleText}>Data</Text>

@@ -5,11 +5,14 @@ import Collapsible from 'react-native-collapsible';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Agendamento } from '../../models/Agendamento';
+import { updateAgendamento } from '../../services/compromisso';
 import { TimerBadge } from '../TimerBadge/TimerBadge';
 import styles from './CollapseAgendamentosStyles';
 
 interface IProps {
-	agendamentos?: Array<Agendamento>;
+	idCompromisso: number;
+	agendamentos: Array<Agendamento>;
+	updateAgendamentos: (agendamentos: Array<Agendamento>) => void;
 }
 
 interface IState {
@@ -18,7 +21,7 @@ interface IState {
 	timersStatuses: Array<'initial' | 'playing' | 'finished'>;
 }
 
-export const CollapseAgendamentos: FunctionComponent<IProps> = ({ agendamentos }) => {
+export const CollapseAgendamentos: FunctionComponent<IProps> = ({ idCompromisso, agendamentos, updateAgendamentos }) => {
 	const clockCallRef = useRef(agendamentos.map((item, i) => null));
 
 	const initialState: IState = {
@@ -32,24 +35,41 @@ export const CollapseAgendamentos: FunctionComponent<IProps> = ({ agendamentos }
 
 	const onCollapseHeaderPressed = (index: number) => {
 		setAgendamentoIsCollapsed((previousState) => {
-			console.log(previousState);
+			(previousState);
 			const newState = Object.assign([], previousState, { [index]: !previousState[index] });
 			return newState;
 		})
 	}
 
-	const startTimer = (index: number) => {
-		console.log({test: moment().format()});
 
+
+	const startTimer = async (index: number) => {
 		clockCallRef.current[index] = setInterval(() => {
 			setAgendamentoTimers((previousState) => {
 				return Object.assign([], previousState, { [index]: previousState[index] + 1 });
 			})
 		}, 1000);
+
+		const newAgendamento: Agendamento = {
+			id_agendamento: agendamentos[index].id_agendamento,
+			hora_inicio: moment().format()
+		}
+
+		const res = await updateAgendamento(idCompromisso, newAgendamento);
+		updateAgendamentos(Object.assign([], agendamentos, { [index]: res.data }));
+
 	}
 
-	const stopTimer = (index: number) => {
+	const stopTimer = async (index: number) => {
 		clearInterval(clockCallRef.current[index]);
+
+		const newAgendamento: Agendamento = {
+			id_agendamento: agendamentos[index].id_agendamento,
+			hora_fim: moment().format()
+		}
+
+		const res = await updateAgendamento(idCompromisso, newAgendamento);
+		updateAgendamentos(Object.assign([], agendamentos, { [index]: res.data }));
 	}
 
 	const onTimerBadgePressed = (index: number) => {
@@ -64,13 +84,20 @@ export const CollapseAgendamentos: FunctionComponent<IProps> = ({ agendamentos }
 				return Object.assign([], previousState, { [index]: 'finished' });
 			})
 		}
-
 	}
 
-	const formatTime = (time: number) => {
+	const formatTimeCounter = (time: number) => {
 		return moment("2015-01-01").startOf('day')
     .seconds(time)
     .format('HH:mm:ss');
+	}
+
+	const formatTimeStatic = (hora_inicio: string, hora_fim: string) => {
+		const inicio = hora_inicio != null ? moment(hora_inicio, 'YYYY-MM-DDTHH:mm:ss').format('HH:mm') : '--:--';
+		const fim = hora_fim != null ? moment(hora_fim, 'YYYY-MM-DDTHH:mm:ss').format('HH:mm') : '--:--';
+		console.log({test: moment(hora_inicio, 'YYYY-MM-DDTHH:mm:ss'), inicio, fim});
+
+		return `${inicio} / ${fim}`;
 	}
 
 	return (
@@ -85,8 +112,8 @@ export const CollapseAgendamentos: FunctionComponent<IProps> = ({ agendamentos }
 							<Icon name={'keyboard-arrow-down'} style={styles.arrowIconStyle} size={25} />
 						</TouchableWithoutFeedback>
 						<Collapsible collapsed={agendamentoIsCollapsed[i]} style={[styles.collapseContent, i === agendamentos.length - 1 && { borderBottomWidth: 0 }]}>
-							<Text style={styles.collapseContentText}>{`13:34 / 14:28`}</Text>
-							<TimerBadge index={i} status={timersStatuses[i]} time={formatTime(agendamentoTimers[i])} onPress={onTimerBadgePressed} />
+							<Text style={styles.collapseContentText}>{formatTimeStatic(agendamento.hora_inicio, agendamento.hora_fim)}</Text>
+							<TimerBadge index={i} status={timersStatuses[i]} time={formatTimeCounter(agendamentoTimers[i])} onPress={onTimerBadgePressed} />
 						</Collapsible>
 					</View>
 				))}
