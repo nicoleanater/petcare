@@ -6,6 +6,7 @@ import { AuthHeader } from '../../components/AuthHeader/AuthHeader';
 import { CardDatesInterval } from '../../components/CardDatesInterval/CardDatesInterval';
 import { CardEndereco } from '../../components/CardEndereco/CardEndereco';
 import { CardUsuario } from '../../components/CardUsuario/CardUsuario';
+import { CollapseAgendamentos } from '../../components/CollapseAgendamentos/CollapseAgendamentos';
 import RoundedButton from '../../components/RoundedButton/RoundedButton';
 import { StatusBadge } from '../../components/StatusBadge/StatusBadge';
 import { Compromisso, CompromissoStatus } from '../../models/Compromisso';
@@ -78,9 +79,7 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
 			switch (compromisso.status) {
 				case CompromissoStatus.EM_ANDAMENTO:
 				case CompromissoStatus.FINALIZADO:
-					return (<>
-						<Text>agendamentos</Text>
-					</>);
+					return (<CollapseAgendamentos agendamentos={compromisso.agendamentos}/>);
 				default:
 					return (<>
 						<Text style={styles.text.cardTitleText}>Data</Text>

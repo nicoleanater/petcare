@@ -1,6 +1,7 @@
 import { Moment } from "moment";
 import { Usuario } from "./Usuario";
 import { Avaliacao } from "./Avaliacao";
+import { Agendamento } from "./Agendamento";
 
 export enum CompromissoStatus {
   SOLICITACAO = 'SOLICITACAO',
@@ -20,4 +21,5 @@ export interface Compromisso {
 	dono_de_animal?: Usuario;
 	avaliacao_petsitter: Avaliacao;
 	avaliacao_dono_de_animal: Avaliacao;
+	agendamentos?: Array<Agendamento>;
 };
