@@ -1,5 +1,5 @@
 import moment from 'moment-timezone';
-import React, { FunctionComponent, useRef, useState } from 'react';
+import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { Text, View } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
@@ -26,12 +26,48 @@ export const CollapseAgendamentos: FunctionComponent<IProps> = ({ idCompromisso,
 
 	const initialState: IState = {
 		agendamentoIsCollapsed: agendamentos.map((item, i) => i === 0 ? false : true),
-		agendamentoTimers: agendamentos.map((item, i) => 0), // update to display difference between already set and now
-		timersStatuses: agendamentos.map((item, i) => 'initial') // update to conditionally set depending on time already set
+		agendamentoTimers: agendamentos.map((item, i) => {
+			let seconds = 0;
+			if (item.hora_inicio != null && item.hora_fim != null) {
+				const startTime = moment(`${item.hora_inicio}`, 'YYYY-MM-DDTHH:mm:ss');
+				const endTime = moment(`${item.hora_fim}`, 'YYYY-MM-DDTHH:mm:ss');
+				const duration = moment.duration(endTime.diff(startTime));
+				seconds = duration.asSeconds();
+			} else if (item.hora_inicio != null) {
+				const startTime = moment(`${item.hora_inicio}`, 'YYYY-MM-DDTHH:mm:ss').format();
+				const nowString = moment().tz('America/Sao_Paulo').format();
+				const now = moment(nowString, 'YYYY-MM-DDTHH:mm:ss');
+				const duration = moment.duration(now.diff(startTime));
+				seconds = duration.asSeconds();
+			}
+
+			return seconds;
+		}),
+		timersStatuses: agendamentos.map((item, i) => {
+			if (item.hora_inicio != null && item.hora_fim != null) {
+				return 'finished';
+			} else if (item.hora_inicio != null) {
+				return 'playing';
+			}
+			return 'initial';
+		})
 	};
 	const [agendamentoIsCollapsed, setAgendamentoIsCollapsed] = useState(initialState.agendamentoIsCollapsed);
 	const [agendamentoTimers, setAgendamentoTimers] = useState(initialState.agendamentoTimers);
 	const [timersStatuses, setTimersStatuses] = useState(initialState.timersStatuses);
+
+	useEffect(() => {
+		agendamentoTimers.forEach((timer, i) => {
+			console.log(timer);
+			if (timer > 0 && timersStatuses[i] == 'playing') {
+				clockCallRef.current[i] = setInterval(() => {
+					setAgendamentoTimers((previousState) => {
+						return Object.assign([], previousState, { [i]: previousState[i] + 1 });
+					})
+				}, 1000);
+			}
+		})
+	}, [])
 
 	const onCollapseHeaderPressed = (index: number) => {
 		setAgendamentoIsCollapsed((previousState) => {
@@ -40,8 +76,6 @@ export const CollapseAgendamentos: FunctionComponent<IProps> = ({ idCompromisso,
 			return newState;
 		})
 	}
-
-
 
 	const startTimer = async (index: number) => {
 		clockCallRef.current[index] = setInterval(() => {
@@ -93,8 +127,8 @@ export const CollapseAgendamentos: FunctionComponent<IProps> = ({ idCompromisso,
 	}
 
 	const formatTimeStatic = (hora_inicio: string, hora_fim: string) => {
-		const inicio = hora_inicio != null ? moment.utc(hora_inicio, 'YYYY-MM-DDTHH:mm:ss[Z]').local().format('HH:mm') : '--:--';
-		const fim = hora_fim != null ? moment.utc(hora_fim, 'YYYY-MM-DDTHH:mm:ss[Z]').local().format('HH:mm') : '--:--';
+		const inicio = hora_inicio != null ? moment(hora_inicio, 'YYYY-MM-DDTHH:mm:ss').format('HH:mm') : '--:--';
+		const fim = hora_fim != null ? moment(hora_fim, 'YYYY-MM-DDTHH:mm:ss').format('HH:mm') : '--:--';
 		return `${inicio} / ${fim}`;
 	}
 
