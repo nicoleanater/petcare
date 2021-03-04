@@ -11,9 +11,6 @@ export default {
 		paddingVertical: 5,
 		elevation: 2,
 	} as ViewStyle,
-	agendamentoCollapseContainer: {
-
-	} as ViewStyle,
 	collapseHeader: {
 		flexDirection: 'row',
 		height: 47,
@@ -31,5 +28,18 @@ export default {
 	arrowIconStyle: {
 		color: Colors.gradientPink,
 		marginLeft: 'auto'
-	} as TextStyle
+	} as TextStyle,
+	collapseContent: {
+		marginLeft: 32,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		paddingBottom: 15,
+		borderBottomWidth: 1,
+		borderColor: Colors.grayThree
+	} as ViewStyle,
+	collapseContentText: {
+		fontFamily: Fonts.fontFamilies.latoLight,
+		fontSize: Fonts.sizes.big,
+		color: Colors.grayOne
+	} as TextStyle,
 };

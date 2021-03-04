@@ -34,14 +34,17 @@ export const CollapseAgendamentos: FunctionComponent<IProps> = ({ agendamentos }
 			<Text style={styles.text.cardTitleText}>Agendamentos</Text>
 			<View style={styles.mainContainer}>
 				{agendamentos.map((agendamento, i) => (
-					<View key={i} style={styles.agendamentoCollapseContainer}>
+					<View key={i}>
 						<TouchableWithoutFeedback onPress={() => onCollapseHeaderPressed(i)} style={styles.collapseHeader}>
 							<Icon name={'today'} style={styles.calendarIconStyle} size={20}/>
 							<Text style={styles.collapseHeaderText}>{moment(agendamento.data, 'YYYY-MM-DD').format('DD/MM/YYYY')}</Text>
 							<Icon name={'keyboard-arrow-down'} style={styles.arrowIconStyle} size={25}/>
 						</TouchableWithoutFeedback>
-						<Collapsible collapsed={agendamentoIsCollapsed[i]}>
-							<Text>content</Text>
+						<Collapsible collapsed={agendamentoIsCollapsed[i]} style={[styles.collapseContent, i === agendamentos.length-1 && {borderBottomWidth: 0}]}>
+							<Text style={styles.collapseContentText}>{`13:34 / 14:28`}</Text>
+							<View>
+								<Text>Time view</Text>
+							</View>
 						</Collapsible>
 					</View>
 				))}

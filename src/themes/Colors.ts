@@ -7,6 +7,7 @@ export default {
 	gray: "#F2F2F2",
 	grayOne: "#6B6B6B",
 	grayTwo: "#A9A9A9",
+	grayThree: "#DCDCDC",
 	grayFour: "#CBCACA",
 	white: "#FFFFFF",
 	gradientPink: "#FF738C",
