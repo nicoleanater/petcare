@@ -10,6 +10,7 @@ import { Compromisso } from "../../models/Compromisso";
 import { buscaCompromissosAtivos, buscaCompromissosHistorico } from "../../services/compromisso";
 import { useStore } from "../../store";
 import styles from './CompromissosScreenStyles';
+import { useIsFocused } from '@react-navigation/native';
 
 const CompromissosAtivos = ({ compromissos }) => (
 	<ScrollView style={styles.tabsBackground}>
@@ -36,6 +37,7 @@ const CompromissosScreen: FunctionComponent<any> = () => {
 	const [{ usuario }] = useStore();
 	const [compromissosAtivos, setCompromissosAtivos] = useState<Array<Compromisso>>([]);
 	const [compromissosHistorico, setCompromissosHistorico] = useState<Array<Compromisso>>([]);
+	const isFocused = useIsFocused();
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -43,9 +45,11 @@ const CompromissosScreen: FunctionComponent<any> = () => {
 		});
 	}, [navigation]);
 
-	useEffect(()=> {
-		buscaCompromissos();
-	}, [])
+	useEffect(() => {
+		if (isFocused) {
+			buscaCompromissos();
+		}
+	}, [isFocused]);
 
 	const buscaCompromissos = async () => {
 		try {
