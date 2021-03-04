@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 import React, { FunctionComponent, useRef, useState } from 'react';
 import { Text, View } from 'react-native';
 import Collapsible from 'react-native-collapsible';
@@ -52,7 +52,7 @@ export const CollapseAgendamentos: FunctionComponent<IProps> = ({ idCompromisso,
 
 		const newAgendamento: Agendamento = {
 			id_agendamento: agendamentos[index].id_agendamento,
-			hora_inicio: moment().format()
+			hora_inicio: moment.tz('America/Sao_Paulo').format()
 		}
 
 		const res = await updateAgendamento(idCompromisso, newAgendamento);
@@ -65,7 +65,7 @@ export const CollapseAgendamentos: FunctionComponent<IProps> = ({ idCompromisso,
 
 		const newAgendamento: Agendamento = {
 			id_agendamento: agendamentos[index].id_agendamento,
-			hora_fim: moment().format()
+			hora_fim: moment.tz('America/Sao_Paulo').format()
 		}
 
 		const res = await updateAgendamento(idCompromisso, newAgendamento);
@@ -93,10 +93,8 @@ export const CollapseAgendamentos: FunctionComponent<IProps> = ({ idCompromisso,
 	}
 
 	const formatTimeStatic = (hora_inicio: string, hora_fim: string) => {
-		const inicio = hora_inicio != null ? moment(hora_inicio, 'YYYY-MM-DDTHH:mm:ss').format('HH:mm') : '--:--';
-		const fim = hora_fim != null ? moment(hora_fim, 'YYYY-MM-DDTHH:mm:ss').format('HH:mm') : '--:--';
-		console.log({test: moment(hora_inicio, 'YYYY-MM-DDTHH:mm:ss'), inicio, fim});
-
+		const inicio = hora_inicio != null ? moment.utc(hora_inicio, 'YYYY-MM-DDTHH:mm:ss[Z]').local().format('HH:mm') : '--:--';
+		const fim = hora_fim != null ? moment.utc(hora_fim, 'YYYY-MM-DDTHH:mm:ss[Z]').local().format('HH:mm') : '--:--';
 		return `${inicio} / ${fim}`;
 	}
 
