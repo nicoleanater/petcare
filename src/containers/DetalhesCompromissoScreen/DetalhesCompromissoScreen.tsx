@@ -161,6 +161,7 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
 					<Text style={styles.text.cardTitleText}>Endereço</Text>
 					<CardEndereco endereco={compromisso.dono_de_animal.endereco}/>
 					{renderActionButtons()}
+					<View style={{height: 30}}/>
         </ScrollView>
     );
 };
