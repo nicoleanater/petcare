@@ -5,6 +5,7 @@ import Collapsible from 'react-native-collapsible';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Agendamento } from '../../models/Agendamento';
+import { TimerBadge } from '../TimerBadge/TimerBadge';
 import styles from './CollapseAgendamentosStyles';
 
 interface IProps {
@@ -17,7 +18,7 @@ interface IState {
 
 export const CollapseAgendamentos: FunctionComponent<IProps> = ({ agendamentos }) => {
 	const initialState: IState = {
-		agendamentoIsCollapsed: agendamentos.map(() => false)
+		agendamentoIsCollapsed: agendamentos.map((item,i) => i === 0 ? false : true)
 	};
 	const [agendamentoIsCollapsed, setAgendamentoIsCollapsed] = useState(initialState.agendamentoIsCollapsed);
 
@@ -27,6 +28,12 @@ export const CollapseAgendamentos: FunctionComponent<IProps> = ({ agendamentos }
 			const newState = Object.assign([], previousState, {[index]: !previousState[index]});
 			return newState;
 		})
+	}
+
+	const onTimerBadgePressed = (index: number) => {
+		console.log({index});
+
+		//todo
 	}
 
 	return (
@@ -42,9 +49,7 @@ export const CollapseAgendamentos: FunctionComponent<IProps> = ({ agendamentos }
 						</TouchableWithoutFeedback>
 						<Collapsible collapsed={agendamentoIsCollapsed[i]} style={[styles.collapseContent, i === agendamentos.length-1 && {borderBottomWidth: 0}]}>
 							<Text style={styles.collapseContentText}>{`13:34 / 14:28`}</Text>
-							<View>
-								<Text>Time view</Text>
-							</View>
+							<TimerBadge index={i} status={'initial'} time={`00:00:00`} onPress={onTimerBadgePressed}/>
 						</Collapsible>
 					</View>
 				))}

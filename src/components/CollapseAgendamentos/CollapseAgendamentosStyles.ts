@@ -32,6 +32,7 @@ export default {
 	collapseContent: {
 		marginLeft: 32,
 		flexDirection: 'row',
+		alignItems: 'center',
 		justifyContent: 'space-between',
 		paddingBottom: 15,
 		borderBottomWidth: 1,

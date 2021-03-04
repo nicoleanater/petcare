@@ -9,6 +9,7 @@ export default {
 	grayTwo: "#A9A9A9",
 	grayThree: "#DCDCDC",
 	grayFour: "#CBCACA",
+	grayFive: "#E8E8E8",
 	white: "#FFFFFF",
 	gradientPink: "#FF738C",
 	gradientPeach: "#FFD397",
@@ -16,7 +17,6 @@ export default {
 	redOne: "#FC6767",
 	errorRed: "#E03434",
 	paleOyster: "#96897B",
-	blueOne: "#2F80ED",
 	statusPurple: "#BA76E4",
 	statusPurpleLight: "rgba(186, 118, 228, 0.4)",
 	statusBlue: "#88CFDF",
@@ -26,5 +26,8 @@ export default {
 	statusGray: "#A9A9A9",
 	statusGrayLight: "rgba(169, 169, 169, 0.4)",
 	statusGreen: "#88DF91",
-	statusGreenLight: "rgba(136, 223, 145, 0.4)"
+	statusGreenLight: "rgba(136, 223, 145, 0.4)",
+	greenOne: "#219653",
+	blueOne: "#2F80ED",
+	red: "#EB5757"
 };
