@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
 import React, { useEffect, FunctionComponent, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader';
 import { CardDatesInterval } from '../../components/CardDatesInterval/CardDatesInterval';
 import { CardEndereco } from '../../components/CardEndereco/CardEndereco';
@@ -145,7 +146,7 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
 		}
 
     return (
-        <View style={styles.mainContainer}>
+        <ScrollView style={styles.mainContainer}>
 					<StatusBadge status={compromisso.status}/>
 					<Text style={styles.text.cardTitleText}>
 						{tipo_usuario === TipoUsuario.PET_SITTER ? getTipoUsuario(TipoUsuario.DONO_DE_ANIMAL) : getTipoUsuario(TipoUsuario.PET_SITTER) }
@@ -155,6 +156,6 @@ export const DetalhesCompromissoScreen: FunctionComponent<IProps> = (props) => {
 					<Text style={styles.text.cardTitleText}>Endereço</Text>
 					<CardEndereco endereco={compromisso.dono_de_animal.endereco}/>
 					{renderActionButtons()}
-        </View>
+        </ScrollView>
     );
 };
