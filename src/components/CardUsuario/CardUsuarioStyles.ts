@@ -21,6 +21,7 @@ export default {
 	} as ViewStyle,
 	textInfoContainer: {
 		marginLeft: 20,
+		maxWidth: 130
 	} as ViewStyle,
 	priceContainer: {
 		position: 'absolute',
