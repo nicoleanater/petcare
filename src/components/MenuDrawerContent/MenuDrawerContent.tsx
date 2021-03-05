@@ -37,9 +37,9 @@ export const MenuDrawerContent: FunctionComponent<any> = (props) => {
 						<Text style={styles.userTypeTextStyle}>{getTipoUsuario(usuario.tipo_usuario)}</Text>
 					</View>
 					<View>
-						{/* <TouchableOpacity onPress={() => props.navigation.navigate('Perfil')} style={styles.menuItemContainer}>
+						<TouchableOpacity onPress={() => props.navigation.navigate('Perfil')} style={styles.menuItemContainer}>
 							<Text style={styles.menuLabelStyle}>Perfil</Text>
-						</TouchableOpacity> */}
+						</TouchableOpacity>
 						<TouchableOpacity onPress={() => props.navigation.navigate('Compromissos')} style={styles.menuItemContainer}>
 							<Text style={styles.menuLabelStyle}>Compromissos</Text>
 						</TouchableOpacity>
