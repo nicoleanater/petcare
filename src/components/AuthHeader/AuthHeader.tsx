@@ -8,17 +8,17 @@ import { useNavigation } from "@react-navigation/native";
 
 interface IProps {
 	title: String;
-	theme: 'light' | 'dark;'
+	theme: 'light' | 'transparent';
 }
 
-export const AuthHeader: FunctionComponent<IProps & StackHeaderProps> = ({ title }) => {
+export const AuthHeader: FunctionComponent<IProps & StackHeaderProps> = ({ title, theme }) => {
 	const navigation = useNavigation<DrawerNavigationProp<any, any>>();
 	return (
-		<View style={styles.headerContainer}>
+		<View style={[styles.headerContainer, theme === 'transparent' && styles.headerContainerTransparent]}>
 			<View style={styles.upperHeaderContainer}>
-				<MenuButton onPress={() => navigation.openDrawer()} theme={"dark"} />
-				<Text style={styles.headerTextStyle}>{title}</Text>
-				<View style={styles.rightMenuButton}/>
+				<MenuButton onPress={() => navigation.openDrawer()} theme={theme === 'light' ? 'dark' : 'light'} />
+				<Text style={[styles.headerTextStyle, theme === 'transparent' && styles.headerTextTransparentStyle]}>{title}</Text>
+				<View style={[styles.rightMenuButton, theme === 'transparent' && styles.headerTextTransparentStyle]}/>
 			</View>
 		</View>
 	);

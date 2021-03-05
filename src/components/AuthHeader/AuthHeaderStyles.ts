@@ -10,6 +10,10 @@ export default {
 		elevation: 4,
 		justifyContent: "center"
 	} as ViewStyle,
+	headerContainerTransparent: {
+		backgroundColor: Colors.transparent,
+		elevation: 4
+	} as ViewStyle,
 	upperHeaderContainer: {
 		flexDirection: "row",
 		alignItems: 'center',
@@ -19,6 +23,9 @@ export default {
 		fontFamily: Fonts.fontFamilies.latoBold,
 		fontSize: Fonts.sizes.bigger,
 		color: Colors.watermelonDark,
+	} as TextStyle,
+	headerTextTransparentStyle: {
+		color: Colors.white
 	} as TextStyle,
 	rightMenuButton: {
 		height: 45,
