@@ -8,11 +8,13 @@ export default {
 			height: 3
 		} as ViewStyle,
 		tabBarContainerStyle: {
-			backgroundColor: Colors.white
+			backgroundColor: Colors.white,
+			height: 56,
+			justifyContent: 'center'
 		} as ViewStyle,
 		tabLabelStyle: {
 			fontFamily: Fonts.fontFamilies.latoBlack,
-			fontSize: Fonts.sizes.regular,
+			fontSize: Fonts.sizes.big,
 			color: Colors.paleOyster
 		} as TextStyle,
 		tabsBackground: {

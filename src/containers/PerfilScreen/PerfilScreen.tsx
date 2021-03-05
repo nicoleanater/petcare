@@ -1,8 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
 import React, { FunctionComponent, useLayoutEffect } from 'react';
-import { Text, View } from 'react-native';
+import { Dimensions, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { TabBar, TabView } from 'react-native-tab-view';
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader';
 import { ImageGradientPicker } from '../../components/ImageGradientPicker/ImageGradientPicker';
 import { RatingStars } from '../../components/RatingStars/RatingStars';
@@ -38,8 +39,34 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 		});
 	}, [navigation]);
 
+	const [index, setIndex] = React.useState(0);
+	const [routes] = React.useState([
+		{ key: 'dados', title: 'DADOS' },
+		{ key: 'avaliacoes', title: 'AVALIAÇÕES' },
+	]);
+
+	const renderScene = ({ route }) => {
+		switch (route.key) {
+			case 'dados':
+				return <View style={{backgroundColor: 'white', flex: 1}}><Text>aaa</Text></View>;
+			case 'avaliacoes':
+				return <View style={{backgroundColor: 'white', flex: 1}}><Text>bbb</Text></View>;
+			default:
+				return null;
+		}
+	};
+
+	const renderTabBar = props => (
+		<TabBar
+			{...props}
+			indicatorStyle={styles.tabIndicatorStyle}
+			style={styles.tabBarContainerStyle}
+			labelStyle={styles.tabLabelStyle}
+		/>
+	);
+
 	return (
-		<LinearGradient colors={[Colors.gradientPink, Colors.gradientPeach]} style={styles.perfilGradientHeader} start={{x: 0, y: 0}} end={{x: 0.8, y: 0.8}}>
+		<LinearGradient colors={[Colors.gradientPink, Colors.gradientPeach]} style={styles.perfilGradientHeader} start={{x: 0, y: 0}} end={{x: 0.5, y: 0.5}}>
 			<View style={styles.userInfoContainer}>
 				<ImageGradientPicker
 					image={usuario.foto}
@@ -52,14 +79,13 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 					<RatingStars rating={usuario.nota_media} size={'medium'}/>
 				</View>
 			</View>
-			{/* <TabView
+			<TabView
 				navigationState={{ index, routes }}
 				renderScene={renderScene}
 				renderTabBar={renderTabBar}
 				onIndexChange={setIndex}
 				initialLayout={{ width: Dimensions.get('window').width }}
-			/> */}
-
+			/>
 		</LinearGradient>
 	);
 };
