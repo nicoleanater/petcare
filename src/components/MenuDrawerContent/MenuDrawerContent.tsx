@@ -12,7 +12,7 @@ import { ImageGradientPicker } from '../ImageGradientPicker/ImageGradientPicker'
 import { getTipoUsuario } from '../../utils/StringUtils';
 import { TipoUsuario } from '../../models/Usuario';
 
-const MenuDrawerContent: FunctionComponent<any> = (props) => {
+export const MenuDrawerContent: FunctionComponent<any> = (props) => {
 	const [{ usuario }, dispatch] = useStore();
 
 	const onLogoutPressed = () => {
@@ -61,5 +61,3 @@ const MenuDrawerContent: FunctionComponent<any> = (props) => {
 		</View>
 	);
 };
-
-export default MenuDrawerContent;

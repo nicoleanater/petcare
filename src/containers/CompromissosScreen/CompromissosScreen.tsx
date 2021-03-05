@@ -1,7 +1,7 @@
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { StackHeaderProps } from "@react-navigation/stack";
 import React, { FunctionComponent, useEffect, useLayoutEffect, useState } from "react";
-import { Dimensions, Text, View } from "react-native";
+import { Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { TabBar, TabView } from 'react-native-tab-view';
 import { AuthHeader } from "../../components/AuthHeader/AuthHeader";
@@ -10,7 +10,6 @@ import { Compromisso } from "../../models/Compromisso";
 import { buscaCompromissosAtivos, buscaCompromissosHistorico } from "../../services/compromisso";
 import { useStore } from "../../store";
 import styles from './CompromissosScreenStyles';
-import { useIsFocused } from '@react-navigation/native';
 
 const CompromissosAtivos = ({ compromissos }) => (
 	<ScrollView style={styles.tabsBackground}>
@@ -32,7 +31,7 @@ const CompromissosHistorico = ({ compromissos }) => (
 	</ScrollView>
 );
 
-const CompromissosScreen: FunctionComponent<any> = () => {
+export const CompromissosScreen: FunctionComponent<any> = () => {
 	const navigation = useNavigation();
 	const [{ usuario }] = useStore();
 	const [compromissosAtivos, setCompromissosAtivos] = useState<Array<Compromisso>>([]);
@@ -98,5 +97,3 @@ const CompromissosScreen: FunctionComponent<any> = () => {
 		/>
 	);
 }
-
-export default CompromissosScreen;
