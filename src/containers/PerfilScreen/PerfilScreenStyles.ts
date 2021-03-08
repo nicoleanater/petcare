@@ -3,6 +3,8 @@ import { ApplicationStyles, Colors, Fonts } from '../../themes';
 
 export default {
 	...ApplicationStyles,
+
+	// perfil header styles
 	perfilGradientHeader: {
 		paddingTop: 56 + 30,
 		flex: 1
@@ -42,8 +44,44 @@ export default {
 		color: Colors.blackOne
 	} as TextStyle,
 	tabsBackground: {
+		flex: 1,
 		backgroundColor: Colors.gray,
 		paddingHorizontal: 20,
-		paddingVertical: 30
-	} as ViewStyle
+		paddingVertical: 40
+	} as ViewStyle,
+
+	// tabs content styles
+	cardContainer: {
+		backgroundColor: Colors.white,
+		borderRadius: 20,
+		marginBottom: 15,
+		paddingHorizontal: 20,
+		paddingVertical: 30,
+		elevation: 2,
+	} as ViewStyle,
+	cardLine: {
+		flexDirection: 'row',
+		flex: 1,
+		marginBottom: 35
+	} as ViewStyle,
+	cardCell: {
+		width: '50%'
+	} as ViewStyle,
+	cardLabel: {
+		fontFamily: Fonts.fontFamilies.latoBold,
+		fontSize: Fonts.sizes.regular,
+		color: Colors.blackThree
+	} as TextStyle,
+	cardValue: {
+		fontFamily: Fonts.fontFamilies.latoRegular,
+		fontSize: Fonts.sizes.regular,
+		color: Colors.grayOne,
+		marginTop: 3
+	} as TextStyle,
+	divider: {
+		width: '100%',
+		height: 1,
+		backgroundColor: Colors.blackOne,
+		marginBottom: 35
+	} as ViewStyle,
 };

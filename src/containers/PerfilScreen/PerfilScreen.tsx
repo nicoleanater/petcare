@@ -13,6 +13,8 @@ import { useStore } from '../../store';
 import { Colors } from '../../themes';
 import { getTipoUsuario } from '../../utils/StringUtils';
 import styles from './PerfilScreenStyles';
+import { TabDados } from './TabDados';
+
 interface IProps {
 	route: {
 		params: {
@@ -61,7 +63,7 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 	const renderScene = ({ route }) => {
 		switch (route.key) {
 			case 'dados':
-				return <View style={{backgroundColor: 'white', flex: 1}}><Text>aaa</Text></View>;
+				return <TabDados usuario={usuario}/>;
 			case 'avaliacoes':
 				return <View style={{backgroundColor: 'white', flex: 1}}><Text>bbb</Text></View>;
 			default:
