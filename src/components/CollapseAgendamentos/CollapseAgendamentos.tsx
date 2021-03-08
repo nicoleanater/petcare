@@ -58,7 +58,6 @@ export const CollapseAgendamentos: FunctionComponent<IProps> = ({ idCompromisso,
 
 	useEffect(() => {
 		agendamentoTimers.forEach((timer, i) => {
-			console.log(timer);
 			if (timer > 0 && timersStatuses[i] == 'playing') {
 				clockCallRef.current[i] = setInterval(() => {
 					setAgendamentoTimers((previousState) => {
