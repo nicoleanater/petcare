@@ -1,13 +1,14 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
-import React, { FunctionComponent, useLayoutEffect } from 'react';
-import { Dimensions, Text, View } from 'react-native';
+import React, { FunctionComponent, useEffect, useLayoutEffect, useState } from 'react';
+import { ActivityIndicator, Dimensions, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader';
 import { ImageGradientPicker } from '../../components/ImageGradientPicker/ImageGradientPicker';
 import { RatingStars } from '../../components/RatingStars/RatingStars';
 import { Usuario } from '../../models/Usuario';
+import { buscarUsuario } from '../../services/usuario';
 import { useStore } from '../../store';
 import { Colors } from '../../themes';
 import { getTipoUsuario } from '../../utils/StringUtils';
@@ -21,17 +22,29 @@ interface IProps {
 }
 
 interface IState {
-	// State type definition
+	usuario: Usuario;
 }
 
 export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 	const initialState: IState = {
+		usuario: props.route.params?.usuarioPerfil
 	};
+
 	const navigation = useNavigation();
 	const [{ usuario: storedUsuario }] = useStore();
-	const usuarioPerfil = props.route.params?.usuarioPerfil;
+	const [usuario, setUsuario] = useState(initialState.usuario);
 
-	const usuario = usuarioPerfil != null ? usuarioPerfil : storedUsuario;
+	useEffect(() => {
+		if (usuario == null) {
+			searchUser(storedUsuario.id);
+		}
+	}, [])
+
+
+	const searchUser = async (id: number) => {
+		const res = await buscarUsuario(id);
+		setUsuario(res.data);
+	}
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -64,6 +77,14 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 			labelStyle={styles.tabLabelStyle}
 		/>
 	);
+
+	if (usuario == null) {
+		return (
+			<View style={[styles.verticalCenterAlignedColumn, styles.marginTop]}>
+				<ActivityIndicator size='large'/>
+			</View>
+		);
+	}
 
 	return (
 		<LinearGradient colors={[Colors.gradientPink, Colors.gradientPeach]} style={styles.perfilGradientHeader} start={{x: 0, y: 0}} end={{x: 0.5, y: 0.5}}>

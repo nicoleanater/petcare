@@ -13,3 +13,7 @@ export function salvarUsuario(usuario: Usuario): Promise<AxiosResponse> {
 export function buscarPetsitters(idCidade: number): Promise<AxiosResponse<Array<Usuario>>> {
 	return api.get<Array<Usuario>>(`/petsitter/cidade/${idCidade}`);
 }
+
+export function buscarUsuario(idUsuario: number): Promise<AxiosResponse<Usuario>> {
+	return api.get<Usuario>(`/usuario/${idUsuario}`);
+}
