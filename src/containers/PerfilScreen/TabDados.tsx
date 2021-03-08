@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { TipoUsuario, Usuario } from "../../models/Usuario";
 import styles from './PerfilScreenStyles';
+import { MaskService } from 'react-native-masked-text';
 
 interface IProps {
 	usuario: Usuario;
@@ -42,7 +43,11 @@ export const TabDados: FunctionComponent<IProps> = ({ usuario }) => {
 						<View style={styles.divider} />
 						<View>
 							<Text style={styles.cardLabel}>Sobre mim</Text>
-							<Text style={styles.cardValue}>{usuario.descricao}</Text>
+							<Text style={[styles.cardValue, {marginBottom: 60}]}>{usuario.descricao}</Text>
+						</View>
+						<View style={styles.priceView}>
+							<Text style={styles.cardLabel}>{MaskService.toMask('money', usuario.preco.toFixed(2), { unit: 'R$ '})}</Text>
+							<Text style={styles.perHourText}>por hora</Text>
 						</View>
 					</>
 				}

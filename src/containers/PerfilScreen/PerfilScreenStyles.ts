@@ -84,4 +84,16 @@ export default {
 		backgroundColor: Colors.blackOne,
 		marginBottom: 35
 	} as ViewStyle,
+	priceView: {
+		position: 'absolute',
+		right: 27,
+		bottom: 30,
+		alignItems: 'flex-end'
+	} as ViewStyle,
+	perHourText: {
+		fontFamily: Fonts.fontFamilies.latoLight,
+		fontSize: Fonts.sizes.small,
+		color: Colors.blackThree,
+		marginTop: 3
+	} as TextStyle
 };
