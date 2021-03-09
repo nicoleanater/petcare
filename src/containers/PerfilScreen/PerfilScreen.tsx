@@ -88,6 +88,8 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 			indicatorStyle={styles.tabIndicatorStyle}
 			style={styles.tabBarContainerStyle}
 			labelStyle={styles.tabLabelStyle}
+			activeColor={Colors.redOne}
+			inactiveColor={Colors.blackOne}
 		/>
 	);
 

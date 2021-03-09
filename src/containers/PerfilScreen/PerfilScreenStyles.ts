@@ -40,8 +40,7 @@ export default {
 	} as ViewStyle,
 	tabLabelStyle: {
 		fontFamily: Fonts.fontFamilies.latoBlack,
-		fontSize: Fonts.sizes.big,
-		color: Colors.blackOne
+		fontSize: Fonts.sizes.big
 	} as TextStyle,
 	tabsBackground: {
 		flex: 1,
