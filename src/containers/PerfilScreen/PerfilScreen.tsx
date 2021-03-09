@@ -96,7 +96,7 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 					style={styles.smallMarginBottom}
 					noBorder
 				/>
-				<View>
+				<View style={styles.rightAlignedColumn}>
 					<Text style={styles.nameTextStyle}>{usuario.nome}</Text>
 					<Text style={styles.userTypeTextStyle}>{getTipoUsuario(usuario.tipo_usuario)}</Text>
 					<RatingStars rating={usuario.nota_media} size={'medium'}/>
