@@ -1,4 +1,3 @@
-import { Moment } from "moment";
 import { Animal } from "./Animal";
 import { Endereco } from "./Endereco";
 
@@ -13,7 +12,7 @@ export interface Usuario {
 	senha?: string;
 	nome?: string;
 	sobrenome?: string;
-	data_nasc?: Moment;
+	data_nasc?: string;
 	celular?: string;
 	foto?: string;
 	nota_media?: number;

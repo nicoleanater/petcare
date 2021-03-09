@@ -4,6 +4,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { TipoUsuario, Usuario } from "../../models/Usuario";
 import styles from './PerfilScreenStyles';
 import { MaskService } from 'react-native-masked-text';
+import moment from 'moment';
 
 interface IProps {
 	usuario: Usuario;
@@ -15,11 +16,11 @@ export const TabDados: FunctionComponent<IProps> = ({ usuario }) => {
 				<View style={styles.cardLine}>
 					<View style={styles.cardCell}>
 						<Text style={styles.cardLabel}>Data de Nasc.</Text>
-						<Text style={styles.cardValue}>{usuario.data_nasc}</Text>
+						<Text style={styles.cardValue}>{MaskService.toMask('datetime', moment(usuario.data_nasc, 'YYYY-MM-DD').format('DD/MM/YYYY'), { format: 'DD/MM/YYYY' })}</Text>
 					</View>
 					<View style={styles.cardCell}>
 						<Text style={styles.cardLabel}>Celular</Text>
-						<Text style={styles.cardValue}>{usuario.celular}</Text>
+						<Text style={styles.cardValue}>{MaskService.toMask('cel-phone', usuario.celular)}</Text>
 					</View>
 				</View>
 				<View style={styles.cardLine}>
