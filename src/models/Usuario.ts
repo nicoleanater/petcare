@@ -1,4 +1,5 @@
 import { Animal } from "./Animal";
+import { Avaliacao } from "./Avaliacao";
 import { Endereco } from "./Endereco";
 
 export enum TipoUsuario {
@@ -21,5 +22,6 @@ export interface Usuario {
 	animais?: Array<Animal>;
 	descricao?: string;
 	preco?: number;
+	avaliacoes: Array<Avaliacao>;
 	qtde_avaliacoes?: number;
 }

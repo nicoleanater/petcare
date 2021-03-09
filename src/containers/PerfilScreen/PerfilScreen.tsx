@@ -2,11 +2,14 @@ import { useNavigation } from '@react-navigation/native';
 import { StackHeaderProps } from '@react-navigation/stack';
 import React, { FunctionComponent, useEffect, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator, Dimensions, Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader';
+import { CardAvaliacao } from '../../components/CardAvaliacao/CardAvaliacao';
 import { ImageGradientPicker } from '../../components/ImageGradientPicker/ImageGradientPicker';
 import { RatingStars } from '../../components/RatingStars/RatingStars';
+import { Avaliacao } from '../../models/Avaliacao';
 import { Usuario } from '../../models/Usuario';
 import { buscarUsuario } from '../../services/usuario';
 import { useStore } from '../../store';
@@ -15,6 +18,14 @@ import { getTipoUsuario } from '../../utils/StringUtils';
 import styles from './PerfilScreenStyles';
 import { TabDados } from './TabDados';
 
+const TabAvaliacoes = ({ avaliacoes }) => (
+	<ScrollView style={styles.tabsBackground}>
+		{avaliacoes.map((avaliacao: Avaliacao, i) =>  (
+			<CardAvaliacao avaliacao={avaliacao} key={i}/>
+		))}
+		<View style={{height: 60}}/>
+	</ScrollView>
+);
 interface IProps {
 	route: {
 		params: {
@@ -65,7 +76,7 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 			case 'dados':
 				return <TabDados usuario={usuario}/>;
 			case 'avaliacoes':
-				return <View style={{backgroundColor: 'white', flex: 1}}><Text>bbb</Text></View>;
+				return <TabAvaliacoes avaliacoes={usuario.avaliacoes}/>;
 			default:
 				return null;
 		}
