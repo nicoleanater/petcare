@@ -6,11 +6,13 @@ import { ScrollView } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import { TabBar, TabView } from 'react-native-tab-view';
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader';
+import { CardAnimal } from '../../components/CardAnimal/CardAnimal';
 import { CardAvaliacao } from '../../components/CardAvaliacao/CardAvaliacao';
 import { ImageGradientPicker } from '../../components/ImageGradientPicker/ImageGradientPicker';
 import { RatingStars } from '../../components/RatingStars/RatingStars';
+import { Animal } from '../../models/Animal';
 import { Avaliacao } from '../../models/Avaliacao';
-import { Usuario } from '../../models/Usuario';
+import { TipoUsuario, Usuario } from '../../models/Usuario';
 import { buscarUsuario } from '../../services/usuario';
 import { useStore } from '../../store';
 import { Colors } from '../../themes';
@@ -22,6 +24,15 @@ const TabAvaliacoes = ({ avaliacoes }) => (
 	<ScrollView style={styles.tabsBackground}>
 		{avaliacoes.map((avaliacao: Avaliacao, i) =>  (
 			<CardAvaliacao avaliacao={avaliacao} key={i}/>
+		))}
+		<View style={{height: 60}}/>
+	</ScrollView>
+);
+
+const TabAnimais = ({ animais }) => (
+	<ScrollView style={styles.tabsBackground}>
+		{animais.map((animal: Animal, i) =>  (
+			<CardAnimal animal={animal} key={i}/>
 		))}
 		<View style={{height: 60}}/>
 	</ScrollView>
@@ -47,6 +58,9 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 	const [{ usuario: storedUsuario }] = useStore();
 	const [usuario, setUsuario] = useState(initialState.usuario);
 
+	const [index, setIndex] = useState(0);
+	const [routes, setRoutes] = useState([]);
+
 	useEffect(() => {
 		if (usuario == null) {
 			searchUser(storedUsuario.id);
@@ -57,6 +71,20 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 	const searchUser = async (id: number) => {
 		const res = await buscarUsuario(id);
 		setUsuario(res.data);
+		setRoutes(() => {
+			if (res.data.tipo_usuario === TipoUsuario.PET_SITTER) {
+				return [
+					{ key: 'dados', title: 'DADOS' },
+					{ key: 'avaliacoes', title: 'AVALIAÇÕES' }
+				];
+			} else if (res.data.tipo_usuario === TipoUsuario.DONO_DE_ANIMAL) {
+				return [
+					{ key: 'dados', title: 'DADOS' },
+					{ key: 'avaliacoes', title: 'AVALIAÇÕES' },
+					{ key: 'animais', title: 'ANIMAIS' }
+				];
+			}
+		})
 	}
 
 	useLayoutEffect(() => {
@@ -65,11 +93,6 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 		});
 	}, [navigation]);
 
-	const [index, setIndex] = React.useState(0);
-	const [routes] = React.useState([
-		{ key: 'dados', title: 'DADOS' },
-		{ key: 'avaliacoes', title: 'AVALIAÇÕES' },
-	]);
 
 	const renderScene = ({ route }) => {
 		switch (route.key) {
@@ -77,6 +100,8 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 				return <TabDados usuario={usuario}/>;
 			case 'avaliacoes':
 				return <TabAvaliacoes avaliacoes={usuario.avaliacoes}/>;
+			case 'animais':
+				return <TabAnimais animais={usuario.animais}/>;
 			default:
 				return null;
 		}

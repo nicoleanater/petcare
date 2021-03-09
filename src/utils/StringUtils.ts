@@ -1,4 +1,4 @@
-import { Animal, TipoAnimal } from "../models/Animal";
+import { Animal, TipoAnimal, Genero } from "../models/Animal";
 import { CompromissoStatus } from "../models/Compromisso";
 import { TipoUsuario } from "../models/Usuario";
 import { Colors } from "../themes";
@@ -48,4 +48,18 @@ export const renderAnimaisText = (animais: Array<Animal>) => {
 export const renderPluralAnimais = (length: number, word: string) => {
 	if (length > 1) return `${word}s`
 	if (length === 1) return `${word}`
+}
+
+export const getTipoAnimal = (tipo: TipoAnimal) => {
+	switch (tipo) {
+		case TipoAnimal.GATO: return 'Gato';
+		case TipoAnimal.CACHORRO: return 'Cachorro';
+	}
+}
+
+export const getGenero = (genero: Genero) => {
+	switch (genero) {
+		case Genero.FEMEA: return 'Fêmea';
+		case Genero.MACHO: return 'Macho';
+	}
 }

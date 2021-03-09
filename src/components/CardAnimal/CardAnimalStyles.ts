@@ -1,5 +1,6 @@
 import { TextStyle, ViewStyle } from 'react-native';
-import { ApplicationStyles, Colors, Fonts } from '../../themes';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { ApplicationStyles, Fonts } from '../../themes';
 
 export default {
 	...ApplicationStyles,
@@ -7,11 +8,12 @@ export default {
 		backgroundColor: Colors.white,
 		borderRadius: 20,
 		marginBottom: 15,
-		paddingHorizontal: 18,
+		paddingLeft: 18,
+		paddingRight: 27,
 		paddingVertical: 22,
 		elevation: 2,
 	} as ViewStyle,
-	avaliacaoHeader: {
+	animalHeader: {
 		flexDirection: 'row'
 	} as ViewStyle,
 	headerTextView: {
@@ -24,17 +26,25 @@ export default {
 		maxWidth: 130,
 		alignItems: 'flex-start'
 	} as ViewStyle,
-	usuarioNomeText: {
+	headerRight: {
+		marginLeft: 'auto'
+	} as ViewStyle,
+	animalNomeText: {
 		fontFamily: Fonts.fontFamilies.latoBlack,
 		fontSize: Fonts.sizes.bigger,
 		color: Colors.grayOne,
 		marginBottom: 6
 	} as TextStyle,
-	dateText: {
+	animalTipoSexoText: {
 		fontFamily: Fonts.fontFamilies.latoRegular,
-		fontSize: Fonts.sizes.small,
+		fontSize: Fonts.sizes.regular,
 		color: Colors.grayOne,
-		marginLeft: 'auto'
+	} as TextStyle,
+	idadeRacaText: {
+		fontFamily: Fonts.fontFamilies.latoRegular,
+		fontSize: Fonts.sizes.regular,
+		color: Colors.grayOne,
+		marginBottom: 7
 	} as TextStyle,
 	descricaoText: {
 		fontFamily: Fonts.fontFamilies.latoRegular,
