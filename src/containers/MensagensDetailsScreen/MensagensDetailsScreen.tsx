@@ -4,6 +4,8 @@ import React, { useEffect, FunctionComponent, useState, useLayoutEffect } from '
 import { ActivityIndicator, Text, View } from 'react-native';
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader';
 import { Mensagem } from '../../models/Mensagem';
+import { Usuario } from '../../models/Usuario';
+import { buscaDetalhesChat } from '../../services/mensagem';
 import styles from './MensagensDetailsScreenStyles';
 
 interface IProps {
@@ -16,6 +18,7 @@ interface IProps {
 }
 
 interface IState {
+	outroUsuario: Usuario;
 	messages: Array<Mensagem>;
 }
 
@@ -26,10 +29,12 @@ export const MensagensDetailsScreen: FunctionComponent<IProps> = (props) => {
 	const isFocused = useIsFocused();
 
 	const initialState: IState = {
+		outroUsuario: null,
 		messages: null
 	};
 
 	const [messages, setMessages] = useState(initialState.messages);
+	const [outroUsuario, setOutroUsuario] = useState(initialState.outroUsuario);
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
@@ -44,15 +49,14 @@ export const MensagensDetailsScreen: FunctionComponent<IProps> = (props) => {
 	}, [isFocused]);
 
 	const getMessages = async () => {
-		// try {
-		// 	const res = await buscaMensagens(usuario.id);
-		// 	getMessages(res.data);
-		// } catch (error) {
-		// 	console.error({error});
-		// }
+		try {
+			const res = await buscaDetalhesChat(currentUserId, otherUserId);
+			setOutroUsuario(res.data.usuario);
+			setMessages(res.data.mensagens);
+		} catch (error) {
+			console.error({error});
+		}
 	}
-
-	console.log({currentUserId, otherUserId});
 
 	if (messages == null) {
 		return (
