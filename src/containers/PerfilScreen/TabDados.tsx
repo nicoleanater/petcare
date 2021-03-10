@@ -32,7 +32,7 @@ export const TabDados: FunctionComponent<IProps> = ({ usuario }) => {
 				<View style={styles.cardLine}>
 					<View style={styles.cardCell}>
 						<Text style={styles.cardLabel}>Cidade</Text>
-						<Text style={styles.cardValue}>{usuario.endereco.cidade.descricao}</Text>
+						<Text style={styles.cardValue}>{usuario.endereco.cidade.descricao} - {usuario.endereco.cidade.estado.sigla}</Text>
 					</View>
 					<View style={styles.cardCell}>
 						<Text style={styles.cardLabel}>Bairro</Text>
