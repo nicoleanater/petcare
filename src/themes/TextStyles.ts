@@ -13,6 +13,11 @@ export default {
 		fontSize: Fonts.sizes.regular,
 		color: Colors.grayOne
 	} as TextStyle,
+	cardContentSmall: {
+		fontFamily: Fonts.fontFamilies.latoRegular,
+		fontSize: Fonts.sizes.small,
+		color: Colors.grayOne
+	} as TextStyle,
 	priceText: {
 		fontFamily: Fonts.fontFamilies.latoBlack,
 		fontSize: Fonts.sizes.regular,

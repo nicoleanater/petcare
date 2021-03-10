@@ -1,7 +1,10 @@
-import { ViewStyle, TextStyle, StyleProp, ImageStyle } from 'react-native';
-import { Colors, ApplicationStyles, Fonts } from '../../themes';
-import { responsiveHeight } from 'react-native-responsive-dimensions';
+import { ViewStyle } from 'react-native';
+import { ApplicationStyles, Colors } from '../../themes';
 
 export default {
 	...ApplicationStyles,
+	mensagensBackground: {
+		backgroundColor: Colors.white,
+		padding: 40
+	} as ViewStyle
 };
