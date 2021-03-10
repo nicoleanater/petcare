@@ -2,6 +2,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { MenuDrawerContent } from "../../components/MenuDrawerContent/MenuDrawerContent";
+import { AgendarCompromissoScreen } from "../../containers/AgendarCompromissoScreen/AgendarCompromissoScreen";
 import { AvaliacaoScreen } from "../../containers/AvaliacaoScreen/AvaliacaoScreen";
 import { CompromissosScreen } from '../../containers/CompromissosScreen/CompromissosScreen';
 import { DetalhesCompromissoScreen } from "../../containers/DetalhesCompromissoScreen/DetalhesCompromissoScreen";
@@ -14,10 +15,11 @@ const Drawer = createDrawerNavigator();
 
 const DrawerStack = () => {
 	return (
-		<Stack.Navigator initialRouteName="Perfil">
+		<Stack.Navigator initialRouteName="Compromissos">
 			<Stack.Screen name="Compromissos" component={CompromissosStack} options={{ headerShown: false }}/>
       <Stack.Screen name="Pesquisar" component={PesquisarScreen} />
       <Stack.Screen name="Perfil" component={PerfilScreen} options={{	headerTransparent: true }} />
+      <Stack.Screen name="AgendarCompromisso" component={AgendarCompromissoScreen} />
 		</Stack.Navigator>
 	);
 }

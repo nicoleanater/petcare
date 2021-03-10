@@ -43,3 +43,7 @@ export function criarAvaliacao(avaliacao: Avaliacao, idCompromisso: number): Pro
 export function updateAgendamento(idCompromisso: number, agendamento: Agendamento): Promise<AxiosResponse<Agendamento>> {
 	return api.patch<Agendamento>(`/compromissos/${idCompromisso}/agendamento`, agendamento);
 }
+
+export function criarCompromisso(compromisso: Compromisso): Promise<AxiosResponse> {
+	return api.post(`/compromissos/`, compromisso);
+}

@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 const filterState = (state) => {
 	const whiteList = {
-		['usuario']: ['id', 'nome', 'foto', 'tipo_usuario', 'nota_media']
+		['usuario']: ['id', 'nome', 'foto', 'tipo_usuario', 'nota_media', 'endereco']
 	}
 
 	const stateToPersist = Object.entries(state)

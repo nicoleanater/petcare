@@ -96,7 +96,7 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			header: (props: StackHeaderProps) => <AuthHeader {...props} title={"Perfil"} theme={'transparent'} headerRight={ownProfile ? false : usuario.tipo_usuario}/>,
+			header: (props: StackHeaderProps) => <AuthHeader {...props} title={"Perfil"} theme={'transparent'} headerRight={ownProfile ? false : usuario.tipo_usuario} usuario={usuario}/>,
 		});
 	}, [navigation]);
 

@@ -22,6 +22,6 @@ export interface Usuario {
 	animais?: Array<Animal>;
 	descricao?: string;
 	preco?: number;
-	avaliacoes: Array<Avaliacao>;
+	avaliacoes?: Array<Avaliacao>;
 	qtde_avaliacoes?: number;
 }

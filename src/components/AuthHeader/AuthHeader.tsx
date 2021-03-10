@@ -5,19 +5,24 @@ import styles from "./AuthHeaderStyles";
 import { MenuButton } from "../MenuButton/MenuButton";
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
-import { TipoUsuario } from "../../models/Usuario";
+import { TipoUsuario, Usuario } from "../../models/Usuario";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 interface IProps {
 	title: String;
 	theme: 'light' | 'transparent';
-	headerRight: false | TipoUsuario;
+	headerRight?: false | TipoUsuario;
+	usuario?: Usuario;
 }
 
-export const AuthHeader: FunctionComponent<IProps & StackHeaderProps> = ({ title, theme, headerRight }) => {
+export const AuthHeader: FunctionComponent<IProps & StackHeaderProps> = ({ title, theme, headerRight, usuario }) => {
 	const navigation = useNavigation<DrawerNavigationProp<any, any>>();
 	const [showMenu, setShowMenu] = useState(false);
+
+	const onAgendarCompromisso = () => {
+		navigation.navigate('AgendarCompromisso', { usuario })
+	}
 
 	return (
 		<View style={[styles.headerContainer, theme === 'transparent' && styles.headerContainerTransparent]}>
@@ -37,7 +42,7 @@ export const AuthHeader: FunctionComponent<IProps & StackHeaderProps> = ({ title
 									<TouchableOpacity style={styles.menuItemContainer}>
 										<Text style={styles.menuTextStyle}>Enviar Mensagem</Text>
 									</TouchableOpacity>
-									<TouchableOpacity style={[styles.menuItemContainer, styles.menuDivider]}>
+									<TouchableOpacity style={[styles.menuItemContainer, styles.menuDivider]} onPress={onAgendarCompromisso}>
 										<Text style={styles.menuTextStyle}>Agendar Compromisso</Text>
 									</TouchableOpacity>
 								</View>

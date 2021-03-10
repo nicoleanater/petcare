@@ -13,13 +13,13 @@ export enum CompromissoStatus {
 
 export interface Compromisso {
 	id?: number;
-	usuario: Usuario;
+	usuario?: Usuario;
 	data_inicio: string;
 	data_fim: string,
-	status: CompromissoStatus;
+	status?: CompromissoStatus;
 	petsitter?: Usuario;
 	dono_de_animal?: Usuario;
-	avaliacao_petsitter: Avaliacao;
-	avaliacao_dono_de_animal: Avaliacao;
+	avaliacao_petsitter?: Avaliacao;
+	avaliacao_dono_de_animal?: Avaliacao;
 	agendamentos?: Array<Agendamento>;
 };
