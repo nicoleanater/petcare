@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/core';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React, { FunctionComponent } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -13,7 +14,7 @@ interface IProps {
 }
 
 export const CardUsuario: FunctionComponent<IProps> = ({ usuario }) => {
-	const navigation = useNavigation();
+	const navigation = useNavigation<StackNavigationProp<any>>();
 
 	const openPerfilUsuario = () => {
 		navigation.push('Perfil', { usuarioPerfil: usuario } );
