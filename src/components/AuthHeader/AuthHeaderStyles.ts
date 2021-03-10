@@ -28,7 +28,37 @@ export default {
 		color: Colors.white
 	} as TextStyle,
 	rightMenuButton: {
-		height: 45,
-		width: 45
-	} as ViewStyle
+		height: 60,
+		width: 60,
+		alignItems: 'center',
+		justifyContent: 'center',
+	} as ViewStyle,
+	menuButtonLight: {
+		color: Colors.white,
+	} as TextStyle,
+	menuButtonDark: {
+		color: Colors.watermelonDark,
+	} as TextStyle,
+	rightMenuContainer: {
+		position: 'absolute',
+		right: 30,
+		top: 55,
+		backgroundColor: Colors.white,
+		borderRadius: 8,
+		borderTopRightRadius: 0,
+		paddingHorizontal: 22
+	} as ViewStyle,
+	menuItemContainer: {
+		paddingVertical: 19,
+		alignItems: 'flex-end'
+	} as ViewStyle,
+	menuDivider: {
+		borderTopWidth: 1,
+		borderTopColor: Colors.gray
+	} as ViewStyle,
+	menuTextStyle: {
+		fontFamily: Fonts.fontFamilies.latoBold,
+		fontSize: Fonts.sizes.big,
+		color: Colors.blackTwo
+	} as TextStyle
 };

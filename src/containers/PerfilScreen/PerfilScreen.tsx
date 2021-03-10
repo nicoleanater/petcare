@@ -57,6 +57,7 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 	const navigation = useNavigation();
 	const [{ usuario: storedUsuario }] = useStore();
 	const [usuario, setUsuario] = useState(initialState.usuario);
+	const [ownProfile] = useState((props.route.params?.usuarioPerfil != null) ? false : true);
 
 	const [index, setIndex] = useState(0);
 	const [routes, setRoutes] = useState([]);
@@ -95,7 +96,7 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 
 	useLayoutEffect(() => {
 		navigation.setOptions({
-			header: (props: StackHeaderProps) => <AuthHeader {...props} title={"Perfil"} theme={'transparent'} />,
+			header: (props: StackHeaderProps) => <AuthHeader {...props} title={"Perfil"} theme={'transparent'} headerRight={ownProfile ? false : usuario.tipo_usuario}/>,
 		});
 	}, [navigation]);
 
