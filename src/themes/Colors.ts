@@ -13,6 +13,7 @@ export default {
 	white: "#FFFFFF",
 	gradientPink: "#FF738C",
 	gradientPeach: "#FFD397",
+	gradientYellow: "#FFE8C9",
 	watermelonDark: "#EE5F78",
 	redOne: "#FC6767",
 	errorRed: "#E03434",
