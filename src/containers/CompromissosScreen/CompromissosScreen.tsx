@@ -1,7 +1,7 @@
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { StackHeaderProps } from "@react-navigation/stack";
 import React, { FunctionComponent, useEffect, useLayoutEffect, useState } from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { TabBar, TabView } from 'react-native-tab-view';
 import { AuthHeader } from "../../components/AuthHeader/AuthHeader";
@@ -18,6 +18,7 @@ const CompromissosAtivos = ({ compromissos }) => (
 				<CardCompromisso compromisso={item} key={i}/>
 			)
 		})}
+		<View style={{height: 40}}/>
 	</ScrollView>
 );
 
@@ -28,6 +29,7 @@ const CompromissosHistorico = ({ compromissos }) => (
 				<CardCompromisso compromisso={item} key={i}/>
 			)
 		})}
+		<View style={{height: 40}}/>
 	</ScrollView>
 );
 
