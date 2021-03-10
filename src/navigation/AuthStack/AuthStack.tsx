@@ -6,6 +6,7 @@ import { AgendarCompromissoScreen } from "../../containers/AgendarCompromissoScr
 import { AvaliacaoScreen } from "../../containers/AvaliacaoScreen/AvaliacaoScreen";
 import { CompromissosScreen } from '../../containers/CompromissosScreen/CompromissosScreen';
 import { DetalhesCompromissoScreen } from "../../containers/DetalhesCompromissoScreen/DetalhesCompromissoScreen";
+import { MensagensListScreen } from "../../containers/MensagensListScreen/MensagensListScreen";
 import { PerfilScreen } from "../../containers/PerfilScreen/PerfilScreen";
 import { PesquisarScreen } from "../../containers/PesquisarScreen/PesquisarScreen";
 import styles from '../AppNavigatorStyles';
@@ -20,6 +21,7 @@ const DrawerStack = () => {
       <Stack.Screen name="Pesquisar" component={PesquisarScreen} />
       <Stack.Screen name="Perfil" component={PerfilScreen} options={{	headerTransparent: true }} />
       <Stack.Screen name="AgendarCompromisso" component={AgendarCompromissoScreen} />
+      <Stack.Screen name="Mensagens" component={ChatStack} options={{ headerShown: false }}/>
 		</Stack.Navigator>
 	);
 }
@@ -38,6 +40,14 @@ function CompromissosStack() {
 			<Stack.Screen name="Compromissos" component={CompromissosScreen} />
 			<Stack.Screen name="DetalhesCompromisso" component={DetalhesCompromissoScreen} />
 			<Stack.Screen name="Avaliacao" component={AvaliacaoScreen} />
+		</Stack.Navigator>
+	)
+}
+
+function ChatStack() {
+	return (
+		<Stack.Navigator initialRouteName="Mensagens">
+			<Stack.Screen name="Mensagens" component={MensagensListScreen} />
 		</Stack.Navigator>
 	)
 }
