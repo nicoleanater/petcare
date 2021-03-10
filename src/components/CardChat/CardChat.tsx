@@ -1,8 +1,10 @@
+import { useNavigation } from '@react-navigation/core';
 import moment from 'moment-timezone';
 import React, { FunctionComponent } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Mensagem } from '../../models/Mensagem';
+import { useStore } from '../../store';
 import { ImageGradientPicker } from '../ImageGradientPicker/ImageGradientPicker';
 import styles from './CardChatStyles';
 
@@ -12,9 +14,11 @@ interface IProps {
 
 
 export const CardChat: FunctionComponent<IProps> = ({ mensagem }) => {
+	const navigation = useNavigation();
+	const [{ usuario }] = useStore();
 
-	const openChatDetails = (outroUserId: number) => {
-		//todo
+	const openChatDetails = (otherUserId: number) => {
+		navigation.navigate('MensagensDetails', { currentUserId: usuario.id, otherUserId })
 	}
 
 	const getHoraMensagem = (data: string) => {

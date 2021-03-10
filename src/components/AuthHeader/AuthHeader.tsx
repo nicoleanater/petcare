@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import { TipoUsuario, Usuario } from "../../models/Usuario";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useStore } from "../../store";
 
 interface IProps {
 	title: String;
@@ -19,9 +20,16 @@ interface IProps {
 export const AuthHeader: FunctionComponent<IProps & StackHeaderProps> = ({ title, theme, headerRight, usuario }) => {
 	const navigation = useNavigation<DrawerNavigationProp<any, any>>();
 	const [showMenu, setShowMenu] = useState(false);
+	const [{ usuario: currentUser }] = useStore();
 
 	const onAgendarCompromisso = () => {
-		navigation.navigate('AgendarCompromisso', { usuario })
+		navigation.navigate('AgendarCompromisso', { usuario });
+		setShowMenu((prev) => !prev);
+	}
+
+	const onEnviarMensagem = () => {
+		navigation.navigate('MensagensDetails', { currentUserId: currentUser.id, otherUserId: usuario.id });
+		setShowMenu((prev) => !prev);
 	}
 
 	return (
@@ -39,7 +47,7 @@ export const AuthHeader: FunctionComponent<IProps & StackHeaderProps> = ({ title
 							</TouchableOpacity>
 							{showMenu && headerRight === TipoUsuario.PET_SITTER &&
 								<View style={styles.rightMenuContainer}>
-									<TouchableOpacity style={styles.menuItemContainer}>
+									<TouchableOpacity style={styles.menuItemContainer} onPress={onEnviarMensagem}>
 										<Text style={styles.menuTextStyle}>Enviar Mensagem</Text>
 									</TouchableOpacity>
 									<TouchableOpacity style={[styles.menuItemContainer, styles.menuDivider]} onPress={onAgendarCompromisso}>
@@ -49,7 +57,7 @@ export const AuthHeader: FunctionComponent<IProps & StackHeaderProps> = ({ title
 							}
 							{showMenu && headerRight === TipoUsuario.DONO_DE_ANIMAL &&
 								<View style={styles.rightMenuContainer}>
-									<TouchableOpacity style={styles.menuItemContainer}>
+									<TouchableOpacity style={styles.menuItemContainer} onPress={onEnviarMensagem}>
 										<Text style={styles.menuTextStyle}>Enviar Mensagem</Text>
 									</TouchableOpacity>
 								</View>

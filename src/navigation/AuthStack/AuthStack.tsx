@@ -6,6 +6,7 @@ import { AgendarCompromissoScreen } from "../../containers/AgendarCompromissoScr
 import { AvaliacaoScreen } from "../../containers/AvaliacaoScreen/AvaliacaoScreen";
 import { CompromissosScreen } from '../../containers/CompromissosScreen/CompromissosScreen';
 import { DetalhesCompromissoScreen } from "../../containers/DetalhesCompromissoScreen/DetalhesCompromissoScreen";
+import { MensagensDetailsScreen } from "../../containers/MensagensDetailsScreen/MensagensDetailsScreen";
 import { MensagensListScreen } from "../../containers/MensagensListScreen/MensagensListScreen";
 import { PerfilScreen } from "../../containers/PerfilScreen/PerfilScreen";
 import { PesquisarScreen } from "../../containers/PesquisarScreen/PesquisarScreen";
@@ -48,6 +49,7 @@ function ChatStack() {
 	return (
 		<Stack.Navigator initialRouteName="Mensagens">
 			<Stack.Screen name="Mensagens" component={MensagensListScreen} />
+			<Stack.Screen name="MensagensDetails" component={MensagensDetailsScreen} />
 		</Stack.Navigator>
 	)
 }
