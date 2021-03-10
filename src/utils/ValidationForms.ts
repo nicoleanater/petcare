@@ -36,6 +36,13 @@ export const validateDateFuture = (inputRef: MutableRefObject<IRefFloatingLabel>
 	return dateValid && dateInTheFuture;
 }
 
+export const validateDateInterval = (inputRefInicio: MutableRefObject<IRefFloatingLabel>, inputRefFim: MutableRefObject<IRefFloatingLabel>) => {
+	const rawValueInicio = inputRefInicio.current.getRawValue();
+	const rawValueFim = inputRefFim.current.getRawValue();
+	const intervalValid = moment(rawValueInicio).isSameOrBefore(rawValueFim);
+	return intervalValid;
+}
+
 export const validateCEP = (inputRef: MutableRefObject<IRefFloatingLabel>) => {
 	return inputRef.current.isValid();
 }

@@ -13,7 +13,7 @@ import { Compromisso } from '../../models/Compromisso';
 import { Usuario } from '../../models/Usuario';
 import { criarCompromisso } from '../../services/compromisso';
 import { useStore } from '../../store';
-import { validateDateFuture } from '../../utils/ValidationForms';
+import { validateDateFuture, validateDateInterval } from '../../utils/ValidationForms';
 import styles from './AgendarCompromissoScreenStyles';
 
 interface IProps {
@@ -74,6 +74,21 @@ export const AgendarCompromissoScreen: FunctionComponent<IProps> = (props) => {
 		} else if (!validateDateFuture(dataFimRef)) {
 			setData_fimError('data inválida')
 			valid = false;
+		}
+
+		if (valid) {
+			const dateIntervalValid = validateDateInterval(dataInicioRef, dataFimRef);
+			if (!dateIntervalValid) {
+				valid = false;
+				Alert.alert(
+					"Intervalo inválido",
+					"O fim precisa ser maior ou igual ao início!",
+					[
+						{ text: "OK" }
+					],
+					{ cancelable: false }
+				);
+			}
 		}
 
 		return valid;
