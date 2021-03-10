@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/core';
 import React, { FunctionComponent } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -12,9 +13,10 @@ interface IProps {
 }
 
 export const CardUsuario: FunctionComponent<IProps> = ({ usuario }) => {
+	const navigation = useNavigation();
 
-	const openPetsitterDetails = () => {
-		//todo
+	const openPerfilUsuario = () => {
+		navigation.push('Perfil', { usuarioPerfil: usuario } );
 	}
 
 	const renderPrice = () => {
@@ -37,7 +39,7 @@ export const CardUsuario: FunctionComponent<IProps> = ({ usuario }) => {
 	}
 
 	return (
-		<TouchableOpacity onPress={openPetsitterDetails} style={styles.cardContainer}>
+		<TouchableOpacity onPress={openPerfilUsuario} style={styles.cardContainer}>
 			<ImageGradientPicker
 				image={usuario.foto}
 				small

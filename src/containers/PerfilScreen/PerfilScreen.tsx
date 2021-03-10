@@ -64,20 +64,26 @@ export const PerfilScreen: FunctionComponent<IProps> = (props) => {
 	useEffect(() => {
 		if (usuario == null) {
 			searchUser(storedUsuario.id);
+		} else {
+			updateTabs(usuario.tipo_usuario);
 		}
-	}, [])
+	}, [usuario])
 
 
 	const searchUser = async (id: number) => {
 		const res = await buscarUsuario(id);
 		setUsuario(res.data);
+		updateTabs(res.data.tipo_usuario);
+	}
+
+	const updateTabs = (tipo_usuario: TipoUsuario) => {
 		setRoutes(() => {
-			if (res.data.tipo_usuario === TipoUsuario.PET_SITTER) {
+			if (tipo_usuario === TipoUsuario.PET_SITTER) {
 				return [
 					{ key: 'dados', title: 'DADOS' },
 					{ key: 'avaliacoes', title: 'AVALIAÇÕES' }
 				];
-			} else if (res.data.tipo_usuario === TipoUsuario.DONO_DE_ANIMAL) {
+			} else if (tipo_usuario === TipoUsuario.DONO_DE_ANIMAL) {
 				return [
 					{ key: 'dados', title: 'DADOS' },
 					{ key: 'avaliacoes', title: 'AVALIAÇÕES' },
