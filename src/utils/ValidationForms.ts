@@ -29,6 +29,13 @@ export const validateDate = (inputRef: MutableRefObject<IRefFloatingLabel>) => {
 	return dateValid && dateInThePast;
 }
 
+export const validateDateFuture = (inputRef: MutableRefObject<IRefFloatingLabel>) => {
+	const rawValue = inputRef.current.getRawValue();
+	const dateValid = inputRef.current.isValid();
+	const dateInTheFuture = moment(rawValue).isAfter();
+	return dateValid && dateInTheFuture;
+}
+
 export const validateCEP = (inputRef: MutableRefObject<IRefFloatingLabel>) => {
 	return inputRef.current.isValid();
 }
