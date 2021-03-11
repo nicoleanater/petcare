@@ -60,6 +60,7 @@ export const ChatWrapper: FunctionComponent<IProps> = ({ messages, onSend, curre
 			renderBubble={renderBubble}
 			renderInputToolbar={renderInputToolbar}
 			renderSend={renderSend}
+			messagesContainerStyle={{paddingBottom: 25}}
 		/>
 	);
 };
