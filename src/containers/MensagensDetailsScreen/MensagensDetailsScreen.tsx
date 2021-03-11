@@ -12,7 +12,7 @@ import { ImageGradientPicker } from '../../components/ImageGradientPicker/ImageG
 import { RatingStars } from '../../components/RatingStars/RatingStars';
 import { Mensagem } from '../../models/Mensagem';
 import { TipoUsuario, Usuario } from '../../models/Usuario';
-import { buscaDetalhesChat } from '../../services/mensagem';
+import { adicionarMensagem, buscaDetalhesChat } from '../../services/mensagem';
 import { Colors } from '../../themes';
 import { renderAnimaisText } from '../../utils/StringUtils';
 import styles from './MensagensDetailsScreenStyles';
@@ -82,8 +82,30 @@ export const MensagensDetailsScreen: FunctionComponent<IProps> = (props) => {
 		});
 	}
 
-	const onSend = useCallback((messages = []) => {
-    setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+	const onSend = useCallback(async (messages = []) => {
+		const dateCreated = moment.tz('America/Sao_Paulo');
+
+		const novaMensagem: Mensagem = {
+			texto: messages[0].text,
+			data: dateCreated.format(),
+			remetente: currentUserId,
+			destinatario: otherUserId
+		}
+
+		const dateTimeLocal = dateCreated.format();
+
+		const message: IMessage = {
+			_id: messages[0]._id,
+			text: messages[0].text,
+			createdAt: moment(dateTimeLocal, 'YYYY-MM-DDTHH:mm:ss').toDate(),
+			user: { _id: messages[0].user._id }
+		}
+    setMessages(previousMessages => GiftedChat.append(previousMessages, [message]))
+		try {
+			await adicionarMensagem(novaMensagem);
+		} catch (error) {
+			console.error({error});
+		}
   }, [])
 
 	const renderUserTextDetails = () => {

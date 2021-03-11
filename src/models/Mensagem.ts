@@ -5,4 +5,6 @@ export interface Mensagem {
 	texto?: string;
 	data?: string;
 	usuario?: Usuario;
+	remetente?: number;
+	destinatario?: number;
 }

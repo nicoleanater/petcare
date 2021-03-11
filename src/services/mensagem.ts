@@ -10,3 +10,7 @@ export function buscaChats(idUsuario: number): Promise<AxiosResponse<Array<Mensa
 export function buscaDetalhesChat(currentUserId: number, otherUserId: number): Promise<AxiosResponse<DetalhesChat>> {
 	return api.get<DetalhesChat>(`/mensagem/chat`, { params: { currentUserId, otherUserId }});
 }
+
+export function adicionarMensagem(mensagem: Mensagem): Promise<AxiosResponse> {
+	return api.post(`/mensagem`, mensagem);
+}
