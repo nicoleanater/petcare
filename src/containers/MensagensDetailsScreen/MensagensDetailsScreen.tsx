@@ -1,10 +1,13 @@
 import { useIsFocused, useNavigation } from '@react-navigation/core';
 import { StackHeaderProps } from '@react-navigation/stack';
-import React, { useEffect, FunctionComponent, useState, useLayoutEffect } from 'react';
+import moment from 'moment-timezone';
+import React, { FunctionComponent, useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator, Text, View } from 'react-native';
+import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 import LinearGradient from 'react-native-linear-gradient';
 import { MaskService } from 'react-native-masked-text';
 import { AuthHeader } from '../../components/AuthHeader/AuthHeader';
+import { ChatWrapper } from '../../components/ChatWrapper/ChatWrapper';
 import { ImageGradientPicker } from '../../components/ImageGradientPicker/ImageGradientPicker';
 import { RatingStars } from '../../components/RatingStars/RatingStars';
 import { Mensagem } from '../../models/Mensagem';
@@ -25,7 +28,7 @@ interface IProps {
 
 interface IState {
 	outroUsuario: Usuario;
-	messages: Array<Mensagem>;
+	messages: Array<IMessage>;
 }
 
 export const MensagensDetailsScreen: FunctionComponent<IProps> = (props) => {
@@ -58,11 +61,30 @@ export const MensagensDetailsScreen: FunctionComponent<IProps> = (props) => {
 		try {
 			const res = await buscaDetalhesChat(currentUserId, otherUserId);
 			setOutroUsuario(res.data.usuario);
-			setMessages(res.data.mensagens);
+			setMessages(transformMessagesForChat(res.data.mensagens));
 		} catch (error) {
 			console.error({error});
 		}
 	}
+
+	const transformMessagesForChat = (mensagens: Array<Mensagem>) => {
+		return mensagens.map(mensagem => {
+			const dateTimeUTC = moment(mensagem.data, 'YYYY-MM-DDTHH:mm:ss').format();
+			const dateTimeLocal = moment(dateTimeUTC).tz('America/Sao_Paulo').toDate();
+
+			const message: IMessage = {
+				_id: mensagem.id,
+				text: mensagem.texto,
+				createdAt: dateTimeLocal,
+				user: { _id: mensagem.usuario.id, ...mensagem.usuario }
+			}
+			return message;
+		});
+	}
+
+	const onSend = useCallback((messages = []) => {
+    setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+  }, [])
 
 	const renderUserTextDetails = () => {
 		if (outroUsuario.tipo_usuario === TipoUsuario.PET_SITTER) {
@@ -92,7 +114,7 @@ export const MensagensDetailsScreen: FunctionComponent<IProps> = (props) => {
 	}
 
 	return (
-		<View>
+		<View style={{flex: 1}}>
 			<LinearGradient colors={[Colors.gradientPink, Colors.gradientYellow]} style={styles.gradientHeader} start={{x: 0, y: 0}} end={{x: 0.7, y: 0.7}}>
 			<ImageGradientPicker
 				image={outroUsuario.foto}
@@ -113,7 +135,7 @@ export const MensagensDetailsScreen: FunctionComponent<IProps> = (props) => {
 				}
 			</View>
 			</LinearGradient>
-			<Text>MensagensDetailsScreen</Text>
+			<ChatWrapper messages={messages} onSend={onSend} currentUserId={currentUserId} />
 		</View>
 	);
 };
