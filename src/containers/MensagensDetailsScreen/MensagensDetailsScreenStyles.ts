@@ -7,7 +7,8 @@ export default {
 	gradientHeader: {
 		height: 120,
 		flexDirection: 'row',
-		alignItems: 'center'
+		alignItems: 'center',
+		paddingHorizontal: 15
 	} as ViewStyle,
 	userInfoContainer: {
 		marginLeft: 23,

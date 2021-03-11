@@ -100,7 +100,7 @@ export const MensagensDetailsScreen: FunctionComponent<IProps> = (props) => {
 				small
 			/>
 			<View style={styles.userInfoContainer}>
-				<View style={{maxWidth: 170, marginRight: 20}}>
+				<View style={{maxWidth: 150, marginRight: 20}}>
 					<Text style={styles.nomeTextStyle}>{outroUsuario.nome}</Text>
 					{renderUserTextDetails()}
 				</View>
