@@ -32,12 +32,12 @@ export default {
 		marginHorizontal: 15,
 		marginBottom: 20,
 		elevation: 2,
-		height: 45,
+		minHeight: 45,
 		paddingLeft: 12,
 		paddingTop: 2
 	} as ViewStyle,
 	inputContainerStyle: {
-		height: 45,
+		minHeight: 45,
 		justifyContent: 'center'
 	} as ViewStyle,
 	textInputStyle: {
