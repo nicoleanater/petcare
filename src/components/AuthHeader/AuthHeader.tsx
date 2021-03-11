@@ -28,7 +28,7 @@ export const AuthHeader: FunctionComponent<IProps & StackHeaderProps> = ({ title
 	}
 
 	const onEnviarMensagem = () => {
-		navigation.navigate('MensagensDetails', { currentUserId: currentUser.id, otherUserId: usuario.id });
+		navigation.navigate('Mensagens', { screen: 'MensagensDetails', params: { currentUserId: currentUser.id, otherUserId: usuario.id }});
 		setShowMenu((prev) => !prev);
 	}
 
