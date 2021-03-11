@@ -16,6 +16,7 @@ export default {
 	gradientYellow: "#FFE8C9",
 	watermelonDark: "#EE5F78",
 	redOne: "#FC6767",
+	redOrange: "#FF8087",
 	errorRed: "#E03434",
 	paleOyster: "#96897B",
 	statusPurple: "#BA76E4",
